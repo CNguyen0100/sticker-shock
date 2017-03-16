@@ -5,47 +5,24 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>Shop Item - Start Bootstrap Template</title>
-
+    <title>Shop Homepage - Start Bootstrap Template</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/shop-item.css" rel="stylesheet">
-
-    <style>
-        .navbar-toggler {
-            z-index: 1;
-        }
-
-        @media (max-width: 576px) {
-            nav > .container {
-                width: 100%;
-            }
-        }
-    </style>
+    <link href="css/shop-homepage.css" rel="stylesheet">
 
 </head>
 
 <body>
 
-    <?php
-        include 'view/navigation.php';
-    ?>
+    <?php include 'view/navigation.php'; ?>
 
-    <div class="container">
+    <div class="container" style="margin-top: 1rem;">
 
         <div class="row">
 
-            <div class="col-md-3">
-                <p class="lead">Shop Name</p>
-                <div class="list-group">
-                    <a href="#" class="list-group-item active">Category 1</a>
-                    <a href="#" class="list-group-item">Category 2</a>
-                    <a href="#" class="list-group-item">Category 3</a>
-                </div>
-            </div>
+            <?php include 'view/category-menu.php'; ?>
 
             <div class="col-md-9">
 
