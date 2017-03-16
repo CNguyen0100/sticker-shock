@@ -1,4 +1,5 @@
 <?php
+ include_once "connection.php";
 class Item {
     public $title;
     public $size;
@@ -19,9 +20,11 @@ class Item {
     public static function allItems() {
         $list = [];
         $db = db::getInstance();
-        $req = $db->query('SELECT * FROM Items');
+        $result = $db->prepare("SELECT * FROM Items");
+        $result->execute();
 
-        foreach($req->fetchAll() as $item) {
+        while ($item = $result->fetch(PDO::FETCH_ASSOC))
+        {
             $list[] = new Item($item['title'], $item['size'], $item['price'], $item['description'], $item['category'], $item['subcategory']);
         }
 
