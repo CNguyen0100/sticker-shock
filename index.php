@@ -1,5 +1,5 @@
 <?php
-require_once('model/Connection.php');
+require_once('models/Connection.php');
 ?>
 
 <!DOCTYPE html>
@@ -15,24 +15,35 @@ require_once('model/Connection.php');
     <title>Sticker Shock</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/shop-homepage.css" rel="stylesheet">
+    <style>
+        .navbar-toggler {
+            z-index: 1;
+        }
+
+        @media (max-width: 576px) {
+            nav > .container {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <?php include "view/navigation.php";?>
+    <?php include "views/navigation.php"?>
 
-    <div class="container" style="margin-top: 1rem;">
+    <div class="container" style="margin-top:25px;">
         <div class="row">
-            <?php include 'view/category-menu.php';?>
+            <?php include 'views/category-menu.php';?>
             <div class="col-md-9">
                 <div class="row">
-                    <?php include 'view/item-cards.php';?>
+                    <?php include 'views/item-cards.php';?>
                 </div>
             </div>
         </div>
     </div>
 
-    <?php include 'view/footer.php';?>
+    <?php include 'views/footer.php';?>
 
     <script src="js/jquery.js"></script>
     <script src="js/tether.min.js"></script>

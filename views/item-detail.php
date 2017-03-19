@@ -1,5 +1,5 @@
 <?php
-include "../model/Item.php";
+include "../models/Item.php";
 if(isset($_GET['id'])) {
     $item_id = $_GET['id'];
     $item = Item::getItemById($item_id);
@@ -23,16 +23,11 @@ if(isset($_GET['id'])) {
 
 <body>
 
-<?php include "../view/navigation.php";?>
-
-<div class="container" style="margin-top: 1rem;">
-
+<?php include "../views/navigation.php";?>
+<div class="container">
     <div class="row">
-
-        <?php include 'category-menu.php'; ?>
-
+        <?php include 'category-menu.php';?>
         <div class="col-md-9">
-
             <div class="card">
                 <img class="img-responsive" src="http://placehold.it/800x300" alt="">
                 <div class="card-block">
@@ -42,9 +37,7 @@ if(isset($_GET['id'])) {
                     <div class="text-left">
                         <a class="btn btn-success">Purchase</a>
                     </div>
-
                 </div>
-
                 <div class="ratings">
                     <p class="float-right">3 reviews for this seller</p>
                     <p>
@@ -65,7 +58,7 @@ if(isset($_GET['id'])) {
 
 
 
-<?php include '../view/footer.php';?>
+<?php include '../views/footer.php';?>
 
 <script src="../js/jquery.js"></script>
 <script src="../js/tether.min.js"></script>
