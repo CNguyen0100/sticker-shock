@@ -1,5 +1,5 @@
 <?php
-require_once('model/connection.php');
+require_once('model/Connection.php');
 ?>
 
 <!DOCTYPE html>

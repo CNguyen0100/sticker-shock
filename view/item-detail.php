@@ -33,43 +33,36 @@ if(isset($_GET['id'])) {
 
         <div class="col-md-9">
 
-            <div class="thumbnail">
+            <div class="card">
                 <img class="img-responsive" src="http://placehold.it/800x300" alt="">
-                <div class="caption-full">
-                    <h4><?php echo $item->title?></h4>
-                    <h5 class="pull-right">$<?php echo $item->price?></h5>
+                <div class="card-block">
+                    <h4 style="display:inline-block;"><?php echo $item->title?></h4>
+                    <h5 class="float-right" style="display:inline-block;">$<?php echo $item->price?></h5>
                     <p><?php echo $item->description?></p>
+                    <div class="text-left">
+                        <a class="btn btn-success">Purchase</a>
+                    </div>
+
                 </div>
 
                 <div class="ratings">
-                    <p class="pull-right">3 reviews</p>
+                    <p class="float-right">3 reviews for this seller</p>
                     <p>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
+                        &#9733; &#9733; &#9733; &#9733; &#9734;
                         4.0 stars
                     </p>
                 </div>
             </div>
-
+            <br>
             <div class="well">
-
-                <div class="text-right">
-                    <a class="btn btn-success">Leave a Review</a>
-                </div>
-
-                <hr>
-
-                <?php include "review.php"?>
+                <?php include "reviews.php" ?>
             </div>
 
         </div>
-
     </div>
 
 </div>
+
 
 
 <?php include '../view/footer.php';?>

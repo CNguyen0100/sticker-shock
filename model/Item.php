@@ -1,5 +1,5 @@
 <?php
- include_once "connection.php";
+ include_once "Connection.php";
 class Item {
     public $title;
     public $size;
@@ -27,6 +27,19 @@ class Item {
         $item = new Item($row['item_id'], $row['title'], $row['size'], $row['price'], $row['description'], $row['category'], $row['subcategory']);
         $db = null;
         return $item;
+    }
+
+    public static function getItemsByCategory($category) {
+        $list = [];
+        $db = db::getInstance();
+        $result = $db->prepare("SELECT * FROM Items WITH category='$category'");
+        $result->execute();
+        while ($item = $result->fetch(PDO::FETCH_ASSOC))
+        {
+            $list[] = new Item($item['item_id'], $item['title'], $item['size'], $item['price'], $item['description'], $item['category'], $item['subcategory']);
+        }
+        $db = null;
+        return $list;
     }
 
     public static function allItems() {
