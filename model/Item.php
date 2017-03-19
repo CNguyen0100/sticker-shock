@@ -7,6 +7,7 @@ class Item {
     public $description;
     public $category;
     public $subcategory;
+    private $table = 'Items';
 
    public function __construct($title, $size, $price, $description, $category, $subcategory) {
         $this->title = $title;
@@ -27,7 +28,7 @@ class Item {
         {
             $list[] = new Item($item['title'], $item['size'], $item['price'], $item['description'], $item['category'], $item['subcategory']);
         }
-
+        $db = null;
         return $list;
     }
 }

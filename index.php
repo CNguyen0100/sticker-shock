@@ -26,7 +26,7 @@ require_once('model/connection.php');
             <?php include 'view/category-menu.php';?>
             <div class="col-md-9">
                 <div class="row">
-                    <?php include 'view/item-card.php';?>
+                    <?php include 'view/item-cards.php';?>
                 </div>
             </div>
         </div>

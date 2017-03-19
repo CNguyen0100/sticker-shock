@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <title>Shop Homepage - Start Bootstrap Template</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/shop-homepage.css" rel="stylesheet">
+    <link href="css/shop-item.css" rel="stylesheet">
 
 </head>
 
@@ -116,7 +116,6 @@
     <script src="js/jquery.js"></script>
     <script src="js/tether.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
 </body>
 
 </html>
