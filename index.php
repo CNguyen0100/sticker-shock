@@ -15,6 +15,7 @@ require_once('models/Connection.php');
     <title>Sticker Shock</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/shop-homepage.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/logo.png">
     <style>
         .navbar-toggler {
             z-index: 1;
