@@ -1,3 +1,11 @@
+<?php
+include "../model/Item.php";
+if(isset($_GET['id'])) {
+    $item_id = $_GET['id'];
+    $item = Item::getItemById($item_id);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,36 +16,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Shop Homepage - Start Bootstrap Template</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/shop-item.css" rel="stylesheet">
+    <title><?php echo $item->title?></title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/shop-item.css" rel="stylesheet">
 
 </head>
 
 <body>
 
-    <?php include 'view/navigation.php'; ?>
+    <?php include 'navigation.php'; ?>
 
     <div class="container" style="margin-top: 1rem;">
 
         <div class="row">
 
-            <?php include 'view/category-menu.php'; ?>
+            <?php include 'category-menu.php'; ?>
 
             <div class="col-md-9">
 
                 <div class="thumbnail">
                     <img class="img-responsive" src="http://placehold.it/800x300" alt="">
                     <div class="caption-full">
-                        <h4 class="pull-right">$24.99</h4>
-                        <h4><a href="#">Product Name</a>
-                        </h4>
-                        <p>See more snippets like these online store reviews at <a target="_blank" href="http://bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
-                        <p>Want to make these reviews work? Check out
-                            <strong><a href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">this building a review system tutorial</a>
-                            </strong>over at maxoffsky.com!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                        <h4><?php echo $item->title?></h4>
+                        <h5 class="pull-right">$<?php echo $item->price?></h5>
+                        <p><?php echo $item->description?></p>
                     </div>
+
                     <div class="ratings">
                         <p class="pull-right">3 reviews</p>
                         <p>
@@ -83,7 +87,7 @@
                             <span class="glyphicon glyphicon-star-empty"></span>
                             Anonymous
                             <span class="pull-right">12 days ago</span>
-                            <p>I've alredy ordered another one!</p>
+                            <p>I've already ordered another one!</p>
                         </div>
                     </div>
 
@@ -111,11 +115,11 @@
     </div>
 
 
-    <?php include 'view/footer.php'; ?>
+    <?php include 'footer.php'; ?>
 
-    <script src="js/jquery.js"></script>
-    <script src="js/tether.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/tether.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 </body>
 
 </html>
