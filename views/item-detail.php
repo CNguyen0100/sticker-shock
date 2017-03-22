@@ -43,7 +43,7 @@ if(isset($_GET['id'])) {
             <div class="card">
                 <img class="img-responsive" src="http://placehold.it/800x300" alt="">
                 <div class="card-block">
-                    <h4 style="display:inline-block;"><?php echo $item->title?></h4>
+                    <h4 style="display:inline-block;"><?php echo $item->item_name?></h4>
                     <h5 class="float-right" style="display:inline-block;">$<?php echo $item->price?></h5>
                     <p><?php echo $item->description?></p>
                     <div class="text-left">
