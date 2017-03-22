@@ -9,14 +9,14 @@ class Item {
     public $subcategory;
     private $table = 'Items';
 
-   public function __construct($item_id, $title, $size, $price, $description, $category, $subcategory) {
+   public function __construct($item_id, $item_name, $size, $price, $description, $category, $subcategory) {
         $this->item_id = $item_id;
-        $this->title = $title;
+        $this->item_name = $item_name;
         $this->size  = $size;
         $this->price  = $price;
         $this->description = $description;
         $this->category = $category;
-        $this->$subcategory = $subcategory;
+        $this->subcategory = $subcategory;
     }
 
     public static function getItemById($id){
