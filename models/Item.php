@@ -24,7 +24,7 @@ class Item {
         $result = $db->prepare("SELECT * FROM Items WHERE item_id='$id'");
         $result->execute();
         $row  = $result -> fetch();
-        $item = new Item($row['item_id'], $row['title'], $row['size'], $row['price'], $row['description'], $row['category'], $row['subcategory']);
+        $item = new Item($row['item_id'], $row['item_name'], $row['size'], $row['price'], $row['description'], $row['category'], $row['subcategory']);
         $db = null;
         return $item;
     }
@@ -32,11 +32,11 @@ class Item {
     public static function getItemsByCategory($category) {
         $list = [];
         $db = db::getInstance();
-        $result = $db->prepare("SELECT * FROM Items WITH category='$category'");
+        $result = $db->prepare("SELECT * FROM Items WHERE category='$category' AND status='available'");
         $result->execute();
         while ($item = $result->fetch(PDO::FETCH_ASSOC))
         {
-            $list[] = new Item($item['item_id'], $item['title'], $item['size'], $item['price'], $item['description'], $item['category'], $item['subcategory']);
+            $list[] = new Item($item['item_id'], $item['item_name'], $item['size'], $item['price'], $item['description'], $item['category'], $item['subcategory']);
         }
         $db = null;
         return $list;
@@ -45,11 +45,11 @@ class Item {
     public static function allItems() {
         $list = [];
         $db = db::getInstance();
-        $result = $db->prepare("SELECT * FROM Items");
+        $result = $db->prepare("SELECT * FROM Items WHERE status='available'");
         $result->execute();
         while ($item = $result->fetch(PDO::FETCH_ASSOC))
         {
-            $list[] = new Item($item['item_id'], $item['title'], $item['size'], $item['price'], $item['description'], $item['category'], $item['subcategory']);
+            $list[] = new Item($item['item_id'], $item['item_name'], $item['size'], $item['price'], $item['description'], $item['category'], $item['subcategory']);
         }
         $db = null;
         return $list;
