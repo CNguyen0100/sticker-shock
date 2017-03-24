@@ -1,5 +1,6 @@
 *.bak
 *.bak2
+*.map
 
 stylesheets/*
 .sass-cache/*
