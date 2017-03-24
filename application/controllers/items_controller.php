@@ -17,7 +17,7 @@ class Items extends Controller {
         $item = $this->model->getItemById($id);
 
         if (!$item) {
-            $error_page();
+            header('location: ' . URL . 'pages/error');
             return;
         }
 
