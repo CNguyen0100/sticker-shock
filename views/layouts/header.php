@@ -13,11 +13,11 @@
         <link href="/css/bootstrap.min.css" rel="stylesheet">
         <link href="/css/shop-homepage.css" rel="stylesheet">
         <link href="/css/style.css" rel="stylesheet">
-        <link rel="icon" type="image/png" href="images/logo.png">
+        <link rel="icon" type="image/png" href="/images/logo.png">
 
-        <script src="js/jquery.js"></script>
-        <script src="js/tether.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <script src="/js/jquery.js"></script>
+        <script src="/js/tether.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
     </head>
     <body>
     <?php include "views/navigation.php"?>
