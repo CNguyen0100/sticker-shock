@@ -11,7 +11,17 @@ class Pages extends Controller {
         require 'application/views/layouts/footer.php';
     }
 
+    public function contact() {
+        $this->title="Contact Us";
+
+        require 'application/views/layouts/header.php';
+        require 'application/views/pages/contact-us.php';
+        require 'application/views/layouts/footer.php';
+    }
+
     public function error() {
+        $this->title = "Page Not Found.";
+
         require 'application/views/layouts/header.php';
         require 'application/views/pages/error.php';
         require 'application/views/layouts/footer.php';
