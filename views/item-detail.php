@@ -1,5 +1,5 @@
 <?php
-include "../models/Item.php";
+#include "../models/Item.php";
 if(isset($_GET['id'])) {
     $item_id = $_GET['id'];
     $item = Item::getItemById($item_id);

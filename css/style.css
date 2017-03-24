@@ -1,0 +1,85 @@
+/**************************************
+************** General ****************
+**************************************/
+body {
+  color: #222;
+  font-family: Lato, sans-serif;
+  -webkit-font-smoothing: antialiased; }
+
+h1, h2, h3, h4, h5 {
+  font-family: Open Sans, sans-serif; }
+
+h1 {
+  font-weight: 400;
+  font-size: 1.5em; }
+
+h2 {
+  font-weight: 400;
+  font-size: 1.3em;
+  letter-spacing: 0.03em; }
+
+h3 {
+  color: #383838;
+  font-weight: 700;
+  font-size: 1.2em; }
+
+h4 {
+  color: #444;
+  font-weight: 300;
+  letter-spacing: 0.02em; }
+  h4 a {
+    color: inherit; }
+    h4 a:hover {
+      color: inherit; }
+
+b {
+  font-weight: 700; }
+
+i {
+  font-style: italic; }
+
+/**************************************
+************** Classes ****************
+**************************************/
+.navbar-brand {
+  font-family: Montserrat, Lato, sans-serif;
+  font-size: 2em;
+  font-weight: 700;
+  letter-spacing: -0.11em; }
+
+.navbar-toggler {
+  font-size: 1.5em;
+  border: none; }
+
+.navbar-toggler-icon {
+  height: 2em; }
+
+.category a {
+  color: #555;
+  font-weight: bold;
+  text-transform: uppercase; }
+  .category a:hover {
+    color: inherit; }
+.category .category-item {
+  border: none; }
+  .category .category-item:hover {
+    background-color: #e6e6e6; }
+  .category .category-item:first-child {
+    border-radius: 0; }
+  .category .category-item:last-child {
+    border-radius: 0; }
+
+.card {
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2); }
+
+.card-img-top {
+  border-top-right-radius: 2px;
+  border-top-left-radius: 2px; }
+
+.card-footer {
+  border: none;
+  padding: 0.25em 1.25em 0.75em; }
+
+/*# sourceMappingURL=style.css.map */
