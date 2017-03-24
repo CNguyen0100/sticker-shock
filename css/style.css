@@ -73,6 +73,9 @@ i {
   .category .category-item:last-child {
     border-radius: 0; }
 
+nav + div.container {
+  margin-top: 1.5em; }
+
 .card {
   border: none;
   border-radius: 2px;
