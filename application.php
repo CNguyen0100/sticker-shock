@@ -12,8 +12,8 @@ class Application {
         $this->splitURL();
 
         if (!$this->url_controller) {
-            require './controllers/Pages_controller.php';
-            $page = new Page("Item");
+            require './controllers/pages_controller.php';
+            $page = new Pages();
             $page->index();
         } elseif (file_exists('./controllers/' . $this->url_controller . '_controller.php')) {
             require './controllers/' . $this->url_controller . '_controller.php';
@@ -49,6 +49,10 @@ class Application {
             unset($url[0], $url[1]);
 
             $this->url_params = array_values($url);
+
+            #echo 'Controller ' . $this->url_controller . '<br />';
+            #echo 'Action: ' . $this->url_action . '<br />';
+            #echo 'Parameters ' . print_r($this->url_params, true) . '<br />';
         }
     }
 
