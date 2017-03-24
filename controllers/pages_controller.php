@@ -1,10 +1,6 @@
 <?php
 
-class Page extends Controller {
-
-    public function __construct() {
-        parent::__construct();
-    }
+class Pages extends Controller {
 
     public function index() {
         $this->title="Home";
