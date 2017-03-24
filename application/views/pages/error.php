@@ -1,3 +1,3 @@
-<div class="container" style="margin-top: 1.5em;">
+<div class="container">
     <p>Oops! Something went wrong.</p>
 </div>

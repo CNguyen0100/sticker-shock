@@ -1,3 +1,3 @@
-<div class="container" style="margin-top: 1.5em;">
+<div class="container">
     <p>Form here.</p>
 </div>

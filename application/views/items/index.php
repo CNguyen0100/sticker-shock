@@ -1,4 +1,4 @@
-<div class="container" style="margin-top: 1.5em;">
+<div class="container">
     <div class="row">
         <?php include './views/category-menu.php';?>
         <div class="col-md-9">
