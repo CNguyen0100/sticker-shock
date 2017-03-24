@@ -41,6 +41,9 @@ i {
 /**************************************
 ************** Classes ****************
 **************************************/
+@media (max-width: 576px) {
+  nav > .container {
+    width: 100%; } }
 .navbar-brand {
   font-family: Montserrat, Lato, sans-serif;
   font-size: 2em;
@@ -48,6 +51,7 @@ i {
   letter-spacing: -0.11em; }
 
 .navbar-toggler {
+  z-index: 1;
   font-size: 1.5em;
   border: none; }
 
