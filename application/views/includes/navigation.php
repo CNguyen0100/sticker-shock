@@ -13,7 +13,7 @@
                     <a class="nav-link" href="#">Sell</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Account</a>
+                    <a class="nav-link" href="account">Account</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="pages/contact">Contact Us</a>
