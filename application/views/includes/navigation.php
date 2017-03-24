@@ -16,7 +16,7 @@
                     <a class="nav-link" href="#">Account</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact Us</a>
+                    <a class="nav-link" href="pages/contact">Contact Us</a>
                 </li>
             </ul>
         </div>
