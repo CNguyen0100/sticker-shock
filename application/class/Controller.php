@@ -3,9 +3,7 @@
 abstract class Controller
 {
     public $db = null;
-
     public $model = null;
-
     public $title = null;
 
     public function __construct()

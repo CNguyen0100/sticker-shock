@@ -3,20 +3,20 @@
 class Application {
 
     private $url_controller = null;
-
     private $url_action = null;
-
     private $url_params = array();
+
+    private $controller_dir = 'application/controllers/';
 
     public function __construct() {
         $this->splitURL();
 
         if (!$this->url_controller) {
-            require './controllers/pages_controller.php';
+            require $this->controller_dir . 'pages_controller.php';
             $page = new Pages();
             $page->index();
-        } elseif (file_exists('./controllers/' . $this->url_controller . '_controller.php')) {
-            require './controllers/' . $this->url_controller . '_controller.php';
+        } elseif (file_exists($this->controller_dir . $this->url_controller . '_controller.php')) {
+            require $this->controller_dir . $this->url_controller . '_controller.php';
             $this->url_controller = new $this->url_controller();
 
             if (method_exists($this->url_controller, $this->url_action)) {
@@ -29,11 +29,13 @@ class Application {
                 if (strlen($this->url_action) == 0) {
                     $this->url_controller->index();
                 } else {
-                    header('location: ' . URL . 'problem');
+                    #header('location: ' . URL . 'pages/error');
+                    $this->error_page();
                 }
             }
         } else {
-            header('location: ' . URL . 'problem');
+            #header('location: ' . URL . 'pages/error');
+            $this->error_page();
         }
     }   
 
@@ -54,6 +56,10 @@ class Application {
             #echo 'Action: ' . $this->url_action . '<br />';
             #echo 'Parameters ' . print_r($this->url_params, true) . '<br />';
         }
+    }
+
+    public function error_page() {
+        header('location: ' . URL . 'pages/error');
     }
 
 }

@@ -1,9 +1,9 @@
 <?php
 
-require './config.php';
+require './application/conf/config.php';
 
-require './application.php';
-require './controllers/Controller.php';
-require './models/Model.php';
+require './application/class/Application.php';
+require './application/class/Controller.php';
+require './application/class/Model.php';
 
 $app = new Application();

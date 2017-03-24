@@ -20,5 +20,5 @@
         <script src="/js/bootstrap.min.js"></script>
     </head>
     <body>
-    <?php include "views/includes/navigation.php"?>
+    <?php include "application/views/includes/navigation.php"?>
 
