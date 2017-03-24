@@ -16,7 +16,7 @@ class Items extends Controller {
     public function item($id) {
         $item = $this->model->getItemById($id);
 
-        $title = $item->item_name;
+        $this->title = $item->item_name;
 
         require './views/layouts/header.php';
         require './views/items/item.php';
