@@ -10,13 +10,13 @@
                     <a class="nav-link" href="/">Shop<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Sell</a>
+                    <a class="nav-link" href="../views/list-item.php">Sell</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="account">Account</a>
+                    <a class="nav-link" href="/account">Account</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="pages/contact">Contact Us</a>
+                    <a class="nav-link" href="/pages/contact">Contact Us</a>
                 </li>
             </ul>
         </div>
