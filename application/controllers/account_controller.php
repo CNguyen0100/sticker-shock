@@ -11,14 +11,14 @@ class Account extends Controller {
         if ($user) {
             require 'application/views/account/index.php';
         } else {
-            $this->login(); 
+            $this->login();
         }
     } 
 
     public function login() {
         $this->title = 'Log In';
 
-        require 'application/views/account/login.php';
+        require 'application/views/account/signup.php';
     }
 
     public function signup() {

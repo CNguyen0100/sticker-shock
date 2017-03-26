@@ -2,7 +2,7 @@
 <div class="container">
     <nav class="nav nav-tabs" data-tabs="tabs">
         <a class="nav-link active" data-target="#login" data-toggle="tab">Log In</a>
-        <a class="nav-link" data-target="#register" data-toggle="tab">Register</a>
+        <a class="nav-link" data-target="#register" data-toggle="tab">Sign Up</a>
     </nav>
 
     <div class="tab-content">
