@@ -1,6 +1,22 @@
 <?php
 class Item extends Model {
-    
+
+    public function createItem(){
+
+    }
+
+    public function readItem(){
+
+    }
+
+    public function updateItem(){
+
+    }
+
+    public function deleteItem(){
+
+    }
+
     public function getItemById($id) {
         $sql = "SELECT item_id, item_name, size, price, description, category, subcategory FROM Items WHERE item_id='$id'";
         $query = $this->db->prepare($sql);
