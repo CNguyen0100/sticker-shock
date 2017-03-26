@@ -8,9 +8,7 @@ class Items extends Controller {
         $this->title="Browse";
         $items = $this->model->getAllItems();
 
-        require 'application/views/layouts/header.php';
         require 'application/views/items/index.php';
-        require 'application/views/layouts/footer.php';
     }
 
     public function item($id) {
@@ -23,9 +21,7 @@ class Items extends Controller {
 
         $this->title = $item->item_name;
 
-        require 'application/views/layouts/header.php';
         require 'application/views/items/item.php';
-        require 'application/views/layouts/footer.php';
     }
 
     public function loadModel()
