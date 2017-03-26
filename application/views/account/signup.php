@@ -1,12 +1,33 @@
 <?php require 'application/views/layouts/header.php'; ?>
 <div class="container">
-    <nav class="nav nav-tabs" data-tabs="tabs">
-        <a class="nav-link active" data-target="#login" data-toggle="tab">Log In</a>
-        <a class="nav-link" data-target="#register" data-toggle="tab">Sign Up</a>
-    </nav>
-
+    <ul class="nav nav-tabs" role="tablist" data-tabs="tabs">
+        <li class="nav-item">
+            <a data-toggle="tab" class="nav-link active"  data-target="#login" role="tab">Log In</a>
+        </li>
+        <li class="nav-item">
+            <a data-toggle="tab" class="nav-link" data-target="#signup" role="tab">Sign Up</a>
+        </li>
+    </ul>
     <div class="tab-content">
-        <div id="register" class="tab-pane">
+        <div id="login" class="tab-pane active" role="tabpanel">
+            <br>
+            <form>
+                <div class="form-group row">
+                    <div class="col-6">
+                        <input type="text" class="form-control" id="username" placeholder="Username">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-6">
+                        <input type="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Log In</button>
+                </div>
+            </form>
+        </div>
+        <div id="signup" class="tab-pane" role="tabpanel">
             <br>
             <form>
                 <div class="form-group row">
@@ -65,24 +86,6 @@
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
-        </div>
-        <div id="login" class="tab-pane active">
-           <br>
-            <form>
-                <div class="form-group row">
-                    <div class="col-6">
-                        <input type="text" class="form-control" id="username" placeholder="Username">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-6">
-                        <input type="password" class="form-control" id="password" placeholder="Password">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Log In</button>
                 </div>
             </form>
         </div>
