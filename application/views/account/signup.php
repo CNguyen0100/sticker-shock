@@ -2,8 +2,10 @@
 <div class="container">
     <ul class="nav nav-tabs" role="tablist" data-tabs="tabs">
         <li class="nav-item">
+            <a data-toggle="tab" class="nav-link active"  data-target="#login" role="tab">Log In</a>
         </li>
         <li class="nav-item">
+            <a data-toggle="tab" class="nav-link" data-target="#signup" role="tab">Sign Up</a>
         </li>
     </ul>
     <div class="tab-content">
@@ -25,6 +27,7 @@
                 </div>
             </form>
         </div>
+        <div id="signup" class="tab-pane" role="tabpanel">
             <br>
             <form>
                 <div class="form-group row">
