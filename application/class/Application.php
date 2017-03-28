@@ -30,7 +30,8 @@ class Application {
                     $this->url_controller->index();
                 } else {
                     #header('location: ' . URL . 'pages/error');
-                    $this->error_page();
+                    #$this->error_page();
+                    $this->url_controller->index($this->url_action, $this->url_params);
                 }
             }
         } else {
