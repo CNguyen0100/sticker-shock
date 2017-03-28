@@ -11,7 +11,7 @@ class Account extends Controller {
         if ($user) {
             require 'application/views/account/index.php';
         } else {
-            $this->login(); 
+            $this->login();
         }
     } 
 
