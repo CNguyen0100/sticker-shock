@@ -18,7 +18,7 @@ class Account extends Controller {
     public function login() {
         $this->title = 'Log In';
 
-        require 'application/views/account/signup.php';
+        require 'application/views/account/login.php';
     }
 
     public function signup() {
