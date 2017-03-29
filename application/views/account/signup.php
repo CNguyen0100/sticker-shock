@@ -4,27 +4,27 @@
             <form>
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <input type="text" class="form-control" id="firstname" placeholder="First Name">
+                        <input required type="text" class="form-control" id="firstname" placeholder="First Name">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <input type="text" class="form-control" id="lastname" placeholder="Last Name">
+                        <input required type="text" class="form-control" id="lastname" placeholder="Last Name">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <input type="email" class="form-control" id="email" placeholder="Email">
+                        <input required type="email" class="form-control" id="email" placeholder="Email">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <input type="text" class="form-control" id="username" placeholder="Username">
+                        <input required type="text" class="form-control" id="username" placeholder="Username">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <input type="password" class="form-control" id="password" placeholder="Password">
+                        <input required type="password" class="form-control" id="password" placeholder="Password">
                     </div>
                 </div>
                 <div class="form-group row">
