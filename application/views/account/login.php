@@ -4,12 +4,12 @@
         <form>
             <div class="form-group row">
                 <div class="col-md-6">
-                    <input type="text" class="form-control" id="username" placeholder="Username">
+                    <input required type="text" class="form-control" id="username" placeholder="Username">
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-md-6">
-                    <input type="password" class="form-control" id="password" placeholder="Password">
+                    <input required type="password" class="form-control" id="password" placeholder="Password">
                 </div>
             </div>
 
