@@ -89,7 +89,7 @@ class Application {
     # Alternatively, each controller could have it's own error page which is
     # probably the better way to go about it.
     public function error_page() {
-        header('location: ' . URL . 'pages/error');
+        header('location: pages/error');
     }
 
 }
