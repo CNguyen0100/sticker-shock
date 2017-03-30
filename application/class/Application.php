@@ -53,9 +53,10 @@ class Application {
 
             $this->url_params = array_values($url);
 
-            #echo 'Controller ' . $this->url_controller . '<br />';
+            #echo '<br /> Controller ' . $this->url_controller . '<br />';
             #echo 'Action: ' . $this->url_action . '<br />';
             #echo 'Parameters ' . print_r($this->url_params, true) . '<br />';
+            #var_dump($_POST);
         }
     }
 
