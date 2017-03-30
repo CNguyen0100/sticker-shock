@@ -21,7 +21,7 @@ require "application/views/layouts/header.php"; ?>
             }
             $mail = mail($recipient, $subject, $formcontent, $mailheader);
             if($mail) {
-                echo "<p>Thank you for contacting the Sticker Shock team! We will be in touch as soon as possible.</p>";
+                echo "<p>Thank you for contacting the Sticker Shock team! </p>";
                 echo "<p>We will be in touch as soon as possible.</p>";
             }
             else
