@@ -6,6 +6,7 @@ class Account extends Controller {
         $this->title = 'Account';
     
         $user = null;
+        # Graham L.:
         # If user is logged in, fetch their page.
         # If they aren't redirect to login page.
         if ($user) {

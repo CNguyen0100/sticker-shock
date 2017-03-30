@@ -1,3 +1,8 @@
+<!--
+Graham L.:
+I kind of want to rename "Shop" to "Browse" and have it link to the Item index 
+page (which is currently a clone of the home page).
+//-->
 <nav class="navbar fixed-top navbar-toggleable-md navbar-inverse bg-inverse">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarExample" aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -10,7 +15,7 @@
                     <a class="nav-link" href="/">Shop<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../views/list-item.php">Sell</a>
+                    <a class="nav-link" href="/">Sell</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/account">Account</a>

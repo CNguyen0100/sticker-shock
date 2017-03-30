@@ -1,9 +1,4 @@
-<?php
-ini_set("display_errors", 1);
-ini_set("display_startup_errors", 1);
-error_reporting(E_ALL);
-require "application/views/layouts/header.php"; ?>
-
+<?php require "application/views/layouts/header.php"; ?>
     <div class="container">
         <?php
         if(isset($_POST["submit"])) {
