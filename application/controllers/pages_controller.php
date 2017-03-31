@@ -19,7 +19,6 @@ class Pages extends Controller {
         require 'application/helper/email.php';
     }
 
-
     public function error() {
         $this->title = "Page Not Found.";
 

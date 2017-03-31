@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 # Graham L.:
 # I researched various implementations of MVC patterns in PHP and eventually
 # came across this GitHub repo: https://github.com/panique/mini

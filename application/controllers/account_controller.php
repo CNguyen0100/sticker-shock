@@ -9,7 +9,7 @@ class Account extends Controller {
         # Graham L.:
         # If user is logged in, fetch their page.
         # If they aren't redirect to login page.
-        if ($user) {
+        if (isset($_SESSION['username'])) {
             require 'application/views/account/index.php';
         } else {
             $this->login();
@@ -18,8 +18,19 @@ class Account extends Controller {
 
     public function login() {
         $this->title = 'Log In';
-
         require 'application/views/account/login.php';
+    }
+
+    public function submit_login(){
+        $username=filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+        $password=filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+        $error = $this->model->authenticate($username, $password);
+        if(isset($_SESSION['username'])){
+            $this->index();
+        }
+        else{
+            echo $error;
+        }
     }
 
     public function signup() {
