@@ -25,11 +25,11 @@ class Account extends Controller {
         $password=filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
         $error = $this->model->authenticate($username, $password);
         if(isset($_SESSION['username'])){
-            $error = '';
+            $_SESSION['login_error'] = '';
             $this->index();
         }
         else{
-            echo $error;
+            $_SESSION['login_error'] = $error;
             $this->login();
         }
 
