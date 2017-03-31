@@ -8,6 +8,11 @@
         }
         ?>
         </p>
+        <form action="/account/logout" method="POST">
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" name="logout">Log Out</button>
+        </div>
+        </form>
     </div>
 <?php require 'application/views/layouts/footer.php'; ?>
 

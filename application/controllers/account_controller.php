@@ -1,7 +1,6 @@
 <?php
 
-class Account extends Controller { 
-
+class Account extends Controller {
     public function index() {
         $this->title = 'Account';
     
@@ -26,11 +25,14 @@ class Account extends Controller {
         $password=filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
         $error = $this->model->authenticate($username, $password);
         if(isset($_SESSION['username'])){
+            $error = '';
             $this->index();
         }
         else{
             echo $error;
+            $this->login();
         }
+
     }
 
     public function signup() {
@@ -52,6 +54,11 @@ class Account extends Controller {
         $state = filter_input(INPUT_POST, 'state', FILTER_SANITIZE_STRING);
         $zip = filter_input(INPUT_POST, 'zip', FILTER_SANITIZE_STRING);
         $this->model->createUser($username, $fname, $lname, $email, $hashpass, $gender, $address1, $address2, $city, $state, $zip);
+        $this->login();
+    }
+
+    public function logout(){
+        session_destroy();
         $this->login();
     }
 
