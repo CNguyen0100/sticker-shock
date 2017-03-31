@@ -16,7 +16,6 @@ class Pages extends Controller {
 
     public function contactsubmission() {
         $this->title="Contact Us - Received";
-
         require 'application/helper/email.php';
     }
 
