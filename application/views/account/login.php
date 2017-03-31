@@ -17,6 +17,12 @@
                 <a href="account/signup">Don't have an account? Sign up now!</a>
             </p>
 
+            <?php if(isset($_SESSION['login_error']) &&  $_SESSION['login_error'] != ''){
+                echo '<p id="error">';
+                echo $_SESSION['login_error'];
+                echo '</p>';
+            }?>
+
             <div class="form-group">
                 <button type="submit" class="btn btn-primary" name="submit">Log In</button>
             </div>

@@ -1,5 +1,6 @@
 <?php
 class User extends Model {
+    public $error;
 
     public function createUser($username, $fname, $lname, $email, $password, $gender, $address1, $address2, $city, $state, $zip){
         $stmt = $this->db->prepare("INSERT INTO Accounts (username, first_name, last_name, email, password, gender, address_1, address_2, city, state, zip) 
