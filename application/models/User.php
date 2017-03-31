@@ -29,4 +29,19 @@ class User extends Model {
     public function deleteUser(){
 
     }
+
+    public function authenticate($username, $password){
+        $error = '';
+        $statement = $this->db->prepare("SELECT * from Accounts WHERE username = :username");
+        $statement->bindParam(':username', $username);
+        $statement->execute();
+        $result = $statement->fetch();
+        if(count($result) > 0 && password_verify($password, $result->password)){
+            $_SESSION['username'] = $result->username;
+        }
+        else{
+            $error = 'Username and Password are not found <br>';
+        }
+        return $error;
+    }
 }
