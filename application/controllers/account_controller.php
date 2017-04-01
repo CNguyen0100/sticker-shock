@@ -53,8 +53,14 @@ class Account extends Controller {
         $city = filter_input(INPUT_POST, 'city', FILTER_SANITIZE_STRING);
         $state = filter_input(INPUT_POST, 'state', FILTER_SANITIZE_STRING);
         $zip = filter_input(INPUT_POST, 'zip', FILTER_SANITIZE_STRING);
-        $this->model->createUser($username, $fname, $lname, $email, $hashpass, $gender, $address1, $address2, $city, $state, $zip);
-        $this->login();
+        $this->model->validateRegistration($username, $email);
+        if((isset($_SESSION['username_taken_err']) && $_SESSION['username_taken_err'] != '') || (isset($_SESSION['email_taken_err']) && $_SESSION['email_taken_err'] != '') ) {
+            $this->signup();
+        }
+        else {
+            $this->model->createUser($username, $fname, $lname, $email, $hashpass, $gender, $address1, $address2, $city, $state, $zip);
+            $this->login();
+        }
     }
 
     public function logout(){

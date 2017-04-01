@@ -41,8 +41,27 @@ class User extends Model {
             $_SESSION['username'] = $result->username;
         }
         else{
-            $error = 'Username and Password are not found <br>';
+            $error = 'Username and password combination are invalid<br>';
         }
         return $error;
+    }
+
+    public function validateRegistration($username, $email) {
+        $_SESSION['username_taken_err'] = '';
+        $_SESSION['email_taken_err'] = '';
+        $username_stmt = $this->db->prepare("SELECT * from Accounts WHERE username = :username");
+        $username_stmt->bindParam(':username', $username);
+        $username_stmt->execute();
+        $username_result = $username_stmt->fetchAll();
+        if(count($username_result) > 0){
+            $_SESSION['username_taken_err'] = 'Username is taken.';
+        }
+        $statement = $this->db->prepare("SELECT * from Accounts WHERE email = :email");
+        $statement->bindParam(':email', $email);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        if(count($result) > 0){
+            $_SESSION['email_taken_err'] = 'An account already exists with this email address.';
+        }
     }
 }
