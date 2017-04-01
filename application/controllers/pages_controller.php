@@ -5,8 +5,17 @@ class Pages extends Controller {
     public function index() {
         $this->title="Home";
         $items = $this->model->getAllItems();
-
         require 'application/views/pages/index.php';
+    }
+
+    public function sell(){
+        if(isset($_SESSION['username']) && $_SESSION['username'] != '') {
+            $this->title = "Sell";
+            require 'application/views/pages/sell.php';
+        } else{
+            $_SESSION['login_error'] = 'You must be logged in to complete this action';
+            require 'application/views/account/login.php';
+        }
     }
 
     public function contact() {

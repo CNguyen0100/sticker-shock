@@ -15,7 +15,7 @@ page (which is currently a clone of the home page).
                     <a class="nav-link" href="/">Shop<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Sell</a>
+                    <a class="nav-link" href="/pages/sell">Sell</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/account">Account</a>
