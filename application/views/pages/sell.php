@@ -1,7 +1,7 @@
 <?php require 'application/views/layouts/header.php'; ?>
 <div class="container">
     <div class="h1">Sell<hr></div>
-    <form action="" method="POST">
+    <form action="/items/submititem" method="POST">
         <div class="form-group row">
             <div class="col-md-6">
                 <input required placeholder="Title" class="form-control" type="text" name="title">
@@ -25,7 +25,7 @@
         <div class="form-group row">
             <div class="col-md-6">
                 <select required class="form-control" name="category">
-                    <option disabled>Category</option>
+                    <option selected disabled>Category</option>
                     <option>Category Placeholder 1</option>
                     <option>Category Placeholder 2</option>
                 </select>
@@ -34,6 +34,7 @@
         <div class="form-group row">
             <div class="col-md-6">
                 <select class="form-control" name="subcategory">
+                    <option selected value="">Subcategory</option>
                     <option>Subcategory Placeholder 1</option>
                     <option>Subcategory Placeholder 2</option>
                 </select>
@@ -41,7 +42,7 @@
         </div>
         <div class="form-group row">
             <div class="col-md-6">
-            <textarea class="form-control" name="description" rows="6">Enter your item description here. Some things to include: item quality, brand, etc.</textarea>
+            <textarea placeholder="Enter your item description here. Some things to include: item quality, brand, etc." class="form-control" name="description" rows="6"></textarea>
             </div>
         </div>
 

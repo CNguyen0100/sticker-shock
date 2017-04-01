@@ -1,8 +1,21 @@
 <?php
 class Item extends Model {
 
-    public function createItem(){
-
+    public function createItem($account_id, $name, $size, $price, $shipping, $description, $category, $subcategory){
+        $stmt = $this->db->prepare("INSERT INTO Items (account_id, item_name, size, price, shipping, description, category, subcategory, status) 
+          VALUES (:accountid, :name, :size, :price, :shipping, :description, :category, :subcategory, :status)");
+        $stmt->bindParam(':accountid', $account_id);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':size', $size);
+        $stmt->bindParam(':price', $price);
+        $stmt->bindParam(':shipping', $shipping);
+        $stmt->bindparam(':description', $description);
+        $stmt->bindparam(':category', $category);
+        $stmt->bindparam(':subcategory', $subcategory);
+        $stmt->bindvalue(':status', 'available');
+        $stmt->execute();
+        $id = $this->db->lastInsertId();
+        return $id;
     }
 
     public function readItem(){

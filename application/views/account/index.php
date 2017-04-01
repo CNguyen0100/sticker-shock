@@ -5,6 +5,8 @@
         <?php
         if(isset($_SESSION['username'])){
             echo $_SESSION['username'];
+            echo '<br>';
+            echo $_SESSION['id'];
         }
         ?>
         </p>

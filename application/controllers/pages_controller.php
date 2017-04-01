@@ -18,6 +18,7 @@ class Pages extends Controller {
         }
     }
 
+
     public function contact() {
         $this->title="Contact Us";
         require 'application/views/pages/contact-us.php';
