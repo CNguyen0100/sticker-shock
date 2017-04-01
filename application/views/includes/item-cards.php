@@ -19,7 +19,7 @@ foreach($items as $item)  :?>
                     ?>
             </small>
             <h4 class="card-title"><a href="/items/item/<?php echo $item->item_id?>"><?php echo $item->item_name?></a></h4>
-            <h5>$<?php echo $item->price?></h5>
+            <h5>$<?php echo number_format((float)$item->price, 2, '.', '');?></h5>
             <p class="card-text"><?php echo $item->description?></p>
         </div>
         <div class="card-footer">
