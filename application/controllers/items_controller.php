@@ -59,6 +59,19 @@ class Items extends Controller {
         require 'application/views/items/item.php';
     }
 
+    public function submititem(){
+        $account_id = $_SESSION['id'];
+        $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+        $size = filter_input(INPUT_POST, 'size', FILTER_SANITIZE_STRING);
+        $price = $_POST['price'];
+        $shipping = $_POST['shipping'];
+        $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
+        $category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_STRING);
+        $subcategory = filter_input(INPUT_POST, 'subcategory', FILTER_SANITIZE_STRING);
+        $id = $this->model->createItem($account_id, $title, $size, $price, $shipping, $description, $category, $subcategory);
+        $this->item($id);
+    }
+
     public function loadModel()
     {
         require 'application/models/Item.php';

@@ -14,7 +14,7 @@
             </div>
 
             <p id="passwordHelpBlock" class="form-text text-muted">
-                <a href="account/signup">Don't have an account? Sign up now!</a>
+                <a href="/account/signup">Don't have an account? Sign up now!</a>
             </p>
 
             <?php if(isset($_SESSION['login_error']) &&  $_SESSION['login_error'] != ''){
