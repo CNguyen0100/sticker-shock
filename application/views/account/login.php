@@ -21,6 +21,7 @@
                 echo '<p id="error">';
                 echo $_SESSION['login_error'];
                 echo '</p>';
+                $_SESSION['login_error'] = '';
             }?>
 
             <div class="form-group">
