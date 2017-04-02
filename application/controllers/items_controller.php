@@ -55,7 +55,6 @@ class Items extends Controller {
         }
 
         $this->title = $item->item_name;
-
         require 'application/views/items/item.php';
     }
 
@@ -70,15 +69,16 @@ class Items extends Controller {
         $category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_STRING);
         $subcategory = filter_input(INPUT_POST, 'subcategory', FILTER_SANITIZE_STRING);
         $id = $this->model->createItem($account_id, $title, $size, $price, $shipping, $description, $category, $subcategory);
-        $target_dir = "/var/www/html/uploads/";
+        $target_dir = "/srv/http/uploads/";
         $target_file = $target_dir . basename('item_' . $id);
         move_uploaded_file($_FILES['item_img']['tmp_name'], $target_file);
         $this->item($id);
     }
 
-    public function accountitems(){
-        $items = $this->model->getItemsByUser($_SESSION['id']);
-        require 'application/views/account';
+    public function deleteitem($id){
+        $this->model->deleteItem($id);
+        header('location: /account');
+        return;
     }
 
     public function loadModel()

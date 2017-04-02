@@ -30,8 +30,9 @@ class Item extends Model {
 
     }
 
-    public function deleteItem(){
-
+    public function deleteItem($item_id){
+        $stmt = $this->db->prepare("DELETE FROM Items WHERE item_id='$item_id'");
+        $stmt->execute();
     }
 
     public function getItemById($id) {

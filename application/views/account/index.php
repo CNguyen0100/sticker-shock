@@ -41,7 +41,7 @@ $orders = null;
                             <button type="submit" class="btn btn-secondary btn-block" name="edititem">Edit</button>
                         </div>
                     </form>
-                    <form action="" method="POST">
+                    <form action="/items/deleteitem/<?php echo $item->item_id?>" method="POST">
                         <div class="form-group">
                             <button type="submit" class="btn btn-danger btn-block" name="deleteitem">Delete</button>
                         </div>

@@ -69,8 +69,6 @@ class Account extends Controller {
     }
 
 
-
-
     public function loadModel() {
         require 'application/models/User.php';
         $this->model = new User($this->db);
