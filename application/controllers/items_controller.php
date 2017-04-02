@@ -76,6 +76,11 @@ class Items extends Controller {
         $this->item($id);
     }
 
+    public function accountitems(){
+        $items = $this->model->getItemsByUser($_SESSION['id']);
+        require 'application/views/account';
+    }
+
     public function loadModel()
     {
         require 'application/models/Item.php';

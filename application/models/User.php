@@ -40,6 +40,7 @@ class User extends Model {
         if(count($result) > 0 && password_verify($password, $result->password)){
             $_SESSION['username'] = $result->username;
             $_SESSION['id'] = $result->user_id;
+            $_SESSION['fname'] = $result->first_name;
         }
         else{
             $error = 'Username and password combination are invalid<br>';
