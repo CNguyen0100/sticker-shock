@@ -1,7 +1,7 @@
 <?php require 'application/views/layouts/header.php';
 require 'application/models/Item.php';
-$item = new Item($this->db);
-$listings = $item->getItemsByUser($_SESSION['id']);
+$items = new Item($this->db);
+$listings = $items->getItemsByUser($_SESSION['id']);
 $orders = null;
 ?>
     <div class="container">
@@ -41,11 +41,13 @@ $orders = null;
                             <button type="submit" class="btn btn-secondary btn-block" name="edititem">Edit</button>
                         </div>
                     </form>
+                    <?php if($item->status == 'available'){?>
                     <form action="/items/deleteitem/<?php echo $item->item_id?>" method="POST">
                         <div class="form-group">
                             <button type="submit" class="btn btn-danger btn-block" name="deleteitem">Delete</button>
                         </div>
                     </form>
+                    <?php };?>
                 </div>
             </div>
         <?php }} else {echo '<hr><p>You have no listings! <a href="/pages/sell">Create a listing here.</a>';}?>
