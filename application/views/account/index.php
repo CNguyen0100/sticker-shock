@@ -41,13 +41,11 @@ $orders = null;
                             <button type="submit" class="btn btn-secondary btn-block" name="edititem">Edit</button>
                         </div>
                     </form>
-                    <?php if($item->status == 'available'){?>
                     <form action="/items/deleteitem/<?php echo $item->item_id?>" method="POST">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-danger btn-block" name="deleteitem">Delete</button>
+                            <button <?php if($item->status != 'available'){echo 'style="visibility:hidden;"';};?> type="submit" class="btn btn-danger btn-block" name="deleteitem">Delete</button>
                         </div>
                     </form>
-                    <?php };?>
                 </div>
             </div>
         <?php }} else {echo '<hr><p>You have no listings! <a href="/pages/sell">Create a listing here.</a>';}?>
