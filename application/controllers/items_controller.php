@@ -55,7 +55,6 @@ class Items extends Controller {
         }
 
         $this->title = $item->item_name;
-
         require 'application/views/items/item.php';
     }
 
@@ -76,9 +75,10 @@ class Items extends Controller {
         $this->item($id);
     }
 
-    public function accountitems(){
-        $items = $this->model->getItemsByUser($_SESSION['id']);
-        require 'application/views/account';
+    public function deleteitem($id){
+        $this->model->deleteItem($id);
+        header('location: /account');
+        return;
     }
 
     public function loadModel()

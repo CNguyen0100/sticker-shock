@@ -14,7 +14,7 @@ class Pages extends Controller {
             require 'application/views/pages/sell.php';
         } else{
             $_SESSION['login_error'] = 'You must be logged in to complete this action';
-            require 'application/views/account/login.php';
+            header('location: /account/login');
         }
     }
 
