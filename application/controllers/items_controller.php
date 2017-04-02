@@ -59,7 +59,8 @@ class Items extends Controller {
         require 'application/views/items/item.php';
     }
 
-    public function submititem(){
+    public function submititem()
+    {
         $account_id = $_SESSION['id'];
         $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
         $size = filter_input(INPUT_POST, 'size', FILTER_SANITIZE_STRING);
@@ -69,6 +70,9 @@ class Items extends Controller {
         $category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_STRING);
         $subcategory = filter_input(INPUT_POST, 'subcategory', FILTER_SANITIZE_STRING);
         $id = $this->model->createItem($account_id, $title, $size, $price, $shipping, $description, $category, $subcategory);
+        $target_dir = "/var/www/html/uploads/";
+        $target_file = $target_dir . basename('item_' . $id);
+        move_uploaded_file($_FILES['item_img']['tmp_name'], $target_file);
         $this->item($id);
     }
 

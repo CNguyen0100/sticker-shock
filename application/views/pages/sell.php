@@ -1,7 +1,7 @@
 <?php require 'application/views/layouts/header.php'; ?>
 <div class="container">
     <div class="h1">Sell<hr></div>
-    <form action="/items/submititem" method="POST">
+    <form enctype="multipart/form-data" action="/items/submititem" method="POST">
         <div class="form-group row">
             <div class="col-md-6">
                 <input required placeholder="Title" class="form-control" type="text" name="title">
@@ -48,7 +48,7 @@
 
         <div class="form-group row">
             <div class="col-md-6">
-                <input type="file" id="file" accept="image/*">
+                <input required type="file" name="item_img" accept="image/*">
             </div>
         </div>
         <div class="form-group row">
