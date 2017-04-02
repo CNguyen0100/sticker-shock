@@ -15,6 +15,10 @@ class Item extends Model {
         $stmt->bindvalue(':status', 'available');
         $stmt->execute();
         $id = $this->db->lastInsertId();
+        $stmt = $this->db->prepare("INSERT INTO UserItems (account_id, item_id) VALUES (:account_id, :item_id)");
+        $stmt->bindParam(':account_id', $_SESSION['id']);
+        $stmt->bindParam(':item_id', $id);
+        $stmt->execute();
         return $id;
     }
 
@@ -36,6 +40,14 @@ class Item extends Model {
         $query->execute();
 
         return $query->fetch();
+    }
+
+    public function getItemsByUser($user_id) {
+        $sql = "SELECT item_id, item_name, size, price, description, category, subcategory FROM Items WHERE account_id='$user_id'";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll();
     }
 
     public function getItemsByCategory($category) {
