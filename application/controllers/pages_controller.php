@@ -9,14 +9,18 @@ class Pages extends Controller {
     }
 
     public function sell(){
+        include 'application/controllers/helpers/categories.php';
+        echo constant('Category::Shirts');
+        $arr = Category::getConstants();
         if(isset($_SESSION['username']) && $_SESSION['username'] != '') {
             $this->title = "Sell";
             require 'application/views/pages/sell.php';
         } else{
             $_SESSION['login_error'] = 'You must be logged in to complete this action';
-            require 'application/views/account/login.php';
+            header('location: /account/login');
         }
     }
+
 
     public function contact() {
         $this->title="Contact Us";
