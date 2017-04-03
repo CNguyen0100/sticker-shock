@@ -36,7 +36,7 @@ $orders = null;
                     <p><?php echo $item->description?></p>
                 </div>
                 <div class="media-right">
-                    <form action="" method="POST">
+                    <form action="/items/edititem/<?php echo $item->item_id?>" method="POST">
                         <div class="form-group">
                             <button type="submit" class="btn btn-secondary btn-block" name="edititem">Edit</button>
                         </div>

@@ -26,8 +26,23 @@ class Item extends Model {
 
     }
 
-    public function updateItem(){
-
+    public function updateItem($account_id, $item_id, $name, $size, $price, $shipping, $description, $category, $subcategory, $status, $tracking){
+        $stmt = $this->db->prepare("UPDATE Items SET account_id=:accountid, item_name=:name, size=:size, price=:price, shipping=:shipping, 
+            description=:description, category=:category, subcategory=:subcategory, status=:status, tracking_number=:tracking WHERE item_id=:item_id");
+        $stmt->bindParam(':accountid', $account_id);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':size', $size);
+        $stmt->bindParam(':price', $price);
+        $stmt->bindParam(':shipping', $shipping);
+        $stmt->bindparam(':description', $description);
+        $stmt->bindparam(':category', $category);
+        $stmt->bindparam(':subcategory', $subcategory);
+        $stmt->bindparam(':status', $status);
+        $stmt->bindparam(':tracking', $tracking);
+        $stmt->bindparam(':item_id', $item_id);
+        $stmt->execute();
+        $id = $this->db->lastInsertId();
+        //return $id;
     }
 
     public function deleteItem($item_id){
@@ -36,7 +51,7 @@ class Item extends Model {
     }
 
     public function getItemById($id) {
-        $sql = "SELECT item_id, item_name, size, price, description, category, subcategory, status FROM Items WHERE item_id='$id'";
+        $sql = "SELECT item_id, item_name, size, price, description, category, subcategory, status, shipping, tracking_number FROM Items WHERE item_id='$id'";
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -44,7 +59,7 @@ class Item extends Model {
     }
 
     public function getItemsByUser($user_id) {
-        $sql = "SELECT item_id, item_name, size, price, description, category, subcategory, status FROM Items WHERE account_id='$user_id'";
+        $sql = "SELECT item_id, item_name, size, price, description, category, subcategory, status, shipping, tracking_number FROM Items WHERE account_id='$user_id'";
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -52,7 +67,7 @@ class Item extends Model {
     }
 
     public function getItemsByCategory($category) {
-        $sql = "SELECT item_id, item_name, size, price, description, category, subcategory, status FROM Items WHERE category='$category' AND status='available'";
+        $sql = "SELECT item_id, item_name, size, price, description, category, subcategory, status, shipping, tracking_number FROM Items WHERE category='$category' AND status='available'";
         $query = $this->db->prepare($sql); 
         $query->execute();
 
@@ -60,7 +75,7 @@ class Item extends Model {
     }
 
     public function getItemsBySubcategory($category, $subcategory) {
-        $sql = "SELECT item_id, item_name, size, price, description, category, subcategory, status FROM Items WHERE category='$category' AND subcategory='$subcategory' AND status='available'";
+        $sql = "SELECT item_id, item_name, size, price, description, category, subcategory, status, shipping, tracking_number FROM Items WHERE category='$category' AND subcategory='$subcategory' AND status='available'";
         $query = $this->db->prepare($sql); 
         $query->execute();
 
@@ -68,7 +83,7 @@ class Item extends Model {
     }
 
     public function getAllItems() {
-        $sql = "SELECT item_id, item_name, size, price, description, category, subcategory, status FROM Items WHERE status='available'";
+        $sql = "SELECT item_id, item_name, size, price, description, category, subcategory, status, shipping, tracking_number FROM Items WHERE status='available'";
         $query = $this->db->prepare($sql); 
         $query->execute();
         
