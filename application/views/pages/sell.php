@@ -26,8 +26,9 @@
             <div class="col-md-6">
                 <select required class="form-control" name="category">
                     <option selected disabled>Category</option>
-                    <option>Category Placeholder 1</option>
-                    <option>Category Placeholder 2</option>
+                    <?php foreach($arr as $str): ?>
+                    <option value=<?php echo $str; ?>><?php echo $str;?></option>
+                    <?php endforeach;?>
                 </select>
             </div>
         </div>

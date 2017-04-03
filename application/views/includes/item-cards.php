@@ -13,7 +13,7 @@ foreach($items as $item)  :?>
                         $a_cat = preg_replace('/\s+/', '', $item->category);
                         $a_subcat = preg_replace('/\s+/', '', $item->subcategory);
                         echo '<a href="/items/' . $a_cat . '">' .  $item->category . '</a>';
-                        if (isset($item->subcategory)) {
+                        if (isset($item->subcategory) && $item->subcategory != "") {
                             echo ' / <a href="/items/' . $a_cat . '/' . $a_subcat . '">' . $item->subcategory . '</a>';
                         } 
                     ?>
