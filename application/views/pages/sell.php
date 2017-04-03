@@ -26,7 +26,7 @@
             <div class="col-md-6">
                 <select required class="form-control" name="category">
                     <option selected disabled>Category</option>
-                    <option>Category Placeholder 1</option>
+                    <option selected value="Shirts">Shirts</option>
                     <option>Category Placeholder 2</option>
                 </select>
             </div>
