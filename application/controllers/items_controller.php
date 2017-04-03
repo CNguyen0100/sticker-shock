@@ -75,6 +75,32 @@ class Items extends Controller {
         $this->item($id);
     }
 
+    public function edititem($id){
+        $item = $this->model->getItemById($id);
+        if (!$item) {
+            header('location: /pages/error');
+            return;
+        }
+        $this->title = 'Edit Item: '.$item->item_name;
+        require 'application/views/items/edit.php';
+    }
+
+    public function updateitem($id, $status){
+        $account_id = $_SESSION['id'];
+        $item_id = $id;
+        $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+        $size = filter_input(INPUT_POST, 'size', FILTER_SANITIZE_STRING);
+        $price = $_POST['price'];
+        $shipping = $_POST['shipping'];
+        $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
+        $category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_STRING);
+        $subcategory = filter_input(INPUT_POST, 'subcategory', FILTER_SANITIZE_STRING);
+        $tracking = filter_input(INPUT_POST, 'tracking', FILTER_SANITIZE_STRING);
+        $this->model->updateItem($account_id, $item_id, $title, $size, $price, $shipping, $description, $category, $subcategory, $status, $tracking);
+        $this->item($item_id);
+
+    }
+
     public function deleteitem($id){
         $this->model->deleteItem($id);
         header('location: /account');
