@@ -8,7 +8,6 @@ class Pages extends Controller {
         require 'application/views/pages/index.php';
     }
 
-
     public function contact() {
         $this->title="Contact Us";
         require 'application/views/pages/contact-us.php';
