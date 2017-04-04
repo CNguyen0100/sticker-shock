@@ -32,7 +32,7 @@
             }?>
 
             <div class="form-group">
-                <button type="submit" class="btn btn-primary" name="submit">Log In</button>
+                <button type="submit" class="btn-ss btn-bw" name="submit">Log In</button>
             </div>
         </form>
     </div>

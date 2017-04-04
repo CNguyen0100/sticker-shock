@@ -21,7 +21,7 @@ $orders = null;
                 </p>
                 <form action="/account/logout" method="POST">
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary" name="logout">
+                        <button type="submit" class="btn-ss btn-bw" name="logout">
                         	Log Out
                         </button>
                     </div>
