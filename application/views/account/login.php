@@ -2,6 +2,13 @@
     <div class="container">
         <div class="h1">Log In<hr></div>
         <form action="/account/submit_login" method="POST">
+            <?php if (isset($url)) {
+                echo '<input type="hidden" name="url" value="';
+                foreach ($url as $value) {
+                    echo '/' . $value;
+                }            
+                echo '" />';
+            } ?>
             <div class="form-group row">
                 <div class="col-md-6">
                     <input required type="text" class="form-control" name="username" placeholder="Username">
