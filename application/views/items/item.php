@@ -14,10 +14,21 @@
                         </div>
                     </div>
                     <div class="ratings">
-                        <p class="float-right">3 reviews for this seller</p>
+                        <p class="float-right"> <?php echo $numReviews=3 ?> reviews for this seller</p>
                         <p>
-                            &#9733; &#9733; &#9733; &#9733; &#9734;
-                            4.0 stars
+                        	&nbsp; &nbsp; &nbsp;
+                            <?php
+                        		##Needs to be set later along with numReviews
+                        		$avgReview=3.75;
+                        		
+                        		for ($i=0; $i<5; $i++) {
+                        			if ($avgReview - $i >= 0.5)
+                        				echo '&#9733; ';
+                        			else
+                        				echo '&#9734; ';
+                        		}
+                        		echo $avgReview . ' stars';
+                        	?>
                         </p>
                     </div>
                 </div>
