@@ -12,10 +12,10 @@ page (which is currently a clone of the home page).
         <div class="collapse navbar-collapse" id="navbarExample">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Shop<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">Browse<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/pages/sell">Sell</a>
+                    <a class="nav-link" href="/account/sell">Sell</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/account">Account</a>
