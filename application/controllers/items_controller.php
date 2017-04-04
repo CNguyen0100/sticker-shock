@@ -6,7 +6,7 @@ class Items extends Controller {
     public $category = "";
     public $subcategory = "";
 
-    public function index($category, $args) {
+    public function index($category = null, $args = null) {
 
         # Graham L.:
         # The following if/else clusterfuck is the simplest way I could come up
