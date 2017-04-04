@@ -10,7 +10,7 @@
                         <h5 class="float-right" style="display:inline-block;">$<?php echo number_format((float)$item->price, 2, '.', ''); ?></h5>
                         <p><?php echo $item->description?></p>
                         <div class="text-left">
-                            <a class="btn btn-success">Purchase</a>
+                            <a href="" class="btn-ss btn-bw">Purchase</a>
                         </div>
                     </div>
                     <div class="ratings">
