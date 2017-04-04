@@ -27,17 +27,18 @@
                 <select required class="form-control" name="category">
                     <option selected disabled>Category</option>
                     <?php foreach($arr as $str): ?>
-                    <option value=<?php echo $str; ?>><?php echo $str;?></option>
+                    <option value=<?php echo ucwords($str); ?>><?php echo ucwords($str);?></option>
                     <?php endforeach;?>
                 </select>
             </div>
         </div>
         <div class="form-group row">
             <div class="col-md-6">
-                <select class="form-control" name="subcategory">
-                    <option selected value="">Subcategory</option>
-                    <option>Subcategory Placeholder 1</option>
-                    <option>Subcategory Placeholder 2</option>
+                <select required class="form-control" name="subcategory">
+                    <option selected disabled>Subcategory</option>
+                    <?php foreach($arr2 as $str): ?>
+                    <option value=<?php echo ucwords($str); ?>><?php echo ucwords($str);?></option>
+                    <?php endforeach;?>
                 </select>
             </div>
         </div>
