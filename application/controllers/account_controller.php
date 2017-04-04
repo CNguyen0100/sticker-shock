@@ -11,12 +11,13 @@ class Account extends Controller {
         if (isset($_SESSION['username'])) {
             require 'application/views/account/index.php';
         } else {
-            $this->login();
+            #            $this->login();
+            header('location: /account/login');
         }
     } 
 
     public function login() {
-        if (! empty($_GET)) {
+        if (isset($_GET['page'])) {
             $url = trim($_GET['page'], ',');
             $url = filter_var($url, FILTER_SANITIZE_URL);
             $url = explode(',',$url); 
