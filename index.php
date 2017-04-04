@@ -19,4 +19,7 @@ require './application/class/Controller.php';
 require './application/class/Model.php';
 require './application/class/Enum.php';
 
+require './application/controllers/helpers/categories.php';
+require './application/controllers/helpers/subcategories.php';
+
 $app = new Application();

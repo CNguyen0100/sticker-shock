@@ -1,8 +1,4 @@
 <?php
-# Graham L.:
-# This are strictly enums for categories/subcategories.
-require 'application/controllers/helpers/categories.php';
-require 'application/controllers/helpers/subcategories.php';
 
 class Items extends Controller {
     
@@ -10,7 +6,7 @@ class Items extends Controller {
     public $category = "";
     public $subcategory = "";
 
-    public function index($category, $args) {
+    public function index($category = null, $args = null) {
 
         # Graham L.:
         # The following if/else clusterfuck is the simplest way I could come up
