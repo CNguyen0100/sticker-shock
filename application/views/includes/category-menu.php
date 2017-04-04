@@ -4,8 +4,15 @@
     </div>
     <div class="list-group category">
     	<a href="/items" class="list-group-item category-item">All</a>
-        <a href="/items/shirts" class="list-group-item category-item">Shirts</a>
-        <a href="/items/pants" class="list-group-item category-item">Pants</a>
-        <a href="/items/shoes" class="list-group-item category-item">Shoes</a>
+        <?php
+            $categories = Category::getConstants();
+            foreach ($categories as $key => $value) {
+                echo '<a href="/items/';
+                echo strtolower($key);
+                echo '" class="list-group-item category-item">';
+                echo ucwords($value);
+                echo '</a>';
+            }
+        ?>
     </div>
 </div>
