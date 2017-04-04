@@ -11,11 +11,17 @@ class Account extends Controller {
         if (isset($_SESSION['username'])) {
             require 'application/views/account/index.php';
         } else {
-            $this->login();
+            #            $this->login();
+            header('location: /account/login');
         }
     } 
 
     public function login() {
+        if (isset($_GET['page'])) {
+            $url = trim($_GET['page'], ',');
+            $url = filter_var($url, FILTER_SANITIZE_URL);
+            $url = explode(',',$url); 
+        }
         $this->title = 'Log In';
         require 'application/views/account/login.php';
     }
@@ -26,7 +32,11 @@ class Account extends Controller {
         $password=filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
         $error = $this->model->authenticate($username, $password);
         if(isset($_SESSION['username'])){
-            $this->index();
+            if (isset($_POST['url'])) {
+                header('location: ' . $_POST['url']);
+            } else {
+                header('location: /account');
+            }
         }
         else{
             $_SESSION['login_error'] = $error;
@@ -85,9 +95,20 @@ class Account extends Controller {
 
     public function logout(){
         session_destroy();
-        $this->login();
+        header('location: /');
     }
 
+    public function sell(){
+        echo constant('Category::Shirts');
+        $arr = Category::getConstants();
+        if(isset($_SESSION['username']) && $_SESSION['username'] != '') {
+            $this->title = "Sell";
+            require 'application/views/account/sell.php';
+        } else{
+            $_SESSION['login_error'] = 'You must be logged in to complete this action';
+            header('location: /account/login?page=account,sell');
+        }
+    }
 
     public function loadModel() {
         require 'application/models/User.php';

@@ -12,7 +12,7 @@ $orders = null;
                 <p>
                     <div class="h3">
                     <?php
-                    if(isset($_SESSION['fname'])){
+                    if(isset($_SESSION['fname']) && strpos($_SERVER['HTTP_REFERER'], 'account')){
                         echo 'Welcome back, '. $_SESSION['fname'] .'!';
                         echo '<br>';
                     }
@@ -21,7 +21,9 @@ $orders = null;
                 </p>
                 <form action="/account/logout" method="POST">
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary" name="logout">Log Out</button>
+                        <button type="submit" class="btn btn-primary" name="logout">
+                        	Log Out
+                        </button>
                     </div>
                 </form>
             </div>
