@@ -1,8 +1,4 @@
 <?php
-# Graham L.:
-# This are strictly enums for categories/subcategories.
-require 'application/controllers/helpers/categories.php';
-require 'application/controllers/helpers/subcategories.php';
 
 class Items extends Controller {
     
