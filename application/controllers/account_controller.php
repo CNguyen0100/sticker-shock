@@ -21,11 +21,11 @@ class Account extends Controller {
     }
 
     public function submit_login(){
+        $_SESSION['login_error'] = '';
         $username=filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
         $password=filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
         $error = $this->model->authenticate($username, $password);
         if(isset($_SESSION['username'])){
-            $_SESSION['login_error'] = '';
             $this->index();
         }
         else{
@@ -67,8 +67,6 @@ class Account extends Controller {
         session_destroy();
         $this->login();
     }
-
-
 
 
     public function loadModel() {
