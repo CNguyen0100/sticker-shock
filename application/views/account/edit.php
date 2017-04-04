@@ -79,8 +79,8 @@ require 'application/views/layouts/header.php'; ?>
             $_SESSION['email_taken_err'] = '';
         }?>
         <div class="form-group">
-                    <button type="submit" class="btn btn-primary" name="submit">Save</button>
-                    <button type="reset" class="btn btn-primary" name="reset">Reset</button>
+                    <button type="submit" class="btn-ss btn-bw" name="submit">Save</button>
+                    <button type="reset" class="btn-ss btn-bw" name="reset">Reset</button>
                     <a href="/account/index">Cancel</a>
         </div>
     </form>
