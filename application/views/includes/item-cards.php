@@ -32,7 +32,19 @@ foreach($items as $item)  :?>
             &#9733 is the a black star.
             &#9734 is a white star (with black outline).
             //-->
-            <big>&#9733; &#9733; &#9733; &#9733; &#9734;</big>
+            <big>
+            	<?php
+            	##review needs to be set properly
+            	$avgReview=4;
+	            ##Print the stars
+		        for ($i=0; $i<5; $i++) {
+	    			if ($avgReview - $i >= 0.5)
+	    				echo '&#9733; ';
+	    			else
+	    				echo '&#9734; ';
+	    		}
+	    		?>
+            </big>
         </div>
     </div>
 </div>
