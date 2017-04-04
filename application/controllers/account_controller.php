@@ -79,7 +79,6 @@ class Account extends Controller {
     }
 
     public function sell(){
-        include 'application/controllers/helpers/categories.php';
         echo constant('Category::Shirts');
         $arr = Category::getConstants();
         if(isset($_SESSION['username']) && $_SESSION['username'] != '') {
