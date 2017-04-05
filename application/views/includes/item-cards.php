@@ -1,5 +1,7 @@
 <?php
-foreach($items as $item)  :?>
+require 'application/models/User.php';
+$users = new User($this->db);
+foreach($items as $item): ?>
 <div class="col-lg-4 col-md-6 mb-4">
     <div class="card h-100">
         <a href="/items/item/<?php echo $item->item_id?>" class="img-container-card"><img class="card-img-top img-fluid" src="<?php if(file_exists('uploads/item_'.$item->item_id)) {echo '/uploads/item_'.$item->item_id;} else echo 'https://placehold.it/700x400';?>" alt=""></a>
@@ -22,8 +24,36 @@ foreach($items as $item)  :?>
             <h5>$<?php echo number_format((float)$item->price, 2, '.', '');?></h5>
             <p class="card-text"><?php echo $item->description?></p>
         </div>
+        <div class="card-footer">
+            <!-- 
+            Graham L.:
+            The following are HTML entities. I don't think they are supported
+            in all browsers and I don't think we can change their colors. There
+            are alternative ways to produce those symbols like Font Awesome but
+            I don't know if it's worth it.
+            &#9733 is the a black star.
+            &#9734 is a white star (with black outline).
+            //-->
+            <big>
+            	<?php
+                $user = $users->readUser($item->account_id);
+                if(isset($user->rating)){
+            	    $avgReview=$user->rating;
+                }
+                else{
+                    $avgReview = 0;
+                }
+		        for ($i=0; $i<5; $i++) {
+	    			if ($avgReview - $i >= 0.5)
+	    				echo '&#9733; ';
+	    			else
+	    				echo '&#9734; ';
+	    		}
+	    		?>
+            </big>
+        </div>
     </div>
 </div>
-<?php endforeach;?>
+<?php endforeach; ?>
 
 
