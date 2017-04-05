@@ -101,9 +101,16 @@ class Items extends Controller {
 
     }
 
+    public function purchaseitem($id){
+        header('location: /pages/purchase');
+        #remove item from database
+        $this->deleteitem($id);
+        #add to orders
+    }
+
     public function deleteitem($id){
         $this->model->deleteItem($id);
-        header('location: /account');
+        //header('location: /account');
         return;
     }
 
