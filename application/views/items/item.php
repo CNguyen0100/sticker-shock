@@ -1,4 +1,9 @@
-<?php require 'application/views/layouts/header.php'; ?>
+<?php require 'application/views/layouts/header.php';
+require 'application/models/User.php';
+require 'application/models/Review.php';
+$review_model = new Review($this->db);
+$reviews = $review_model->getReviewsByUser($item->account_id);
+$users = new User($this->db);?>
     <div class="container">
         <div class="row">
             <?php include 'application/views/includes/category-menu.php';?>
@@ -16,53 +21,30 @@
                             </form>
                         </div>
                     </div>
-                    <!--div class="ratings">
-                        <p class="float-right"> <?php echo $numReviews=3 ?> reviews for this seller</p>
+                    <div class="ratings">
+                        <p class="float-right"> <?php echo count($reviews)?> review(s) for this seller</p>
                         <p>
-                        	&nbsp; &nbsp; &nbsp;
                             <?php
-                        		##Needs to be set later along with numReviews
-                        		$avgReview=1.15;
-                        		
-                        		for ($i=0; $i<5; $i++) {
-                        			if ($avgReview - $i >= 0.5)
-                        				echo '&#9733; ';
-                        			else
-                        				echo '&#9734; ';
-                        		}
-                        		echo $avgReview . ' stars';
-                        	?>
+                            $user = $users->readUser($item->account_id);
+                            if(isset($user->rating)){
+                                $avgReview=$user->rating;
+                            }
+                            else{
+                                $avgReview = 0;
+                            }
+                            for ($i=0; $i<5; $i++) {
+                                if ($avgReview - $i >= 0.5)
+                                    echo '&#9733; ';
+                                else
+                                    echo '&#9734; ';
+                            }?>
                         </p>
                     </div>
                 </div>
                 <br>
                 <div class="well">
                     <?php include "application/views/items/reviews.php" ?>
-                </div-->
-                <!--div class="card-footer">
-            <!-- 
-            Graham L.:
-            The following are HTML entities. I don't think they are supported
-            in all browsers and I don't think we can change their colors. There
-            are alternative ways to produce those symbols like Font Awesome but
-            I don't know if it's worth it.
-            &#9733 is the a black star.
-            &#9734 is a white star (with black outline).
-            //>
-            <big>
-                <?php
-                ##review needs to be set properly
-                $avgReview=4;
-                ##Print the stars
-                for ($i=0; $i<5; $i++) {
-                    if ($avgReview - $i >= 0.5)
-                        echo '&#9733; ';
-                    else
-                        echo '&#9734; ';
-                }
-                ?>
-            </big>
-        </div-->
+                </div>
             </div>
         </div>
     </div>
