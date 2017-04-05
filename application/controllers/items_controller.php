@@ -101,10 +101,12 @@ class Items extends Controller {
 
     }
 
-    public function purchaseitem($id){
+    public function purchaseitem(){
+        $item_id = filter_input(INPUT_POST, '$id', FILTER_SANITIZE_STRING);
+        $this->model->purchaseItem($item_id);
         header('location: /pages/purchase');
         #remove item from database
-        $this->deleteitem($id);
+        
         #add to orders
     }
 

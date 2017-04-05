@@ -16,6 +16,7 @@ $users = new User($this->db);?>
                         <p><?php echo $item->description?></p>
                         <div class="text-left">
                             <form action="/items/purchaseitem" method="POST">
+                                <input type="hidden" name="$id" type="Number" value=<?php $item->item_id ?> >
                                 <button type="submit" class="btn-ss btn-bw"" name="submit"> Purchase
                                 </button>
                             </form>

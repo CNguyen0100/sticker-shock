@@ -45,6 +45,13 @@ class Item extends Model {
         //return $id;
     }
 
+    public function purchaseItem($item_id){
+        $stmt = $this->db->prepare("UPDATE Items SET status=:status WHERE item_id=:item_id");
+        $stmt->bindvalue(':status', 'purchased');
+        $stmt->bindparam(':item_id', $item_id);
+        $stmt->execute();
+    }
+
     public function deleteItem($item_id){
         $stmt = $this->db->prepare("DELETE FROM Items WHERE item_id='$item_id'");
         $stmt->execute();
