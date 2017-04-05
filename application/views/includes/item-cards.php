@@ -36,7 +36,6 @@ foreach($items as $item)  :?>
             	<?php
             	##review needs to be set properly
             	$avgReview=4;
-	            ##Print the stars
 		        for ($i=0; $i<5; $i++) {
 	    			if ($avgReview - $i >= 0.5)
 	    				echo '&#9733; ';
