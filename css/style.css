@@ -90,6 +90,7 @@ nav + div.container {
   padding: 0.25em 1.25em 0.75em; }
 
 .btn-ss {
+  border: none;
   display: inline-block;
   padding: 0 1em;
   border-radius: 2px;

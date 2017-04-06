@@ -1,11 +1,4 @@
-<?php require 'application/views/layouts/header.php';
-require 'application/models/Item.php';
-$items = new Item($this->db);
-$listings = $items->getItemsByUser($_SESSION['id']);
-$user = new User($this->db);
-$info = $user->readUser($_SESSION['id']);
-$orders = null;
-?>
+<?php require 'application/views/layouts/header.php';?>
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -42,19 +35,19 @@ $orders = null;
                     <h7> Zip:</h7><br>
                 </div>
                 <div class="col-4">
-                    <h7><?= $info->first_name;?> <?= $info->last_name;?></h7><br>
-                    <h7><?= $info->email;?></h7><br>
+                    <h7><?= $user->first_name;?> <?= $user->last_name;?></h7><br>
+                    <h7><?= $user->email;?></h7><br>
                     <h7><?php
-                        if($info->gender == 'M')
+                        if($user->gender == 'M')
                             echo "Male";
                         else
                             echo "Female";
                         ?></h7><br>
-                    <h7><?= $info->address_1;?></h7><br>
-                    <h7> <?= $info->address_2; ?></h7><br>
-                    <h7><?= $info->city;?></h7><br>
-                    <h7><?= $info->state;?></h7><br>
-                    <h7><?= $info->zip;?></h7><br>
+                    <h7><?= $user->address_1;?></h7><br>
+                    <h7> <?= $user->address_2; ?></h7><br>
+                    <h7><?= $user->city;?></h7><br>
+                    <h7><?= $user->state;?></h7><br>
+                    <h7><?= $user->zip;?></h7><br>
                 </div>
             </div>
                 <div class="text-right">
