@@ -2,6 +2,8 @@
 require 'application/models/Item.php';
 $items = new Item($this->db);
 $listings = $items->getItemsByUser($_SESSION['id']);
+$user = new User($this->db);
+$info = $user->readUser($_SESSION['id']);
 $orders = null;
 ?>
     <div class="container">
@@ -19,13 +21,46 @@ $orders = null;
                 </p>
                 <form action="/account/logout" method="POST">
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary" name="logout">
+                        <button type="submit" class="btn-ss btn-bw" name="logout">
                         	Log Out
                         </button>
                     </div>
                 </form>
             </div>
             <div class="col-md-9">
+        <div class="h1">Account Information</div>
+            <div class="well">
+            <div class="row">
+                <div class="col-4">
+                    <h7> Name: </h7><br>
+                    <h7> Email:</h7><br>
+                    <h7> Gender:</h7><br>
+                    <h7> Address 1:</h7><br>
+                    <h7> Address 2:</h7><br>
+                    <h7> City:</h7><br>
+                    <h7> State:</h7><br>
+                    <h7> Zip:</h7><br>
+                </div>
+                <div class="col-4">
+                    <h7><?= $info->first_name;?> <?= $info->last_name;?></h7><br>
+                    <h7><?= $info->email;?></h7><br>
+                    <h7><?php
+                        if($info->gender == 'M')
+                            echo "Male";
+                        else
+                            echo "Female";
+                        ?></h7><br>
+                    <h7><?= $info->address_1;?></h7><br>
+                    <h7> <?= $info->address_2; ?></h7><br>
+                    <h7><?= $info->city;?></h7><br>
+                    <h7><?= $info->state;?></h7><br>
+                    <h7><?= $info->zip;?></h7><br>
+                </div>
+            </div>
+                <div class="text-right">
+                <a href="/account/edit">Edit</a>
+                </div>
+            </div>
         <div class="h1">Your Listings</div>
         <?php if(count($listings) > 0) {foreach($listings as $item) {?>
             <hr>
@@ -50,7 +85,7 @@ $orders = null;
                     </form>
                 </div>
             </div>
-        <?php }} else {echo '<hr><p>You have no listings! <a href="/pages/sell">Create a listing here.</a>';}?>
+        <?php }} else {echo '<hr><p>You have no listings! <a href="/account/sell">Create a listing here.</a>';}?>
         <br>
         <div class="h1">Your Orders</div>
         <?php if(count($orders) > 0) {foreach($orders as $item) {?>

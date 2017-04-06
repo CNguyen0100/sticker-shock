@@ -72,6 +72,8 @@ class Items extends Controller {
     }
 
     public function edititem($id){
+        $arr = Category::getConstants();
+        $arr2 = Subcategory::getConstants();
         $item = $this->model->getItemById($id);
         if (!$item) {
             header('location: /pages/error');
@@ -95,6 +97,12 @@ class Items extends Controller {
         $this->model->updateItem($account_id, $item_id, $title, $size, $price, $shipping, $description, $category, $subcategory, $status, $tracking);
         $this->item($item_id);
 
+    }
+
+    public function purchaseitem($id){
+        header('location: /pages/purchase');
+        #remove item from database
+        #add to orders
     }
 
     public function deleteitem($id){

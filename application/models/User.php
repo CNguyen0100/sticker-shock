@@ -19,12 +19,28 @@ class User extends Model {
         $stmt->execute();
     }
 
-    public function readUser(){
-
+    public function readUser($id){
+        $statement = $this->db->prepare("SELECT * from Accounts where user_id = :userId");
+        $statement->bindParam(':userId',$id);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result;
     }
 
-    public function updateUser(){
-
+    public function updateUser($id,$fname,$lname,$email,$gender,$address1,$address2,$city,$state,$zip){
+        $stmt= $this->db->prepare("UPDATE Accounts SET first_name = :firstname,last_name = :lastname,email = :email,
+              gender= :gender,address_1=:address1,address_2=:address2,city=:city,state=:state,zip=:zip WHERE user_id = :userId");
+        $stmt->bindParam(':userId',$id);
+        $stmt->bindParam(':firstname', $fname);
+        $stmt->bindParam(':lastname', $lname);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindparam(':gender', $gender);
+        $stmt->bindparam(':address1', $address1);
+        $stmt->bindparam(':address2', $address2);
+        $stmt->bindparam(':city', $city);
+        $stmt->bindparam(':state', $state);
+        $stmt->bindparam(':zip', $zip);
+        $stmt->execute();
     }
 
     public function deleteUser(){
