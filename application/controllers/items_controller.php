@@ -72,9 +72,7 @@ class Items extends Controller {
     }
 
     public function edititem($id){
-        include 'application/controllers/helpers/categories.php';
         $arr = Category::getConstants();
-        include 'application/controllers/helpers/subcategories.php';
         $arr2 = Subcategory::getConstants();
         $item = $this->model->getItemById($id);
         if (!$item) {
@@ -99,6 +97,12 @@ class Items extends Controller {
         $this->model->updateItem($account_id, $item_id, $title, $size, $price, $shipping, $description, $category, $subcategory, $status, $tracking);
         $this->item($item_id);
 
+    }
+
+    public function purchaseitem($id){
+        header('location: /pages/purchase');
+        #remove item from database
+        #add to orders
     }
 
     public function deleteitem($id){

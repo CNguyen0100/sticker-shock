@@ -85,7 +85,7 @@ $orders = null;
                     </form>
                 </div>
             </div>
-        <?php }} else {echo '<hr><p>You have no listings! <a href="/pages/sell">Create a listing here.</a>';}?>
+        <?php }} else {echo '<hr><p>You have no listings! <a href="/account/sell">Create a listing here.</a>';}?>
         <br>
         <div class="h1">Your Orders</div>
         <?php if(count($orders) > 0) {foreach($orders as $item) {?>
