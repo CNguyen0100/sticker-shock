@@ -142,6 +142,7 @@ class Items extends Controller {
         
         # reroute
         header('location: /pages/purchase');
+
     }
 
     public function loadOrderModel()
@@ -152,7 +153,7 @@ class Items extends Controller {
 
     public function deleteitem($id){
         $this->model->deleteItem($id);
-        //header('location: /account');
+        header('location: /account');
         return;
     }
 
