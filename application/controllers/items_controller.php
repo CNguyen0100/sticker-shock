@@ -72,9 +72,7 @@ class Items extends Controller {
     }
 
     public function edititem($id){
-        include 'application/controllers/helpers/categories.php';
         $arr = Category::getConstants();
-        include 'application/controllers/helpers/subcategories.php';
         $arr2 = Subcategory::getConstants();
         $item = $this->model->getItemById($id);
         if (!$item) {
@@ -102,11 +100,11 @@ class Items extends Controller {
     }
 
     public function purchaseitem(){
-        $item_id = filter_input(INPUT_POST, '$id', FILTER_SANITIZE_STRING);
+        $item_id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
         $this->model->purchaseItem($item_id);
+
+
         header('location: /pages/purchase');
-        #remove item from database
-        
         #add to orders
     }
 
