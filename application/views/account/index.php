@@ -1,11 +1,16 @@
 <?php require 'application/views/layouts/header.php';
 require 'application/models/Item.php';
+require 'application/models/Order.php';
 $items = new Item($this->db);
 $listings = $items->getItemsByUser($_SESSION['id']);
 $user = new User($this->db);
 $info = $user->readUser($_SESSION['id']);
-$orders = null;
+$order = null;
+#$order = new Order($this->db);
+#$orders = $order->getOrdersByAccountId();
 ?>
+<?php include 'ChromePhp.php';
+        ChromePhp::log($order); ?>
     <div class="container">
         <div class="row">
             <div class="col-md-3">
