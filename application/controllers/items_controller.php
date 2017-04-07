@@ -55,6 +55,7 @@ class Items extends Controller {
     }
 
     public function order($id) {
+        $this->loadOrderModel();
         $order = $this->model->getOrderById($id);
 
         if (!$order) {
@@ -135,7 +136,8 @@ class Items extends Controller {
 
         $this->loadOrderModel();
         $id = $this->model->createOrder($account_id, $tax, $subtotal, $shipping, $address_1, $city, $state, $zip, $item_id);
-        $this->order($id);
+
+        //$this->order($id);
 
         
         # reroute

@@ -20,19 +20,15 @@ class Order extends Model {
 
 
         $stmt->execute();
+        $id = $this->db->lastInsertId();
         #ItemOrders
         $stmt = $this->db->prepare("INSERT INTO ItemOrders (item_id, order_id) VALUES (:itemid, :orderid)");
         $stmt->bindParam(':itemid', $item_id);
         $stmt->bindParam(':orderid', $id);
 
-        include 'ChromePhp.php';
-        ChromePhp::log('hello');
-        //include 'ChromePhp.php';
-        ChromePhp::log($item_id, $id);
-
         $stmt->execute();
         #AccountOrders
-        $stmt = $this->db->prepare("INSERT INTO AccountOrders (account_id, order_id) VALUES (:itemid, :orderid)");
+        $stmt = $this->db->prepare("INSERT INTO AccountOrders (account_id, order_id) VALUES (:accountid, :orderid)");
         $stmt->bindParam(':accountid', $account_id);
         $stmt->bindParam(':orderid', $id);
         $stmt->execute();
@@ -45,5 +41,13 @@ class Order extends Model {
         $query->execute();
 
         return $query->fetch();
+    }
+
+    public function getOrdersByAccountId($id) {
+        $sql = "SELECT * FROM Orders WHERE account_id='$id'";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll();
     }
 }

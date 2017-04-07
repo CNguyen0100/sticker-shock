@@ -5,12 +5,9 @@ $items = new Item($this->db);
 $listings = $items->getItemsByUser($_SESSION['id']);
 $user = new User($this->db);
 $info = $user->readUser($_SESSION['id']);
-$order = null;
-#$order = new Order($this->db);
-#$orders = $order->getOrdersByAccountId();
+$order = new Order($this->db);
+$orders = $order->getOrdersByAccountId($info->user_id);
 ?>
-<?php include 'ChromePhp.php';
-        ChromePhp::log($order); ?>
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -93,15 +90,15 @@ $order = null;
         <?php }} else {echo '<hr><p>You have no listings! <a href="/account/sell">Create a listing here.</a>';}?>
         <br>
         <div class="h1">Your Orders</div>
-        <?php if(count($orders) > 0) {foreach($orders as $item) {?>
+        <?php if(count($orders) > 0) {foreach($orders as $i) {?>
             <hr>
             <div class="media">
                 <div class="media-left">
-                    <img src="<?php if(file_exists('uploads/item_'.$item->item_id)) {echo '/uploads/item_'.$item->item_id;} else echo 'https://placehold.it/700x400';?>" class="media-object" style="width:60px">
+                    <!--img src="<?php if(file_exists('uploads/item_'.$item->item_id)) {echo '/uploads/item_'.$item->item_id;} else echo 'https://placehold.it/700x400';?>" class="media-object" style="width:60px"-->
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading"><?php echo $item->item_name?></h4>
-                    <p><?php echo $item->description?></p>
+                    <h4 class="media-heading"><?php echo $i->order_id;?></h4>
+                    <p><?php echo $i->account_id;?></p>
                 </div>
             </div>
             <hr>
