@@ -4,7 +4,7 @@ class Pages extends Controller {
 
     public function index() {
         $this->title="Home";
-        $items = $this->model->getAllItems();
+        $items = $this->model->readAllItems();
         require 'application/views/pages/index.php';
     }
 

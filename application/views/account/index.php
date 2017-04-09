@@ -8,6 +8,7 @@ $info = $user->readUser($_SESSION['id']);
 $order = new Order($this->db);
 $orders = $order->getOrdersByAccountId($info->user_id);
 ?>
+
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -44,19 +45,19 @@ $orders = $order->getOrdersByAccountId($info->user_id);
                     <h7> Zip:</h7><br>
                 </div>
                 <div class="col-4">
-                    <h7><?= $info->first_name;?> <?= $info->last_name;?></h7><br>
-                    <h7><?= $info->email;?></h7><br>
+                    <h7><?= $user->first_name;?> <?= $user->last_name;?></h7><br>
+                    <h7><?= $user->email;?></h7><br>
                     <h7><?php
-                        if($info->gender == 'M')
+                        if($user->gender == 'M')
                             echo "Male";
                         else
                             echo "Female";
                         ?></h7><br>
-                    <h7><?= $info->address_1;?></h7><br>
-                    <h7> <?= $info->address_2; ?></h7><br>
-                    <h7><?= $info->city;?></h7><br>
-                    <h7><?= $info->state;?></h7><br>
-                    <h7><?= $info->zip;?></h7><br>
+                    <h7><?= $user->address_1;?></h7><br>
+                    <h7> <?= $user->address_2; ?></h7><br>
+                    <h7><?= $user->city;?></h7><br>
+                    <h7><?= $user->state;?></h7><br>
+                    <h7><?= $user->zip;?></h7><br>
                 </div>
             </div>
                 <div class="text-right">

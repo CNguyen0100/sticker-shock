@@ -36,14 +36,14 @@ class Items extends Controller {
             }
         } else {
             $this->title="Browse";
-            $items = $this->model->getAllItems();
+            $items = $this->model->readAllItems();
         }
 
         require 'application/views/items/index.php';
     }
 
     public function item($id) {
-        $item = $this->model->getItemById($id);
+        $item = $this->model->readItem($id);
 
         if (!$item) {
             header('location: /pages/error');
