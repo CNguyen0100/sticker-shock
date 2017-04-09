@@ -2,7 +2,7 @@
 
 use PayPay\Api\Payment;
 use PayPal\Api\PaymentExecution;
-require 'app/start.php';
+require 'application/helper/start.php';
 
 if(!isset($_GET['success'], $_GET['paymentId'], $_GET['payerID'])) {
 	die();
@@ -27,5 +27,3 @@ try {
 	echo $data->message;
 	die();
 }
-
-echo 'Payment made. Thank You!';

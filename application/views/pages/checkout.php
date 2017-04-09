@@ -1,4 +1,4 @@
-<? php
+<?php
 
 use PayPal\Api\Payer;
 use PayPal\Api\Item;
@@ -9,11 +9,10 @@ use PayPal\Api\Transaction;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\Payment;
 
-
-require 'app/start.php';
+require 'application/helper/start.php';
 
 if(!isset($_POST['product'], $_POST['price'])) {
-	die;
+	die();
 }
 
 $product = $_POST['product'];
@@ -21,7 +20,6 @@ $price = $_POST['price'];
 $shipping = 2.00;
 
 $total = $price + $shipping;
-
 $payer = new Payer();
 $payer->setPaymentMethod('paypal');
 
@@ -35,7 +33,7 @@ $itemList = new ItemList();
 $itemList->setItems([$item]);
 
 $details = new Details();
-$details->setShipping($shipping);
+$details->setShipping($shipping)
 	->setSubtotal($price);
 
 $amount = new Amount();
@@ -44,14 +42,14 @@ $amount->setCurrency('USD')
 	->setDetails($details);
 
 $transaction = new Transaction();
-$transaction->setAmount($amount);
-	->setItemList($itemList);
+$transaction->setAmount($amount)
+	->setItemList($itemList)
 	->setDescription('Sticker-Shock Payment')
 	->setInvoiceNumber(uniqid());
 
 $redirectUrls = new RedirectUrls();
-$redirectUrls->setReturnUrl(SITE_URL . '/pay.php?success=true')
-	->setCancelUrl(SITE_URL . '/pay.php?success=false');
+$redirectUrls->setReturnUrl(SITE_URL . '/pages/success')
+	->setCancelUrl(SITE_URL . '/pages/error');
 
 $payment = new Payment();
 $payment->setIntent('sale')
@@ -60,7 +58,7 @@ $payment->setIntent('sale')
 	->setTransactions([$transaction]);
 
 try{
-	$payment->create[$paypal];
+	$payment->create($paypal);
 } catch(Exception $e) {
 	die($e);
 }
@@ -71,7 +69,7 @@ header("Location: {$approvalUrl}");
 
 
 
-
+?>
 
 
 
