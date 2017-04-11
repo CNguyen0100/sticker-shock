@@ -33,11 +33,8 @@ class Items extends Controller {
                 }
 
                 $this->title = ucwords("$this->category - $this->subcategory");
-
-                #$items = $this->model->getItemsBySubcategory($this->category, $this->subcategory);
             } else {
                 $this->title = ucfirst("$this->category");
-                #$items = $this->model->getItemsByCategory($this->category);
             }
         } else {
             $this->title="Browse";
