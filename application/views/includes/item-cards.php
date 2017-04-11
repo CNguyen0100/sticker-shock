@@ -1,6 +1,4 @@
 <?php
-require 'application/models/User.php';
-$users = new User($this->db);
 foreach($items as $item): ?>
 <div class="col-lg-4 col-md-6 mb-4">
     <div class="card h-100">
@@ -36,9 +34,8 @@ foreach($items as $item): ?>
             //-->
             <big>
             	<?php
-                $user = $users->readUser($item->account_id);
-                if(isset($user->rating)){
-            	    $avgReview=$user->rating;
+                if(isset($item->rating)){
+            	    $avgReview=$item->rating;
                 }
                 else{
                     $avgReview = 0;

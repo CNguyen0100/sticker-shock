@@ -9,9 +9,12 @@ class Account extends Controller {
         # If user is logged in, fetch their page.
         # If they aren't redirect to login page.
         if (isset($_SESSION['username'])) {
+            $user = $this->model->readUser($_SESSION['id']);
+            $listings = $this->model->getItemsByUser($_SESSION['id']);
+            # Not implemented yet.
+            $orders = null;
             require 'application/views/account/index.php';
         } else {
-            #            $this->login();
             header('location: /account/login');
         }
     } 
