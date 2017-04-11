@@ -41,7 +41,6 @@ class Items extends Controller {
             }
         } else {
             $this->title="Browse";
-            #$items = $this->model->readAllItems();
         }
 
         $items = $this->model->readAllItems($this->category, $this->subcategory, $this->search);
