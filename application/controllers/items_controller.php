@@ -59,6 +59,16 @@ class Items extends Controller {
         require 'application/views/items/item.php';
     }
 
+    public function order($id) {
+        $this->loadOrderModel();
+        $order = $this->model->getOrderById($id);
+
+        if (!$order) {
+            header('location: /pages/error');
+            return;
+        }
+    }
+
     public function submititem()
     {
         $account_id = $_SESSION['id'];
@@ -104,10 +114,46 @@ class Items extends Controller {
 
     }
 
-    public function purchaseitem($id){
+    public function purchaseitem(){
+        include 'application/models/User.php';
+        $users = new User($this->db);
+        $user = $users->readUser($_SESSION['id']);
+
+        $item_id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
+        $this->model->purchaseItem($item_id);
+
+        # send to Order;
+
+        $account_id = $user->user_id;
+        //basic values
+        $tax = 10;
+        $subtotal = 10;
+        //get item
+        $shipping = $this->model->getItembyId($item_id)->shipping;
+
+        //get account
+        $address_1 = $user->address_1;
+        $city = $user->city;
+        $state = $user->state;
+        $zip = $user->zip;
+
+
+
+        $this->loadOrderModel();
+        $id = $this->model->createOrder($account_id, $tax, $subtotal, $shipping, $address_1, $city, $state, $zip, $item_id);
+
+        //$this->order($id);
+
+        
+        # reroute
         header('location: /pages/purchase');
-        #remove item from database
-        #add to orders
+
+    }
+
+    public function loadOrderModel()
+    {
+        include 'application/models/Order.php';
+        $this->model = new Order($this->db);
     }
 
     public function deleteitem($id){
