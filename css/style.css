@@ -58,6 +58,19 @@ i {
 .navbar-toggler-icon {
   height: 2em; }
 
+.search-bar-form {
+  width: 40%;
+  margin: 0 auto; }
+
+.search-bar {
+  border: none;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  width: 100%;
+  height: 100%;
+  padding: 0.5em;
+  color: #ddd; }
+
 .category a {
   color: #555;
   font-weight: bold;
