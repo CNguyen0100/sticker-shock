@@ -3,8 +3,9 @@
 class Items extends Controller {
     
     public $id = null;
-    public $category = "";
-    public $subcategory = "";
+    public $category = null;
+    public $subcategory = null;
+    public $search = null;
 
     public function index($category = null, $args = null) {
 
@@ -14,6 +15,10 @@ class Items extends Controller {
         # If the category/subcategory doesn't exist, it redirects to the 
         # generic error page. This behavior could be improved by going to a
         # page with all the categories or something along those lines.
+
+        if (isset($_GET['search'])) {
+           $this->search = $_GET['search'];
+        }
 
         if (isset($category)) {
             if (! $this->category = Category::isValid($category)) {
@@ -29,16 +34,16 @@ class Items extends Controller {
 
                 $this->title = ucwords("$this->category - $this->subcategory");
 
-                $items = $this->model->getItemsBySubcategory($this->category, $this->subcategory);
+                #$items = $this->model->getItemsBySubcategory($this->category, $this->subcategory);
             } else {
                 $this->title = ucfirst("$this->category");
-                $items = $this->model->getItemsByCategory($this->category);
+                #$items = $this->model->getItemsByCategory($this->category);
             }
         } else {
             $this->title="Browse";
-            $items = $this->model->readAllItems();
         }
 
+        $items = $this->model->readAllItems($this->category, $this->subcategory, $this->search);
         require 'application/views/items/index.php';
     }
 
