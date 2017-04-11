@@ -1,12 +1,7 @@
 <?php require 'application/views/layouts/header.php';
-require 'application/models/Item.php';
 require 'application/models/Order.php';
-$items = new Item($this->db);
-$listings = $items->getItemsByUser($_SESSION['id']);
-$user = new User($this->db);
-$info = $user->readUser($_SESSION['id']);
 $order = new Order($this->db);
-$orders = $order->getOrdersByAccountId($info->user_id);
+$orders = $order->getOrdersByAccountId($user->user_id);
 ?>
 
     <div class="container">

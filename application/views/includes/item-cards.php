@@ -1,10 +1,5 @@
 <?php
-require 'application/models/User.php';
-$users = new User($this->db);
-foreach($items as $item): 
-    if($item->status == 'purchased') 
-        continue; ?>
-foreach($items as $item): ?>
+foreach($items as $item): ?> 
 
 <div class="col-lg-4 col-md-6 mb-4">
     <div class="card h-100">
