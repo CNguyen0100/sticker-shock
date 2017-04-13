@@ -19,12 +19,28 @@ class User extends Model {
         $stmt->execute();
     }
 
-    public function readUser(){
-
+    public function readUser($id){
+        $statement = $this->db->prepare("SELECT * from Accounts where user_id = :userId");
+        $statement->bindParam(':userId',$id);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result;
     }
 
-    public function updateUser(){
-
+    public function updateUser($id,$fname,$lname,$email,$gender,$address1,$address2,$city,$state,$zip){
+        $stmt= $this->db->prepare("UPDATE Accounts SET first_name = :firstname,last_name = :lastname,email = :email,
+              gender= :gender,address_1=:address1,address_2=:address2,city=:city,state=:state,zip=:zip WHERE user_id = :userId");
+        $stmt->bindParam(':userId',$id);
+        $stmt->bindParam(':firstname', $fname);
+        $stmt->bindParam(':lastname', $lname);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindparam(':gender', $gender);
+        $stmt->bindparam(':address1', $address1);
+        $stmt->bindparam(':address2', $address2);
+        $stmt->bindparam(':city', $city);
+        $stmt->bindparam(':state', $state);
+        $stmt->bindparam(':zip', $zip);
+        $stmt->execute();
     }
 
     public function deleteUser(){
@@ -39,10 +55,38 @@ class User extends Model {
         $result = $statement->fetch();
         if(count($result) > 0 && password_verify($password, $result->password)){
             $_SESSION['username'] = $result->username;
+            $_SESSION['id'] = $result->user_id;
         }
         else{
-            $error = 'Username and Password are not found <br>';
+            $error = 'Username and password combination are invalid<br>';
         }
         return $error;
+    }
+
+    public function validateRegistration($username, $email) {
+        $_SESSION['username_taken_err'] = '';
+        $_SESSION['email_taken_err'] = '';
+        $username_stmt = $this->db->prepare("SELECT * from Accounts WHERE username = :username");
+        $username_stmt->bindParam(':username', $username);
+        $username_stmt->execute();
+        $username_result = $username_stmt->fetchAll();
+        if(count($username_result) > 0){
+            $_SESSION['username_taken_err'] = 'Username is taken.';
+        }
+        $statement = $this->db->prepare("SELECT * from Accounts WHERE email = :email");
+        $statement->bindParam(':email', $email);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        if(count($result) > 0){
+            $_SESSION['email_taken_err'] = 'An account already exists with this email address.';
+        }
+    }
+
+    public function getItemsByUser($user_id) {
+        $sql = "SELECT * FROM Items WHERE account_id='$user_id'";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll();
     }
 }

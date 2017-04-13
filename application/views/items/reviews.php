@@ -1,18 +1,24 @@
-<div class="row">
-    <div class="col-md-12">
-        &#9733; &#9733; &#9733; &#9733; &#9734;
-        Anonymous
-        <span class="float-right">15 days ago</span>
-        <p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
-    </div>
-</div>
-
-<hr>
-<div class="row">
-    <div class="col-md-12">
-        &#9733; &#9733; &#9733; &#9733; &#9734;
-        Anonymous
-        <span class="float-right">20 days ago</span>
-        <p>This product was great in terms of quality. I would definitely buy another!</p>
-    </div>
-</div>
+<?php
+if (count($reviews) == 0) echo '<p>This user has no reviews.</p>';
+foreach($reviews as $review): ?>
+		<div class="row">
+		    <div class="col-md-12">
+	    	<?php
+		    	##Print the stars
+		        for ($j=0; $j<5; $j++) {
+        			if ($review->rating - $j >= 0.5)
+        				echo '&#9733; ';
+        			else
+        				echo '&#9734; ';
+        		}
+        		$user = $users->readUser($review->reviewer_id);
+    			echo $user->first_name;
+    		?>
+		    <span class="float-right"><?php echo $review->review_date?></span>
+		    <p><?php echo $review->comment; ?></p>
+		    <?php
+                if ($i<count($reviews)-1) echo '<hr>';
+		    ?>
+		</div>
+	</div>
+<?php endforeach; ?>

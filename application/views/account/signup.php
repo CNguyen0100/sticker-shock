@@ -62,8 +62,22 @@
                         <input type="text" class="form-control" name="zip" placeholder="Zip">
                     </div>
                 </div>
+                <?php
+                    if(isset($_SESSION['username_taken_err']) &&  $_SESSION['username_taken_err'] != ''){
+                        echo '<p id="error">';
+                        echo $_SESSION['username_taken_err'];
+                        echo '</p>';
+                        $_SESSION['username_taken_err'] = '';
+                    }
+                    if(isset($_SESSION['email_taken_err']) &&  $_SESSION['email_taken_err'] != ''){
+                        echo '<p id="error">';
+                        echo $_SESSION['email_taken_err'];
+                        echo '</p>';
+                        $_SESSION['email_taken_err'] = '';
+                    }?>
+
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                    <button type="submit" class="btn-ss btn-bw"" name="submit">Submit</button>
                 </div>
             </form>
         </div>

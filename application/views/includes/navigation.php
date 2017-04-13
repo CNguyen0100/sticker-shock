@@ -10,17 +10,31 @@ page (which is currently a clone of the home page).
     <div class="container">
         <a class="navbar-brand" href="/">STICKERSHOCK</a>
         <div class="collapse navbar-collapse" id="navbarExample">
+        	
+        	<?php
+        		if (strpos ($_SERVER['REQUEST_URI'], 'sell'))
+        			$page=1;
+        		else if (strpos ($_SERVER['REQUEST_URI'], 'account'))
+        			$page=2;
+        		else if (strpos ($_SERVER['REQUEST_URI'], 'contact'))
+        			$page=3;
+        		else
+        			$page=0;
+        	?>
+        <form class="search-bar-form" action="/items" method="get">
+            <input class="search-bar" type="text" name="search" placeholder="Search" /><br />
+        </form>        
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Shop<span class="sr-only">(current)</span></a>
+                <li class= "<?php if ($page==0) echo 'nav-item active'; else echo 'nav-item'?>" >
+                    <a class="nav-link" href="/items">Browse<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Sell</a>
+                <li class= "<?php if ($page==1) echo 'nav-item active'; else echo 'nav-item'?>">
+                    <a class="nav-link" href="/account/sell">Sell</a>
                 </li>
-                <li class="nav-item">
+                <li class= "<?php if ($page==2) echo 'nav-item active'; else echo 'nav-item'?>">
                     <a class="nav-link" href="/account">Account</a>
                 </li>
-                <li class="nav-item">
+                <li class= "<?php if ($page==3) echo 'nav-item active'; else echo 'nav-item'?>">
                     <a class="nav-link" href="/pages/contact">Contact Us</a>
                 </li>
             </ul>
