@@ -1,8 +1,13 @@
 <?php require 'application/views/layouts/header.php';
 require 'application/models/Item.php';
-$orders = $_SESSION['orderHis'];
+//$orders = $_SESSION['orderHis'];
 $listings =$_SESSION['listing'];
+require 'application/models/Order.php';
+$order = new Order($this->db);
+$orders = $order->getOrdersByAccountId($user->user_id);
+
 ?>
+
     <div class="container">
         <div class="row">
             <!-- This contain wellcome on the left and infomation on right-->
@@ -131,7 +136,6 @@ $listings =$_SESSION['listing'];
                     </div>
 
                 </div>
-
             <?php }} else {echo '<hr><p>You have no listings! <a href="/pages/sell">Create a listing here.</a>';}?>
             <br>
             <div class="row">

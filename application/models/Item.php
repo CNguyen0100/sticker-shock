@@ -22,12 +22,34 @@ class Item extends Model {
         return $id;
     }
 
-    public function readItem($itemId){
-        $statement = $this->db->prepare("SELECT * from Items where item_id = :itemId");
-        $statement->bindParam(':itemId',$itemId);
-        $statement->execute();
-        $result = $statement->fetch();
-        return $result;
+
+    public function readItem($id){
+        $sql = "SELECT Items.*, Accounts.rating FROM Items LEFT JOIN Accounts ON Items.account_id = Accounts.user_id WHERE status='available' AND Items.item_id='$id'";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        return $query->fetch();
+    }
+  
+    public function readAllItems($category = null, $subcategory = null, $search = null) {
+        $sql = "SELECT Items.item_id, Items.account_id, Items.item_name, Items.price, Items.description, Items.shipping, Items.category, Items.subcategory, Accounts.rating FROM Items LEFT JOIN Accounts ON Items.account_id = Accounts.user_id WHERE status='available'";
+        if (isset($category)) {
+            $sql .= " AND category='" . $category . "'";
+            $category = strtolower($category);
+
+            if (isset($subcategory)) {
+                $sql .= " AND subcategory='" . $subcategory . "'";
+                $subcategory = strtolower($subcategory);
+            }
+        }
+        if (isset($search)) {
+            $search = strtolower($search);
+            $sql .= " AND (LOWER(item_name) LIKE '%$search%' OR LOWER(category) LIKE '%$search%' OR LOWER(subcategory) LIKE '%$search%' OR LOWER(description) LIKE '%$search%')";
+        }
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll();
     }
 
     public function updateItem($account_id, $item_id, $name, $size, $price, $shipping, $description, $category, $subcategory, $status, $tracking){
@@ -54,44 +76,10 @@ class Item extends Model {
         $stmt->execute();
     }
 
-    public function getItemById($id) {
-        $sql = "SELECT item_id, item_name, size, price, description, category, subcategory, status, shipping, tracking_number FROM Items WHERE item_id='$id'";
-        $query = $this->db->prepare($sql);
-        $query->execute();
-
-        return $query->fetch();
+    public function purchaseItem($item_id){
+        $stmt = $this->db->prepare("UPDATE Items SET status=:status WHERE item_id=:item_id");
+        $stmt->bindvalue(':status', 'purchased');
+        $stmt->bindParam(':item_id', $item_id);
+        $stmt->execute();
     }
-
-    public function getItemsByUser($user_id) {
-        $sql = "SELECT item_id, item_name, size, price, description, category, subcategory, status, shipping, tracking_number FROM Items WHERE account_id='$user_id'";
-        $query = $this->db->prepare($sql);
-        $query->execute();
-
-        return $query->fetchAll();
-    }
-
-    public function getItemsByCategory($category) {
-        $sql = "SELECT item_id, item_name, size, price, description, category, subcategory, status, shipping, tracking_number FROM Items WHERE category='$category' AND status='available'";
-        $query = $this->db->prepare($sql); 
-        $query->execute();
-
-        return $query->fetchAll();
-    }
-
-    public function getItemsBySubcategory($category, $subcategory) {
-        $sql = "SELECT item_id, item_name, size, price, description, category, subcategory, status, shipping, tracking_number FROM Items WHERE category='$category' AND subcategory='$subcategory' AND status='available'";
-        $query = $this->db->prepare($sql); 
-        $query->execute();
-
-        return $query->fetchAll();
-    }
-
-    public function getAllItems() {
-        $sql = "SELECT item_id, item_name, size, price, description, category, subcategory, status, shipping, tracking_number FROM Items WHERE status='available'";
-        $query = $this->db->prepare($sql); 
-        $query->execute();
-        
-        return $query->fetchAll();
-    }
-
 }
