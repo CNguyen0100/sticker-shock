@@ -3,17 +3,32 @@
 class Account extends Controller {
     public function index() {
         $this->title = 'Account';
-    
+
         $user = null;
         # Graham L.:
         # If user is logged in, fetch their page.
         # If they aren't redirect to login page.
         if (isset($_SESSION['username'])) {
+
+            //get account infomation
+            $info = $this->model->readUser($_SESSION['id']);
+            $_SESSION['accInfo'] = $info;
+
+            //get list of order
+            $orders = $this->model->getOrderFromOrder($_SESSION['id']);
+            $_SESSION['orderHis'] = $orders;
+
+            //get list of item that user is selling and sold
+            $listings = $this->model->getSaleList($_SESSION['id']);
+            $_SESSION['listing'] = $listings;
+          
             $user = $this->model->readUser($_SESSION['id']);
-            $listings = $this->model->getItemsByUser($_SESSION['id']);
-            # Not implemented yet.
             $orders = null;
             require 'application/views/account/index.php';
+            unset($_SESSION['orderHis']);
+            unset($_SESSION['accInfo']);
+            unset($_SESSION['listing']);
+
         } else {
             header('location: /account/login');
         }
@@ -55,6 +70,7 @@ class Account extends Controller {
 
     public function edit(){
         $this->title = 'Edit Account Information';
+
         require 'application/views/account/edit.php';
 
     }
@@ -127,6 +143,14 @@ class Account extends Controller {
         require 'application/models/User.php';
         $this->model = new User($this->db);
         return;
+    }
+    public function viewOrder(){
+        $this->title = 'View Previous Orders';
+        require 'application/views/account/vieworder.php';
+    }
+    public function viewListing(){
+        $this->title = 'View All Sale';
+        require 'application/views/account/viewListing.php';
     }
 
 }

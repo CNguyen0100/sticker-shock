@@ -26,6 +26,13 @@ class User extends Model {
         $result = $statement->fetch();
         return $result;
     }
+    public function getPurchase($id){
+        $statement = $this->db->prepare("SELECT * FROM Orders WHERE account_id = :userId");
+        $statement->bindParam(':userId',$id);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    }
 
     public function updateUser($id,$fname,$lname,$email,$gender,$address1,$address2,$city,$state,$zip){
         $stmt= $this->db->prepare("UPDATE Accounts SET first_name = :firstname,last_name = :lastname,email = :email,
@@ -82,6 +89,23 @@ class User extends Model {
         }
     }
 
+    //get all order and item infomation from userid
+    public function getOrderFromOrder($id){
+        $statement = $this->db->prepare("SELECT * FROM ItemOrders INNER JOIN Items ON ItemOrders.item_id=Items.item_id INNER JOIN Orders ON Orders.order_id = ItemOrders.order_id where Orders.account_id = :id");
+        $statement->bindParam(':id',$id);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    }
+
+    public function getSaleList($id){
+        $statement = $this->db->prepare("SELECT * FROM Items WHERE account_id = :id");
+        $statement->bindParam(':id',$id);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    }
+}
     public function getItemsByUser($user_id) {
         $sql = "SELECT * FROM Items WHERE account_id='$user_id'";
         $query = $this->db->prepare($sql);
