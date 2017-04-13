@@ -9,8 +9,16 @@ class Account extends Controller {
         # If user is logged in, fetch their page.
         # If they aren't redirect to login page.
         if (isset($_SESSION['username'])) {
+
+            //get account infomation
             $info = $this->model->readUser($_SESSION['id']);
-            $_SESSION['info'] = $info;
+            $_SESSION['accInfo'] = $info;
+
+            //get list of order
+            $orders = $this->model->getOrderFromOrder($_SESSION['id']);
+            $_SESSION['orderHis'] = $orders;
+//            var_dump($orders);
+
             require 'application/views/account/index.php';
         } else {
             #            $this->login();

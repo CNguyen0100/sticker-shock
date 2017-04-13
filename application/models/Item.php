@@ -22,8 +22,12 @@ class Item extends Model {
         return $id;
     }
 
-    public function readItem(){
-
+    public function readItem($itemId){
+        $statement = $this->db->prepare("SELECT * from Items where item_id = :itemId");
+        $statement->bindParam(':itemId',$itemId);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result;
     }
 
     public function updateItem($account_id, $item_id, $name, $size, $price, $shipping, $description, $category, $subcategory, $status, $tracking){
