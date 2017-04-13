@@ -126,7 +126,7 @@ class Items extends Controller {
         $tax = 10;
         $subtotal = 10;
         //get item
-        $shipping = $this->model->getItembyId($item_id)->shipping;
+        $shipping = $this->model->readItem($item_id)->shipping;
 
         //get account
         $address_1 = $user->address_1;

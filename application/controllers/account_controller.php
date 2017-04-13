@@ -102,8 +102,8 @@ class Account extends Controller {
     }
 
     public function sell(){
-        echo constant('Category::Shirts');
         $arr = Category::getConstants();
+        $arr2 = Subcategory::getConstants();
         if(isset($_SESSION['username']) && $_SESSION['username'] != '') {
             $this->title = "Sell";
             require 'application/views/account/sell.php';
@@ -111,6 +111,16 @@ class Account extends Controller {
             $_SESSION['login_error'] = 'You must be logged in to complete this action';
             header('location: /account/login?page=account,sell');
         }
+    }
+
+    public function otherAccount() {
+        $user_id = filter_input(INPUT_POST, 'user', FILTER_SANITIZE_STRING);
+        //require 'application/models/User.php';
+        $user_model = new User($this->db);
+        $user = $user_model->readUser($user_id);
+        $listings = $user_model->getItemsByUser($user_id);
+
+        require 'application/views/account/otherAccount.php';
     }
 
     public function loadModel() {
