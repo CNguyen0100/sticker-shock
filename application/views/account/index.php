@@ -116,9 +116,10 @@ $listings =$_SESSION['listing'];
                         <div class="media-left">
                             <img src="<?php if(file_exists('uploads/item_'.$item->item_id)) {echo '/uploads/item_'.$item->item_id;} else echo 'https://placehold.it/700x400';?>" class="media-object" style="width:300px">
                         </div>
-                        <div class="media-body">
-                            <h4 class="media-heading"><?php echo $item->item_name?></h4>
-                            <p><?php echo $item->description?></p>
+                    </form>
+                    <form action="/items/deleteitem/<?php echo $item->item_id?>" method="POST">
+                        <div class="form-group">
+                            <button <?php if($item->available == false){echo 'style="visibility:hidden;"';};?> type="submit" class="btn btn-danger btn-block" name="deleteitem">Delete</button>
                         </div>
                         <div class="media-right">
                             <form action="/items/edititem/<?php echo $item->item_id?>" method="POST">
