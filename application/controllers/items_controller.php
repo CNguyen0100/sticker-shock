@@ -86,7 +86,7 @@ class Items extends Controller {
     public function edititem($id){
         $arr = Category::getConstants();
         $arr2 = Subcategory::getConstants();
-        $item = $this->model->getItemById($id);
+        $item = $this->model->readItem($id);
         if (!$item) {
             header('location: /pages/error');
             return;
@@ -113,40 +113,37 @@ class Items extends Controller {
 
     public function purchaseitem(){
         include 'application/models/User.php';
-        if(isset($_SESSION['id']) && $_SESSION['id'] != '') {
-            /*$users = new User($this->db);
-            $user = $users->readUser($_SESSION['id']);
-            $item_id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
-            //$this->model->purchaseItem($item_id);
+        $users = new User($this->db);
+        $user = $users->readUser($_SESSION['id']);
 
-            # send to Order;
+        $item_id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
+        $this->model->purchaseItem($item_id);
 
-            $account_id = $user->user_id;
-            //basic values
-            $tax = 10;
-            $subtotal = 10;
-            //get item
-            $shipping = $this->model->readItem($item_id)->shipping;
+        # send to Order;
 
-            //get account
-            $address_1 = $user->address_1;
-            $city = $user->city;
-            $state = $user->state;
-            $zip = $user->zip;
+        $account_id = $user->user_id;
+        //basic values
+        $tax = 10;
+        $subtotal = 10;
+        //get item
+        $shipping = $this->model->readItem($item_id)->shipping;
 
-
-            //$this->loadOrderModel();
-            //$id = $this->model->createOrder($account_id, $tax, $subtotal, $shipping, $address_1, $city, $state, $zip, $item_id);
-
-            //$this->order($id); */
+        //get account
+        $address_1 = $user->address_1;
+        $city = $user->city;
+        $state = $user->state;
+        $zip = $user->zip;
 
 
-            # reroute
-            require 'application/views/pages/checkout.php';
-        }else{
-            $_SESSION['login_error'] = 'You must be logged in to purchase an item';
-            header('location: /account/login');
-        }
+
+        $this->loadOrderModel();
+        $id = $this->model->createOrder($account_id, $tax, $subtotal, $shipping, $address_1, $city, $state, $zip, $item_id);
+
+        //$this->order($id);
+
+        
+        # reroute
+        header('location: /pages/purchase');
 
     }
 
