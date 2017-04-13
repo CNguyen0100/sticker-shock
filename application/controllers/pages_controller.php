@@ -24,11 +24,6 @@ class Pages extends Controller {
         require 'application/views/pages/error.php';
     }
 
-    public function purchase() {
-        $this->title = "Thank You!";
-
-        require 'application/views/pages/purchase.php';
-    }
 
     public function checkout() {
         $this->title = "checkout";

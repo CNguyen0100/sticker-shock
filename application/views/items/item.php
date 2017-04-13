@@ -1,10 +1,4 @@
-<?php require 'application/views/layouts/header.php';
-$_POST['item_name'] = $item->item_name;
-$_POST['price'] = $item->price;
-$_POST['shipping'] = $item->shipping;
-$_POST['seller_id'] = $item->account_id;
-$_POST['item_id'] = $item->item_id;
-?>
+<?php require 'application/views/layouts/header.php'; ?>
    <div class="container">
         <div class="row">
             <?php include 'application/views/includes/category-menu.php';?>
@@ -17,8 +11,12 @@ $_POST['item_id'] = $item->item_id;
                         <p><?php echo $item->description?></p>
                         <div class="text-left">
                             <form action="/items/purchaseitem" method="POST">
-                                <input type="hidden" name="id" type="Number" value="<?php echo htmlspecialchars($item->item_id); ?>" >
-                                <button type="submit" class="btn-ss btn-bw"" name="submit"> Purchase
+                                <input type="hidden" name="item_name" value="<?php echo $item->item_name?>">
+                                <input type="hidden" name="price" value="<?php echo $item->price?>">
+                                <input type="hidden" name="shipping" value="<?php echo $item->shipping?>">
+                                <input type="hidden" name="seller_id" value="<?php echo$item->account_id?>">
+                                <input type="hidden" name="item_id" value="<?php echo $item->item_id?>">
+                                <button type="submit" class="btn-ss btn-bw" name="submit"> Purchase
                                 </button>
                             </form>
                         </div>
