@@ -68,7 +68,6 @@ class Items extends Controller {
 
     public function submititem()
     {
-         header('location: /pages/contact-us');
         $account_id = $_SESSION['id'];
         $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
         $size = filter_input(INPUT_POST, 'size', FILTER_SANITIZE_STRING);
@@ -115,10 +114,10 @@ class Items extends Controller {
     public function purchaseitem(){
         include 'application/models/User.php';
         if(isset($_SESSION['id']) && $_SESSION['id'] != '') {
-            $users = new User($this->db);
+            /*$users = new User($this->db);
             $user = $users->readUser($_SESSION['id']);
             $item_id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
-            $this->model->purchaseItem($item_id);
+            //$this->model->purchaseItem($item_id);
 
             # send to Order;
 
@@ -139,11 +138,11 @@ class Items extends Controller {
             //$this->loadOrderModel();
             //$id = $this->model->createOrder($account_id, $tax, $subtotal, $shipping, $address_1, $city, $state, $zip, $item_id);
 
-            //$this->order($id);
+            //$this->order($id); */
 
 
             # reroute
-            header('location: /pages/purchase');
+            require 'application/views/pages/checkout.php';
         }else{
             $_SESSION['login_error'] = 'You must be logged in to purchase an item';
             header('location: /account/login');

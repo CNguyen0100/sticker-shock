@@ -2,9 +2,9 @@
 require 'application/models/Item.php';
 $orders = $_SESSION['orderHis'];
 $listings =$_SESSION['listing'];
-//require 'application/models/Order.php';
-//$order = new Order($this->db);
-//$orders = $order->getOrdersByAccountId($user->user_id);
+/*require 'application/models/Order.php';
+$order = new Order($this->db);
+$orders = $order->getOrdersByAccountId($user->user_id);*/
 
 ?>
 
@@ -140,13 +140,7 @@ $listings =$_SESSION['listing'];
                         <h6><a href="/account/vieworder/<?=$_SESSION['id']?>">All Order</a></h6>
                     </div>
                 </div>
-                <!--div class="media-body">
-                    <h4 class="media-heading"><?//php echo $i->order_id;?></h4>
-
-                    <!--
-                    Here is the code for the Item name I believe.  Will need to include Item in the controller
-                    <h4 class="media-heading"><?//php echo $item->$order->getItemIdFromOrderId($i->order_id)->item_name;?></h4>>
-                    <p><?//php echo $i->account_id;?></p-->
+              
 
             </div>
                 <hr>
