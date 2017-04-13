@@ -4,7 +4,7 @@ class Pages extends Controller {
 
     public function index() {
         $this->title="Home";
-        $items = $this->model->getAllItems();
+        $items = $this->model->readAllItems();
         require 'application/views/pages/index.php';
     }
 
@@ -28,6 +28,18 @@ class Pages extends Controller {
         $this->title = "Thank You!";
 
         require 'application/views/pages/purchase.php';
+    }
+
+    public function checkout() {
+        $this->title = "checkout";
+
+        require 'application/views/pages/checkout.php';
+    }
+
+    public function success() {
+        $this->title = "success";
+
+        require 'application/views/pages/success.php';
     }
 
     public function loadModel()

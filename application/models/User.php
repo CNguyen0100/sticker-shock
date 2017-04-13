@@ -56,7 +56,6 @@ class User extends Model {
         if(count($result) > 0 && password_verify($password, $result->password)){
             $_SESSION['username'] = $result->username;
             $_SESSION['id'] = $result->user_id;
-            $_SESSION['fname'] = $result->first_name;
         }
         else{
             $error = 'Username and password combination are invalid<br>';
@@ -81,5 +80,13 @@ class User extends Model {
         if(count($result) > 0){
             $_SESSION['email_taken_err'] = 'An account already exists with this email address.';
         }
+    }
+
+    public function getItemsByUser($user_id) {
+        $sql = "SELECT * FROM Items WHERE account_id='$user_id'";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll();
     }
 }
