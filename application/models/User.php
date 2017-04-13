@@ -26,11 +26,11 @@ class User extends Model {
         $result = $statement->fetch();
         return $result;
     }
-    public function getPurchase($id){
-        $statement = $this->db->prepare("SELECT * FROM Orders WHERE account_id = :userId");
-        $statement->bindParam(':userId',$id);
+    public function getPurchase($order_id){
+        $statement = $this->db->prepare("SELECT * FROM ItemOrders INNER JOIN Items ON ItemOrders.item_id=Items.item_id INNER JOIN Orders ON Orders.order_id = ItemOrders.order_id where Orders.order_id = :orderid");
+        $statement->bindParam(':orderid',$order_id);
         $statement->execute();
-        $result = $statement->fetchAll();
+        $result = $statement->fetch();
         return $result;
     }
 
@@ -99,11 +99,12 @@ class User extends Model {
         return $result;
     }
 
-    public function getSaleList($id){
+    public function getSaleList($userid){
         $statement = $this->db->prepare("SELECT * FROM Items WHERE account_id = :id");
-        $statement->bindParam(':id',$id);
+        $statement->bindParam(':id',$userid);
         $statement->execute();
         $result = $statement->fetchAll();
         return $result;
     }
+
 }
