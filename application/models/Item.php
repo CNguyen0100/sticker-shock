@@ -54,7 +54,7 @@ class Item extends Model {
 
     public function updateItem($account_id, $item_id, $name, $size, $price, $shipping, $description, $category, $subcategory, $available, $tracking){
         $stmt = $this->db->prepare("UPDATE Items SET account_id=:accountid, item_name=:name, size=:size, price=:price, shipping=:shipping, 
-            description=:description, category=:category, subcategory=:subcategory, ava=:status, tracking_number=:tracking WHERE item_id=:item_id");
+            description=:description, category=:category, subcategory=:subcategory, available=:status, tracking_number=:tracking WHERE item_id=:item_id");
         $stmt->bindParam(':accountid', $account_id);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':size', $size);
