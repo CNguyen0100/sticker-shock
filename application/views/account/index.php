@@ -97,7 +97,7 @@ $orders = $order->getOrdersByAccountId($user->user_id);
 
                     <!--
                     Here is the code for the Item name I believe.  Will need to include Item in the controller
-                    <h4 class="media-heading"><?php echo $item->$order->getItemIdFromOrderId($i->order_id)->item_name;?></h4>-->
+                    <h4 class="media-heading"><?//php echo $item->$order->getItemIdFromOrderId($i->order_id)->item_name;?></h4>-->
                     <p><?php echo $i->account_id;?></p>
                 </div>
             </div>
