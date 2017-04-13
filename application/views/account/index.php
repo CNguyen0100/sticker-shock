@@ -1,8 +1,13 @@
 <?php require 'application/views/layouts/header.php';
 require 'application/models/Item.php';
-$orders = $_SESSION['orderHis'];
+//$orders = $_SESSION['orderHis'];
 $listings =$_SESSION['listing'];
+require 'application/models/Order.php';
+$order = new Order($this->db);
+$orders = $order->getOrdersByAccountId($user->user_id);
+
 ?>
+
     <div class="container">
         <div class="row">
             <!-- This contain wellcome on the left and infomation on right-->
@@ -91,7 +96,6 @@ $listings =$_SESSION['listing'];
                         </div>
                     </div>
                 </div>
-                
             <br>
             <div class="row">
                 <div class="col-lg-10"><div class="h2">Your Orders</div></div>

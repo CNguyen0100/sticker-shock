@@ -1,5 +1,7 @@
 <?php
-foreach($items as $item)  :?>
+
+foreach($items as $item): ?> 
+
 <div class="col-lg-4 col-md-6 mb-4">
     <div class="card h-100">
         <a href="/items/item/<?php echo $item->item_id?>" class="img-container-card"><img class="card-img-top img-fluid" src="<?php if(file_exists('uploads/item_'.$item->item_id)) {echo '/uploads/item_'.$item->item_id;} else echo 'https://placehold.it/700x400';?>" alt=""></a>
@@ -21,6 +23,13 @@ foreach($items as $item)  :?>
             <h4 class="card-title"><a href="/items/item/<?php echo $item->item_id?>"><?php echo $item->item_name?></a></h4>
             <h5>$<?php echo number_format((float)$item->price, 2, '.', '');?></h5>
             <p class="card-text"><?php echo $item->description?></p>
+            <div class="text-left">
+                            <form action="/account/otherAccount" method="POST">
+                                <input type="hidden" name="user" type="Number" value="<?php echo $user->readUser($item->account_id)->user_id;?>" >
+                                <button type="submit" class="btn btn-link" name="submit"> <?php echo $user->readUser($item->account_id)->username;?>
+                                </button>
+                            </form>
+                        </div>
         </div>
         <div class="card-footer">
             <!-- 
@@ -34,9 +43,12 @@ foreach($items as $item)  :?>
             //-->
             <big>
             	<?php
-            	##review needs to be set properly
-            	$avgReview=4;
-	            ##Print the stars
+                if(isset($item->rating)){
+            	    $avgReview=$item->rating;
+                }
+                else{
+                    $avgReview = 0;
+                }
 		        for ($i=0; $i<5; $i++) {
 	    			if ($avgReview - $i >= 0.5)
 	    				echo '&#9733; ';
@@ -48,6 +60,6 @@ foreach($items as $item)  :?>
         </div>
     </div>
 </div>
-<?php endforeach;?>
+<?php endforeach; ?>
 
 
