@@ -17,9 +17,16 @@ class Account extends Controller {
             //get list of order
             $orders = $this->model->getOrderFromOrder($_SESSION['id']);
             $_SESSION['orderHis'] = $orders;
-//            var_dump($orders);
+
+            //get list of item that user is selling and sold
+            $listings = $this->model->getSaleList($_SESSION['id']);
+            $_SESSION['listing'] = $listings;
 
             require 'application/views/account/index.php';
+            unset($_SESSION['orderHis']);
+            unset($_SESSION['accInfo']);
+            unset($_SESSION['listing']);
+
         } else {
             #            $this->login();
             header('location: /account/login');
@@ -53,14 +60,6 @@ class Account extends Controller {
             $this->login();
         }
 
-    }
-
-    //Testing for proper way to pass data from controller to view\
-    //passing a array account info
-    public function getInfo(){
-        $this->loadModel();
-        $info =  $this->model->readUser($_SESSION['id']);
-        $this->set('accInfo', $info);
     }
 
     public function signup() {
@@ -133,6 +132,14 @@ class Account extends Controller {
         require 'application/models/User.php';
         $this->model = new User($this->db);
         return;
+    }
+    public function viewOrder(){
+        $this->title = 'View Previous Orders';
+        require 'application/views/account/vieworder.php';
+    }
+    public function viewListing(){
+        $this->title = 'View All Sale';
+        require 'application/views/account/viewListing.php';
     }
 
 }

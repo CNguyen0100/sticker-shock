@@ -98,4 +98,12 @@ class User extends Model {
         $result = $statement->fetchAll();
         return $result;
     }
+
+    public function getSaleList($id){
+        $statement = $this->db->prepare("SELECT * FROM Items WHERE account_id = :id");
+        $statement->bindParam(':id',$id);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    }
 }
