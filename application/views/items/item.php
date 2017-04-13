@@ -1,4 +1,10 @@
-<?php require 'application/views/layouts/header.php'; ?>
+<?php require 'application/views/layouts/header.php';
+$_POST['item_name'] = $item->item_name;
+$_POST['price'] = $item->price;
+$_POST['shipping'] = $item->shipping;
+$_POST['seller_id'] = $item->account_id;
+$_POST['item_id'] = $item->item_id;
+?>
    <div class="container">
         <div class="row">
             <?php include 'application/views/includes/category-menu.php';?>

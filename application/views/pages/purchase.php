@@ -1,8 +1,8 @@
 <?php require 'application/views/layouts/header.php';  ?>
 	<br>
-		<div class="payment-container">
-			<h2 class ="header"> Pay for {item}</h2>
+		<div class="container">
 
+            <?php echo var_dump($_POST)?>
 			<form action="/pages/checkout" method="post" autocomplete="off">
 				<label for="item">
 					Product
