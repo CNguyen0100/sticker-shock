@@ -22,6 +22,7 @@ class Item extends Model {
         return $id;
     }
 
+
     public function readItem($id){
         $sql = "SELECT Items.*, Accounts.rating FROM Items LEFT JOIN Accounts ON Items.account_id = Accounts.user_id WHERE status='available' AND Items.item_id='$id'";
         $query = $this->db->prepare($sql);

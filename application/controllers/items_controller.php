@@ -86,7 +86,7 @@ class Items extends Controller {
     public function edititem($id){
         $arr = Category::getConstants();
         $arr2 = Subcategory::getConstants();
-        $item = $this->model->getItemById($id);
+        $item = $this->model->readItem($id);
         if (!$item) {
             header('location: /pages/error');
             return;
