@@ -1,11 +1,9 @@
 <?php require 'application/views/layouts/header.php';
-require 'application/models/Item.php';
-$items = new Item($this->db);
-$listings = $items->getItemsByUser($_SESSION['id']);
-$user = new User($this->db);
-$info = $user->readUser($_SESSION['id']);
-$orders = null;
+require 'application/models/Order.php';
+$order = new Order($this->db);
+$orders = $order->getOrdersByAccountId($user->user_id);
 ?>
+
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -42,19 +40,19 @@ $orders = null;
                     <h7> Zip:</h7><br>
                 </div>
                 <div class="col-4">
-                    <h7><?= $info->first_name;?> <?= $info->last_name;?></h7><br>
-                    <h7><?= $info->email;?></h7><br>
+                    <h7><?= $user->first_name;?> <?= $user->last_name;?></h7><br>
+                    <h7><?= $user->email;?></h7><br>
                     <h7><?php
-                        if($info->gender == 'M')
+                        if($user->gender == 'M')
                             echo "Male";
                         else
                             echo "Female";
                         ?></h7><br>
-                    <h7><?= $info->address_1;?></h7><br>
-                    <h7> <?= $info->address_2; ?></h7><br>
-                    <h7><?= $info->city;?></h7><br>
-                    <h7><?= $info->state;?></h7><br>
-                    <h7><?= $info->zip;?></h7><br>
+                    <h7><?= $user->address_1;?></h7><br>
+                    <h7> <?= $user->address_2; ?></h7><br>
+                    <h7><?= $user->city;?></h7><br>
+                    <h7><?= $user->state;?></h7><br>
+                    <h7><?= $user->zip;?></h7><br>
                 </div>
             </div>
                 <div class="text-right">
@@ -80,23 +78,23 @@ $orders = null;
                     </form>
                     <form action="/items/deleteitem/<?php echo $item->item_id?>" method="POST">
                         <div class="form-group">
-                            <button <?php if($item->status != 'available'){echo 'style="visibility:hidden;"';};?> type="submit" class="btn btn-danger btn-block" name="deleteitem">Delete</button>
+                            <button <?php if($item->available == false){echo 'style="visibility:hidden;"';};?> type="submit" class="btn btn-danger btn-block" name="deleteitem">Delete</button>
                         </div>
                     </form>
                 </div>
             </div>
-        <?php }} else {echo '<hr><p>You have no listings! <a href="/pages/sell">Create a listing here.</a>';}?>
+        <?php }} else {echo '<hr><p>You have no listings! <a href="/account/sell">Create a listing here.</a>';}?>
         <br>
         <div class="h1">Your Orders</div>
-        <?php if(count($orders) > 0) {foreach($orders as $item) {?>
+        <?php if(count($orders) > 0) {foreach($orders as $i) {?>
             <hr>
             <div class="media">
                 <div class="media-left">
-                    <img src="<?php if(file_exists('uploads/item_'.$item->item_id)) {echo '/uploads/item_'.$item->item_id;} else echo 'https://placehold.it/700x400';?>" class="media-object" style="width:60px">
+                    <!--img src="<?php if(file_exists('uploads/item_'.$item->item_id)) {echo '/uploads/item_'.$item->item_id;} else echo 'https://placehold.it/700x400';?>" class="media-object" style="width:60px"-->
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading"><?php echo $item->item_name?></h4>
-                    <p><?php echo $item->description?></p>
+                    <h4 class="media-heading"><?php echo $i->order_id;?></h4>
+                    <p><?php echo $i->account_id;?></p>
                 </div>
             </div>
             <hr>

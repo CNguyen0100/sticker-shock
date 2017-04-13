@@ -1,29 +1,24 @@
 <?php
-	##These variables need to be set from reviews in the database
-	$numReviews=3;
-	for ($i=0; $i<$numReviews; $i++)
-	{
-		$review=4;
-		$text='I\'ve seen some better than this, but not at this price. I definitely recommend this item.';
-		$name='Anonymous';
-		$daysAgo=15;
-		?>
-
+if (count($reviews) == 0) echo '<p>This user has no reviews.</p>';
+foreach($reviews as $review): ?>
 		<div class="row">
 		    <div class="col-md-12">
 	    	<?php
 		    	##Print the stars
 		        for ($j=0; $j<5; $j++) {
-        			if ($review - $j >= 0.5)
+        			if ($review->rating - $j >= 0.5)
         				echo '&#9733; ';
         			else
         				echo '&#9734; ';
-        		} 
-    			echo $name;
+        		}
+        		$user = $users->readUser($review->reviewer_id);
+    			echo $user->first_name;
     		?>
-		    <span class="float-right"><?php echo $daysAgo; ?> days ago</span>
-		    <p><?php echo $text; ?></p>
-		    <?php if ($i<$numReviews-1) echo '<hr>'; ?>
+		    <span class="float-right"><?php echo $review->review_date?></span>
+		    <p><?php echo $review->comment; ?></p>
+		    <?php
+                if ($i<count($reviews)-1) echo '<hr>';
+		    ?>
 		</div>
 	</div>
-<?php } ?>
+<?php endforeach; ?>
