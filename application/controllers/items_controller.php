@@ -53,6 +53,13 @@ class Items extends Controller {
         }
 
         $this->title = $item->item_name;
+
+        require 'application/models/User.php';
+        require 'application/models/Review.php';
+        $review_model = new Review($this->db);
+        $reviews = $review_model->getReviewsByUser($item->account_id);
+        $users = new User($this->db);
+
         require 'application/views/items/item.php';
     }
 

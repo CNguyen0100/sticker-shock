@@ -35,6 +35,9 @@
                         </big>
                     </div>
                 </div>
+                <div class="well">
+                    <?php include "application/views/items/reviews.php" ?>
+                </div>
             </div>
         </div>
     </div>
