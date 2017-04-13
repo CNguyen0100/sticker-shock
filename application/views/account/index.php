@@ -3,8 +3,9 @@ require 'application/models/Item.php';
 //$orders = $_SESSION['orderHis'];
 $listings =$_SESSION['listing'];
 require 'application/models/Order.php';
-$order = new Order($this->db);
-$orders = $order->getOrdersByAccountId($user->user_id);
+$order =  $_SESSION['orderHis'];
+//$order = new Order($this->db);
+//$orders = $order->getOrdersByAccountId($user->user_id);
 
 ?>
 
@@ -129,7 +130,7 @@ $orders = $order->getOrdersByAccountId($user->user_id);
                             </form>
                             <form action="/items/deleteitem/<?php echo $item->item_id?>" method="POST">
                                 <div class="form-group">
-                                    <button <?php if($item->status != 'available'){echo 'style="visibility:hidden;"';};?> type="submit" class="btn btn-danger btn-block" name="deleteitem">Delete</button>
+                                    <button <?php if($item->available != 1){echo 'style="visibility:hidden;"';};?> type="submit" class="btn btn-danger btn-block" name="deleteitem">Delete</button>
                                 </div>
                             </form>
                         </div>
