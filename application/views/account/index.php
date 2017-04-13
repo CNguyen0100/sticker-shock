@@ -17,7 +17,7 @@ $orders = $order->getOrdersByAccountId($user->user_id);
                 <p>
                 <div class="h2"  >
                     <?php
-                    if(isset($_SESSION['fname']) && strpos($_SERVER['HTTP_REFERER'], 'account')){
+                    if(isset($_SESSION['accInfo']->fname) && strpos($_SERVER['HTTP_REFERER'], 'account')){
                         echo 'Welcome back, '. $_SESSION['fname'] .'!';
                         echo '<br>';
                     }
@@ -96,53 +96,12 @@ $orders = $order->getOrdersByAccountId($user->user_id);
                         </div>
                     </div>
                 </div>
-
-                <!-- 2nd order history -->
-                <div class="row">
-                    <div class="col-lg-10"><div class="h2">Your Listing</div></div>
-                    <div class="col-lg-2">
-                        <div class="text-right">
-                            <h6><a href="/account/viewListing">All List</a></h6>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <?php if(count($listings) > 0) {
-                    $count = 0;
-                    foreach($listings as $item) {if($count >=3) break;$count++;?>
-
-                <div class="well">
-
-                    <div class="media">
-                        <div class="media-left">
-                            <img src="<?php if(file_exists('uploads/item_'.$item->item_id)) {echo '/uploads/item_'.$item->item_id;} else echo 'https://placehold.it/700x400';?>" class="media-object" style="width:300px">
-                        </div>
-                        <div class="media-body">
-                            <h4 class="media-heading"><?php echo $item->item_name?></h4>
-                            <p><?php echo $item->description?></p>
-                        </div>
-                        <div class="media-right">
-                            <form action="/items/edititem/<?php echo $item->item_id?>" method="POST">
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-secondary btn-block" name="edititem">Edit</button>
-                                </div>
-                            </form>
-                            <form action="/items/deleteitem/<?php echo $item->item_id?>" method="POST">
-                                <div class="form-group">
-                                    <button <?php if($item->status != 'available'){echo 'style="visibility:hidden;"';};?> type="submit" class="btn btn-danger btn-block" name="deleteitem">Delete</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                </div>
-            <?php }} else {echo '<hr><p>You have no listings! <a href="/pages/sell">Create a listing here.</a>';}?>
             <br>
             <div class="row">
                 <div class="col-lg-10"><div class="h2">Your Orders</div></div>
                 <div class="col-lg-2">
                     <div class="text-right">
-                        <h6><a href="/account/vieworder">All Order</a></h6>
+                        <h6><a href="/account/vieworder/<?=$_SESSION['id']?>">All Order</a></h6>
                     </div>
                 </div>
             </div>
@@ -205,9 +164,21 @@ $orders = $order->getOrdersByAccountId($user->user_id);
     <!--                    collumn of button-->
                         <div class="col-lg-3">
                             <div class="btn-group-vertical" >
-                                <button type="button" class="btn-block" style="width: 200dppx" >View Invoice</button>
-                                <button type="button" class="btn-block" style="width: 200dppx" >Review</button>
-                                <button type="button" class="btn-block" style="width: 200dppx" >Delete Review</button>
+                                <form action="/account/printInvoice/<?php echo $orders[$i]->order_id?>" method="POST">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-secondary btn-block"  name="printInvoice" style="width: 150px" >View Invoice</button>
+                                    </div>
+                                </form>
+                                <form action="/account/writeReview/<?php echo $orders[$i]->order_id ?>" method="POST">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-secondary btn-block"  name="writeReview" style="width: 150px" >Review</button>
+                                    </div>
+                                </form>
+                                <form action="/account/deleteReview/<?php echo $orders[$i]->order_id ?>" method="POST">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-secondary btn-block"  name="deleteReview" style="width: 150px" >Delete Review</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

@@ -144,13 +144,39 @@ class Account extends Controller {
         $this->model = new User($this->db);
         return;
     }
-    public function viewOrder(){
+
+    public function viewOrder($account_id){
         $this->title = 'View Previous Orders';
+//        diplay all order in one page
+        $orders = $this->model->getOrderFromOrder($account_id);
+        $_SESSION['orderHis'] = $orders;
+
         require 'application/views/account/vieworder.php';
+        unset($_SESSION['orderHis']);
     }
-    public function viewListing(){
+    public function viewListing($user_id){
         $this->title = 'View All Sale';
+//        display in one page
+        $listing = $this->model->getSaleList($user_id);
+        $_SESSION['listing'] = $listing;
+
         require 'application/views/account/viewListing.php';
     }
 
+    public function writeReview($orderId){
+
+
+    }
+    public function deleteReview($orderId){
+
+    }
+    public function printInvoice($orderId){
+        if(!$orderId)
+            require 'application/views/pages/error.php';
+        else {
+            $_SESSION['invoice'] = $this->model->getPurchase($orderId);
+            require 'application/views/account/printInvoice.php';
+            unset($_SESSION['invoice']);
+        }
+    }
 }
