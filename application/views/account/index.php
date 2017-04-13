@@ -2,8 +2,7 @@
 require 'application/models/Item.php';
 $items = new Item($this->db);
 $listings = $items->getItemsByUser($_SESSION['id']);
-$user = new User($this->db);
-$info = $user->readUser($_SESSION['id']);
+//$user = new User($this->db);
 $orders = null;
 ?>
     <div class="container">
@@ -42,19 +41,19 @@ $orders = null;
                     <h7> Zip:</h7><br>
                 </div>
                 <div class="col-4">
-                    <h7><?= $info->first_name;?> <?= $info->last_name;?></h7><br>
-                    <h7><?= $info->email;?></h7><br>
+                    <h7><?= $_SESSION['info']->first_name;?> <?= $_SESSION['info']->last_name;?></h7><br>
+                    <h7><?= $_SESSION['info']->email;?></h7><br>
                     <h7><?php
-                        if($info->gender == 'M')
+                        if($_SESSION['info']->gender == 'M')
                             echo "Male";
                         else
                             echo "Female";
                         ?></h7><br>
-                    <h7><?= $info->address_1;?></h7><br>
-                    <h7> <?= $info->address_2; ?></h7><br>
-                    <h7><?= $info->city;?></h7><br>
-                    <h7><?= $info->state;?></h7><br>
-                    <h7><?= $info->zip;?></h7><br>
+                    <h7><?= $_SESSION['info']->address_1;?></h7><br>
+                    <h7> <?= $_SESSION['info']->address_2; ?></h7><br>
+                    <h7><?= $_SESSION['info']->city;?></h7><br>
+                    <h7><?= $_SESSION['info']->state;?></h7><br>
+                    <h7><?= $_SESSION['info']->zip;?></h7><br>
                 </div>
             </div>
                 <div class="text-right">

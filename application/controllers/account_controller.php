@@ -3,12 +3,14 @@
 class Account extends Controller {
     public function index() {
         $this->title = 'Account';
-    
+
         $user = null;
         # Graham L.:
         # If user is logged in, fetch their page.
         # If they aren't redirect to login page.
         if (isset($_SESSION['username'])) {
+            $info = $this->model->readUser($_SESSION['id']);
+            $_SESSION['info'] = $info;
             require 'application/views/account/index.php';
         } else {
             #            $this->login();
@@ -45,6 +47,14 @@ class Account extends Controller {
 
     }
 
+    //Testing for proper way to pass data from controller to view\
+    //passing a array account info
+    public function getInfo(){
+        $this->loadModel();
+        $info =  $this->model->readUser($_SESSION['id']);
+        $this->set('accInfo', $info);
+    }
+
     public function signup() {
         $this->title = 'Sign Up';
         require 'application/views/account/signup.php';
@@ -52,6 +62,7 @@ class Account extends Controller {
 
     public function edit(){
         $this->title = 'Edit Account Information';
+
         require 'application/views/account/edit.php';
 
     }

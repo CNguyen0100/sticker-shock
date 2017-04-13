@@ -1,5 +1,5 @@
-<?php $user = new User($this->db);
-$info = $user->readUser($_SESSION['id']);
+<?php
+$info = $_SESSION['info'];
 require 'application/views/layouts/header.php'; ?>
 <div class="container">
     <div class="h1">Edit Information<hr></div>
