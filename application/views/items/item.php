@@ -1,10 +1,5 @@
-<?php require 'application/views/layouts/header.php';
-require 'application/models/User.php';
-require 'application/models/Review.php';
-$review_model = new Review($this->db);
-$reviews = $review_model->getReviewsByUser($item->account_id);
-$users = new User($this->db);?>
-    <div class="container">
+<?php require 'application/views/layouts/header.php'; ?>
+   <div class="container">
         <div class="row">
             <?php include 'application/views/includes/category-menu.php';?>
             <div class="col-md-9">
@@ -16,18 +11,17 @@ $users = new User($this->db);?>
                         <p><?php echo $item->description?></p>
                         <div class="text-left">
                             <form action="/items/purchaseitem" method="POST">
+                                <input type="hidden" name="id" type="Number" value="<?php echo htmlspecialchars($item->item_id); ?>" >
                                 <button type="submit" class="btn-ss btn-bw"" name="submit"> Purchase
                                 </button>
                             </form>
                         </div>
                     </div>
-                    <div class="ratings">
-                        <p class="float-right"> <?php echo count($reviews)?> review(s) for this seller</p>
-                        <p>
+                    <div class="card-footer">
+                        <big>
                             <?php
-                            $user = $users->readUser($item->account_id);
-                            if(isset($user->rating)){
-                                $avgReview=$user->rating;
+                            if(isset($item->rating)){
+                                $avgReview=$item->rating;
                             }
                             else{
                                 $avgReview = 0;
@@ -38,12 +32,8 @@ $users = new User($this->db);?>
                                 else
                                     echo '&#9734; ';
                             }?>
-                        </p>
+                        </big>
                     </div>
-                </div>
-                <br>
-                <div class="well">
-                    <?php include "application/views/items/reviews.php" ?>
                 </div>
             </div>
         </div>

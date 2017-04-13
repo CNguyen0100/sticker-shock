@@ -23,15 +23,28 @@ class Item extends Model {
     }
 
     public function readItem($id){
-        $sql = "SELECT Items.*, Accounts.rating FROM Items LEFT JOIN Accounts ON Items.account_id = Accounts.user_id WHERE Items.item_id='$id'";
+        $sql = "SELECT Items.*, Accounts.rating FROM Items LEFT JOIN Accounts ON Items.account_id = Accounts.user_id WHERE status='available' AND Items.item_id='$id'";
         $query = $this->db->prepare($sql);
         $query->execute();
 
         return $query->fetch();
     }
+  
+    public function readAllItems($category = null, $subcategory = null, $search = null) {
+        $sql = "SELECT Items.item_id, Items.account_id, Items.item_name, Items.price, Items.description, Items.shipping, Items.category, Items.subcategory, Accounts.rating FROM Items LEFT JOIN Accounts ON Items.account_id = Accounts.user_id WHERE status='available'";
+        if (isset($category)) {
+            $sql .= " AND category='" . $category . "'";
+            $category = strtolower($category);
 
-    public function readAllItems() {
-        $sql = "SELECT Items.item_id, Items.account_id, Items.item_name, Items.price, Items.description, Items.shipping, Items.category, Items.subcategory, Accounts.rating FROM Items LEFT JOIN Accounts ON Items.account_id = Accounts.user_id";
+            if (isset($subcategory)) {
+                $sql .= " AND subcategory='" . $subcategory . "'";
+                $subcategory = strtolower($subcategory);
+            }
+        }
+        if (isset($search)) {
+            $search = strtolower($search);
+            $sql .= " AND (LOWER(item_name) LIKE '%$search%' OR LOWER(category) LIKE '%$search%' OR LOWER(subcategory) LIKE '%$search%' OR LOWER(description) LIKE '%$search%')";
+        }
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -61,43 +74,11 @@ class Item extends Model {
         $stmt = $this->db->prepare("DELETE FROM Items WHERE item_id='$item_id'");
         $stmt->execute();
     }
-    
-    # Graham L.:
-    # This function is redundant and can likely be removed once all calls to it
-    # are replaced with calls to readItem();
-    public function getItemById($id) {
-        $sql = "SELECT * FROM Items WHERE item_id='$id'";
-        $query = $this->db->prepare($sql);
-        $query->execute();
 
-        return $query->fetch();
+    public function purchaseItem($item_id){
+        $stmt = $this->db->prepare("UPDATE Items SET status=:status WHERE item_id=:item_id");
+        $stmt->bindvalue(':status', 'purchased');
+        $stmt->bindParam(':item_id', $item_id);
+        $stmt->execute();
     }
-
-    public function getItemsByCategory($category) {
-        $sql = "SELECT Items.*, Accounts.rating FROM Items LEFT JOIN Accounts ON Items.account_id = Accounts.user_id WHERE category='$category' AND status='available'";
-        $query = $this->db->prepare($sql); 
-        $query->execute();
-
-        return $query->fetchAll();
-    }
-
-    public function getItemsBySubcategory($category, $subcategory) {
-        $sql = "SELECT Items.*, Accounts.rating FROM Items LEFT JOIN Accounts ON Items.account_id = Accounts.user_id WHERE category='$category' AND subcategory='$subcategory' AND status='available'";
-        $query = $this->db->prepare($sql); 
-        $query->execute();
-
-        return $query->fetchAll();
-    }
-
-    # Graham L.:
-    # This function is redundant and can likely be removed once all calls to it
-    # are replaced with calls to readAllItems();
-    public function getAllItems() {
-        $sql = "SELECT * FROM Items WHERE status='available'";
-        $query = $this->db->prepare($sql); 
-        $query->execute();
-        
-        return $query->fetchAll();
-    }
-
 }
