@@ -68,6 +68,7 @@ class Items extends Controller {
 
     public function submititem()
     {
+         header('location: /pages/contact-us');
         $account_id = $_SESSION['id'];
         $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
         $size = filter_input(INPUT_POST, 'size', FILTER_SANITIZE_STRING);

@@ -2,7 +2,7 @@
 class Item extends Model {
 
     public function createItem($account_id, $name, $size, $price, $shipping, $description, $category, $subcategory){
-        $stmt = $this->db->prepare("INSERT INTO Items (account_id, item_name, size, price, shipping, description, category, subcategory, status) 
+        $stmt = $this->db->prepare("INSERT INTO Items (account_id, item_name, size, price, shipping, description, category, subcategory, available) 
           VALUES (:accountid, :name, :size, :price, :shipping, :description, :category, :subcategory, :available)");
         $stmt->bindParam(':accountid', $account_id);
         $stmt->bindParam(':name', $name);
