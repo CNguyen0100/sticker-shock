@@ -92,6 +92,7 @@ class User extends Model {
     //get all order and item infomation from userid
     public function getOrderFromUser($id){
         $statement = $this->db->prepare("SELECT * FROM ItemOrders INNER JOIN Items ON ItemOrders.item_id=Items.item_id INNER JOIN Orders ON Orders.order_id = ItemOrders.order_id where Orders.account_id = :id");
+        
         $statement->bindParam(':id',$id);
         $statement->execute();
         $result = $statement->fetchAll();
