@@ -2,9 +2,9 @@
 require 'application/models/Item.php';
 $orders = $_SESSION['orderHis'];
 $listings =$_SESSION['listing'];
-//require 'application/models/Order.php';
-//$order = new Order($this->db);
-//$orders = $order->getOrdersByAccountId($user->user_id);
+/*require 'application/models/Order.php';
+$order = new Order($this->db);
+$orders = $order->getOrdersByAccountId($user->user_id);*/
 
 ?>
 
@@ -116,10 +116,6 @@ $listings =$_SESSION['listing'];
                         <div class="media-left">
                             <img src="<?php if(file_exists('uploads/item_'.$item->item_id)) {echo '/uploads/item_'.$item->item_id;} else echo 'https://placehold.it/700x400';?>" class="media-object" style="width:300px">
                         </div>
-                        <div class="media-body">
-                            <h4 class="media-heading"><?php echo $item->item_name?></h4>
-                            <p><?php echo $item->description?></p>
-                        </div>
                         <div class="media-right">
                             <form action="/items/edititem/<?php echo $item->item_id?>" method="POST">
                                 <div class="form-group">
@@ -128,14 +124,14 @@ $listings =$_SESSION['listing'];
                             </form>
                             <form action="/items/deleteitem/<?php echo $item->item_id?>" method="POST">
                                 <div class="form-group">
-                                    <button <?php if($item->status != 'available'){echo 'style="visibility:hidden;"';};?> type="submit" class="btn btn-danger btn-block" name="deleteitem">Delete</button>
+                                    <button <?php if($item->available != true){echo 'style="visibility:hidden;"';};?> type="submit" class="btn btn-danger btn-block" name="deleteitem">Delete</button>
                                 </div>
                             </form>
                         </div>
                     </div>
 
                 </div>
-            <?php }} else {echo '<hr><p>You have no listings! <a href="/pages/sell">Create a listing here.</a>';}?>
+            <?php }} else {echo '<hr><p>You have no listings! <a href="/account/sell">Create a listing here.</a>';}?>
             <br>
             <div class="row">
                 <div class="col-lg-10"><div class="h2">Your Orders</div></div>
@@ -144,13 +140,7 @@ $listings =$_SESSION['listing'];
                         <h6><a href="/account/vieworder/<?=$_SESSION['id']?>">All Order</a></h6>
                     </div>
                 </div>
-                <!--div class="media-body">
-                    <h4 class="media-heading"><?//php echo $i->order_id;?></h4>
-
-                    <!--
-                    Here is the code for the Item name I believe.  Will need to include Item in the controller
-                    <h4 class="media-heading"><?//php echo $item->$order->getItemIdFromOrderId($i->order_id)->item_name;?></h4>>
-                    <p><?//php echo $i->account_id;?></p-->
+              
 
             </div>
                 <hr>
