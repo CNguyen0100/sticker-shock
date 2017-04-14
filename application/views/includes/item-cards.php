@@ -1,5 +1,6 @@
 <?php
-foreach($items as $item): ?>
+foreach($items as $item): ?> 
+
 <div class="col-lg-4 col-md-6 mb-4">
     <div class="card h-100">
         <a href="/items/item/<?php echo $item->item_id?>" class="img-container-card"><img class="card-img-top img-fluid" src="<?php if(file_exists('uploads/item_'.$item->item_id)) {echo '/uploads/item_'.$item->item_id;} else echo 'https://placehold.it/700x400';?>" alt=""></a>

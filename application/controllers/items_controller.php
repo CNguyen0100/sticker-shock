@@ -33,11 +33,8 @@ class Items extends Controller {
                 }
 
                 $this->title = ucwords("$this->category - $this->subcategory");
-
-                #$items = $this->model->getItemsBySubcategory($this->category, $this->subcategory);
             } else {
                 $this->title = ucfirst("$this->category");
-                #$items = $this->model->getItemsByCategory($this->category);
             }
         } else {
             $this->title="Browse";
@@ -57,6 +54,16 @@ class Items extends Controller {
 
         $this->title = $item->item_name;
         require 'application/views/items/item.php';
+    }
+
+    public function order($id) {
+        $this->loadOrderModel();
+        $order = $this->model->getOrderById($id);
+
+        if (!$order) {
+            header('location: /pages/error');
+            return;
+        }
     }
 
     public function submititem()
@@ -104,10 +111,49 @@ class Items extends Controller {
 
     }
 
-    public function purchaseitem($id){
-        header('location: /pages/purchase');
-        #remove item from database
-        #add to orders
+    public function purchaseitem(){
+        include 'application/models/User.php';
+        if(isset($_SESSION['id']) && $_SESSION['id'] != '') {
+            $users = new User($this->db);
+            $user = $users->readUser($_SESSION['id']);
+            $item_id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
+            $this->model->purchaseItem($item_id);
+
+            # send to Order;
+
+            $account_id = $user->user_id;
+            //basic values
+            $tax = 10;
+            $subtotal = 10;
+            //get item
+            $shipping = $this->model->readItem($item_id)->shipping;
+
+            //get account
+            $address_1 = $user->address_1;
+            $city = $user->city;
+            $state = $user->state;
+            $zip = $user->zip;
+
+
+            //$this->loadOrderModel();
+            //$id = $this->model->createOrder($account_id, $tax, $subtotal, $shipping, $address_1, $city, $state, $zip, $item_id);
+
+            //$this->order($id);
+
+
+            # reroute
+            header('location: /pages/purchase');
+        }else{
+            $_SESSION['login_error'] = 'You must be logged in to purchase an item';
+            header('location: /account/login');
+        }
+
+    }
+
+    public function loadOrderModel()
+    {
+        include 'application/models/Order.php';
+        $this->model = new Order($this->db);
     }
 
     public function deleteitem($id){
