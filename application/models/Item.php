@@ -21,6 +21,14 @@ class Item extends Model {
         return $id;
     }
 
+    public function readBoughtItem($id){
+        $sql = "SELECT Items.*, Accounts.rating FROM Items LEFT JOIN Accounts ON Items.account_id = Accounts.user_id WHERE Items.item_id='$id'";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        return $query->fetch();
+    }
+
     public function readItem($id){
         $sql = "SELECT Items.*, Accounts.rating FROM Items LEFT JOIN Accounts ON Items.account_id = Accounts.user_id WHERE available=true AND Items.item_id='$id'";
         $query = $this->db->prepare($sql);
@@ -74,10 +82,9 @@ class Item extends Model {
         $stmt->execute();
     }
 
-
     public function purchaseItem($item_id){
         $stmt = $this->db->prepare("UPDATE Items SET available=:status WHERE item_id=:item_id");
-        $stmt->bindvalue(':status', 0);
+        $stmt->bindvalue(':status', false);
         $stmt->bindParam(':item_id', $item_id);
         $stmt->execute();
     }
