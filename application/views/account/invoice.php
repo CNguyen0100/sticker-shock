@@ -4,7 +4,7 @@ require 'application/views/layouts/header.php'; ?>
 
 <div class="container">
         <h3>Invoice:</h3>
-             <p class="media-heading">Item Name: &emsp;<?php echo $invoice->item_name ?></p>
+            <p class="media-heading">Item Name: &emsp;<?php echo $invoice->item_name ?></p>
 
              <p class="media-heading">Size: &emsp;<?php echo $invoice->size ?></p>
 
