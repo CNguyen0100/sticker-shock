@@ -15,8 +15,9 @@ class Account extends Controller {
             $_SESSION['accInfo'] = $info;
 
             //get list of order
-            $orders = $this->model->getOrderFromOrder($_SESSION['id']);
+            $orders = $this->model->getOrderFromUser($_SESSION['id']);
             $_SESSION['orderHis'] = $orders;
+//            var_dump($orders);
 
             //get list of item that user is selling and sold
             $listings = $this->model->getSaleList($_SESSION['id']);
@@ -25,9 +26,9 @@ class Account extends Controller {
             $user = $this->model->readUser($_SESSION['id']);
             $orders = null;
             require 'application/views/account/index.php';
-            unset($_SESSION['orderHis']);
-            unset($_SESSION['accInfo']);
-            unset($_SESSION['listing']);
+//            unset($_SESSION['orderHis']);
+//            unset($_SESSION['accInfo']);
+//            unset($_SESSION['listing']);
 
         } else {
             header('location: /account/login');
@@ -148,7 +149,7 @@ class Account extends Controller {
     public function viewOrder($account_id){
         $this->title = 'View Previous Orders';
 //        diplay all order in one page
-        $orders = $this->model->getOrderFromOrder($account_id);
+        $orders = $this->model->getOrderFromUser($account_id);
         $_SESSION['orderHis'] = $orders;
 
         require 'application/views/account/vieworder.php';
