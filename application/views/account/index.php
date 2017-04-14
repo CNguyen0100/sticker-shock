@@ -17,8 +17,8 @@ $orders = $order->getOrdersByAccountId($user->user_id);*/
                 <p>
                 <div class="h2"  >
                     <?php
-                    if(isset($_SESSION['accInfo']->fname) && strpos($_SERVER['HTTP_REFERER'], 'account')){
-                        echo 'Welcome back, '. $_SESSION['fname'] .'!';
+                    if(isset($_SESSION['accInfo']->first_name) && strpos($_SERVER['HTTP_REFERER'], "/login")){
+                        echo 'Welcome back, '. $_SESSION['accInfo']->first_name .'!';
                         echo '<br>';
                     }
                     else{
@@ -173,7 +173,7 @@ $orders = $order->getOrdersByAccountId($user->user_id);*/
                                 <h7>
                                     <b>Total<br></b>
     <!--                             I don't tax is percentage or actual tax, so fix it if it is percentage-->
-                                <?php $total = $orders[$i]->subtotal+$orders[$i]->tax+ $orders[$i]->shipping;
+                                <?php $total = $orders[$i]->total+$orders[$i]->shipping;
                                     echo $total;?>
                                 </h7>
                             </div>
