@@ -45,8 +45,9 @@ class Items extends Controller {
     }
 
     public function item($id) {
+        require 'application/models/User.php';
+        $user = new User($this->db);
         $item = $this->model->readItem($id);
-
         if (!$item) {
             header('location: /pages/error');
             return;
@@ -64,6 +65,8 @@ class Items extends Controller {
             $ratings = explode(',', $item->ratings);
             $comments = explode('----', $item->comments);
             $review_dates = explode(',', $item->review_dates);
+            $review_titles = explode(',', $item->review_titles);
+
 
             if (sizeof($reviewers) != sizeof($ratings) || sizeof($reviewers) != sizeof($comments) || sizeof($reviewers) != sizeof($review_dates)) {
                 header('location: /pages/error');
@@ -74,9 +77,10 @@ class Items extends Controller {
             $iterator->attachIterator(new ArrayIterator($ratings));
             $iterator->attachIterator(new ArrayIterator($comments));
             $iterator->attachIterator(new ArrayIterator($review_dates));
+            $iterator->attachIterator(new ArrayIterator($review_titles));
 
             foreach ($iterator as $values) {
-                $reviews[] = new Review($values[0], $values[1], $values[2], $values[3]);
+                $reviews[] = new Review($values[0], $values[1], $values[2], $values[3], $values[4]);
             } 
         }
 
