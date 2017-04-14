@@ -42,7 +42,6 @@ class Item extends Model {
         if (isset($category)) {
             $sql .= " AND category='" . $category . "'";
             $category = strtolower($category);
-
             if (isset($subcategory)) {
                 $sql .= " AND subcategory='" . $subcategory . "'";
                 $subcategory = strtolower($subcategory);

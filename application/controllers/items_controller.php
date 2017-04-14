@@ -8,7 +8,8 @@ class Items extends Controller {
     public $search = null;
 
     public function index($category = null, $args = null) {
-
+        require 'application/models/User.php';
+        $user = new User($this->db);
         # Graham L.:
         # The following if/else clusterfuck is the simplest way I could come up
         # with to implement categories/subcategories.
