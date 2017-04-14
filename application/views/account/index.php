@@ -1,14 +1,11 @@
 <?php require 'application/views/layouts/header.php';
-require 'application/models/Item.php';
 $orders = $_SESSION['orderHis'];
 $listings =$_SESSION['listing'];
-/*require 'application/models/Order.php';
-$order = new Order($this->db);
-$orders = $order->getOrdersByAccountId($user->user_id);*/
+$items=new Item($this->db); 
 
 ?>
 
-    <div class="container">
+<div class="container">
         <div class="row">
             <!-- This contain wellcome on the left and infomation on right-->
             <!-- 1st col .. welcome-->
@@ -17,8 +14,8 @@ $orders = $order->getOrdersByAccountId($user->user_id);*/
                 <p>
                 <div class="h2"  >
                     <?php
-                    if(isset($_SESSION['accInfo']->fname) && strpos($_SERVER['HTTP_REFERER'], 'account')){
-                        echo 'Welcome back, '. $_SESSION['fname'] .'!';
+                    if(isset($_SESSION['accInfo']->first_name) && strpos($_SERVER['HTTP_REFERER'], "/login")){
+                        echo 'Welcome back, '. $_SESSION['accInfo']->first_name .'!';
                         echo '<br>';
                     }
                     else{
@@ -101,14 +98,14 @@ $orders = $order->getOrdersByAccountId($user->user_id);*/
                     <div class="col-lg-10"><div class="h2">Your Listing</div></div>
                     <div class="col-lg-2">
                         <div class="text-right">
-                            <h6><a href="/account/viewListing/<?=$_SESSION['id']?>">All List</a></h6>
+                            <!--h6><a href="/account/viewListing/<?=$_SESSION['id']?>">All List</a></h6-->
                         </div>
                     </div>
                 </div>
                 <hr>
                 <?php if(count($listings) > 0) {
                     $count = 0;
-                    foreach($listings as $item) {if($count >=3) break;$count++;?>
+                    foreach($listings as $item) {if($count >=3) break; if($item->available != true) continue; $count++; ?>
 
                 <div class="well">
 
@@ -142,7 +139,7 @@ $orders = $order->getOrdersByAccountId($user->user_id);*/
                 <div class="col-lg-10"><div class="h2">Your Orders</div></div>
                 <div class="col-lg-2">
                     <div class="text-right">
-                        <h6><a href="/account/vieworder/<?=$_SESSION['id']?>">All Order</a></h6>
+                        <!--h6><a href="/account/vieworder/<?=$_SESSION['id']?>">All Order</a></h6-->
                     </div>
                 </div>
               
@@ -170,7 +167,7 @@ $orders = $order->getOrdersByAccountId($user->user_id);*/
                                 <h7>
                                     <b>Total<br></b>
     <!--                             I don't tax is percentage or actual tax, so fix it if it is percentage-->
-                                <?php $total = $orders[$i]->subtotal+$orders[$i]->tax+ $orders[$i]->shipping;
+                                $<?php $total = $orders[$i]->total + $orders[$i]->shipping;
                                     echo $total;?>
                                 </h7>
                             </div>
@@ -212,8 +209,9 @@ $orders = $order->getOrdersByAccountId($user->user_id);*/
                                         <button type="submit" class="btn btn-secondary btn-block"  name="printInvoice" style="width: 150px" >View Invoice</button>
                                     </div>
                                 </form>
-                                <form action="/account/writeReview/<?php echo $orders[$i]->order_id ?>" method="POST">
+                                <form action="/reviews/review" method="POST">
                                     <div class="form-group">
+                                        <input type="hidden" name="sellerID" value='<?php echo $items->readBoughtItem($orders[$i]->item_id)->account_id; ?>' />
                                         <button type="submit" class="btn btn-secondary btn-block"  name="writeReview" style="width: 150px" >Review</button>
                                     </div>
                                 </form>
