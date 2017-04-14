@@ -50,4 +50,12 @@ class Order extends Model {
 
         return $query->fetchAll();
     }
+
+    public function getItemIdFromOrderId($order_id) {
+        $sql = "SELECT * FROM ItemOrders WHERE order_id='$order_id'";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        return $query->fetch();
+    }
 }

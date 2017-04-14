@@ -2,10 +2,9 @@
 require 'application/models/Item.php';
 $orders = $_SESSION['orderHis'];
 $listings =$_SESSION['listing'];
-require 'application/models/Order.php';
-//$order =  $_SESSION['orderHis'];
-//$order = new Order($this->db);
-//$orders = $order->getOrdersByAccountId($user->user_id);
+/*require 'application/models/Order.php';
+$order = new Order($this->db);
+$orders = $order->getOrdersByAccountId($user->user_id);*/
 
 ?>
 
@@ -97,7 +96,6 @@ require 'application/models/Order.php';
                         </div>
                     </div>
                 </div>
-
                 <!-- 2nd order history -->
                 <div class="row">
                     <div class="col-lg-10"><div class="h2">Your Listing</div></div>
@@ -130,7 +128,7 @@ require 'application/models/Order.php';
                             </form>
                             <form action="/items/deleteitem/<?php echo $item->item_id?>" method="POST">
                                 <div class="form-group">
-                                    <button <?php if($item->available != 1){echo 'style="visibility:hidden;"';};?> type="submit" class="btn btn-danger btn-block" name="deleteitem">Delete</button>
+                                    <button <?php if($item->available != true){echo 'style="visibility:hidden;"';};?> type="submit" class="btn btn-danger btn-block" name="deleteitem">Delete</button>
                                 </div>
                             </form>
                         </div>
@@ -147,10 +145,11 @@ require 'application/models/Order.php';
                         <h6><a href="/account/vieworder/<?=$_SESSION['id']?>">All Order</a></h6>
                     </div>
                 </div>
+              
+
             </div>
                 <hr>
             <?php if(count($orders) > 0) {
-
                     $max = 3;
                     if(count($orders)<3)
                         $max = count($orders);

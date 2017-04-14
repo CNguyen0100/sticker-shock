@@ -2,8 +2,8 @@
 class Item extends Model {
 
     public function createItem($account_id, $name, $size, $price, $shipping, $description, $category, $subcategory){
-        $stmt = $this->db->prepare("INSERT INTO Items (account_id, item_name, size, price, shipping, description, category, subcategory, available) 
-          VALUES (:accountid, :name, :size, :price, :shipping, :description, :category, :subcategory, :status)");
+        $stmt = $this->db->prepare("INSERT INTO Items (account_id, item_name, size, price, shipping, description, category, subcategory) 
+          VALUES (:accountid, :name, :size, :price, :shipping, :description, :category, :subcategory)");
         $stmt->bindParam(':accountid', $account_id);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':size', $size);
@@ -12,7 +12,6 @@ class Item extends Model {
         $stmt->bindparam(':description', $description);
         $stmt->bindparam(':category', $category);
         $stmt->bindparam(':subcategory', $subcategory);
-        $stmt->bindvalue(':status', 1);
         $stmt->execute();
         $id = $this->db->lastInsertId();
         $stmt = $this->db->prepare("INSERT INTO UserItems (account_id, item_id) VALUES (:account_id, :item_id)");
@@ -24,7 +23,7 @@ class Item extends Model {
 
 
     public function readItem($id){
-        $sql = "SELECT Items.*, Accounts.rating FROM Items LEFT JOIN Accounts ON Items.account_id = Accounts.user_id WHERE available=1 AND Items.item_id='$id'";
+        $sql = "SELECT Items.*, Accounts.rating FROM Items LEFT JOIN Accounts ON Items.account_id = Accounts.user_id WHERE available=true AND Items.item_id='$id'";
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -32,7 +31,7 @@ class Item extends Model {
     }
   
     public function readAllItems($category = null, $subcategory = null, $search = null) {
-        $sql = "SELECT Items.item_id, Items.account_id, Items.item_name, Items.price, Items.description, Items.shipping, Items.category, Items.subcategory, Accounts.rating FROM Items LEFT JOIN Accounts ON Items.account_id = Accounts.user_id WHERE available=1";
+        $sql = "SELECT Items.item_id, Items.account_id, Items.item_name, Items.price, Items.description, Items.shipping, Items.category, Items.subcategory, Accounts.rating FROM Items LEFT JOIN Accounts ON Items.account_id = Accounts.user_id WHERE available=true";
         if (isset($category)) {
             $sql .= " AND category='" . $category . "'";
             $category = strtolower($category);
@@ -78,7 +77,7 @@ class Item extends Model {
 
     public function purchaseItem($item_id){
         $stmt = $this->db->prepare("UPDATE Items SET available=:status WHERE item_id=:item_id");
-        $stmt->bindvalue(':status', 0);
+        $stmt->bindvalue(':status', false);
         $stmt->bindParam(':item_id', $item_id);
         $stmt->execute();
     }
