@@ -4,7 +4,7 @@ $order = new Order($this->db);
 $orders = $order->getOrdersByAccountId($user->user_id);
 ?>
 
-    <div class="container">
+<div class="container">
         <div class="row">
             <div class="col-md-3">
                 <p>
@@ -57,6 +57,9 @@ $orders = $order->getOrdersByAccountId($user->user_id);
             </div>
                 <div class="text-right">
                 <a href="/account/edit">Edit</a>
+                </div>
+                <div class="text-right">
+                <a href="/items/review">Submit Review</a>
                 </div>
             </div>
         <div class="h1">Your Listings</div>
