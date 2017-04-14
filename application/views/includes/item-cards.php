@@ -1,4 +1,5 @@
 <?php
+
 foreach($items as $item): ?> 
 
 <div class="col-lg-4 col-md-6 mb-4">
@@ -34,6 +35,12 @@ foreach($items as $item): ?>
             &#9734 is a white star (with black outline).
             //-->
             <big>
+                <small>
+                <a href="/account/profile/<?php echo $user->readUser($item->account_id)->user_id;?>">
+                    <?php echo $user->readUser($item->account_id)->username;?>
+                </a>
+                </small>
+                <div class="float-right">
             	<?php
                 if(isset($item->rating)){
             	    $avgReview=$item->rating;
@@ -48,10 +55,10 @@ foreach($items as $item): ?>
 	    				echo '&#9734; ';
 	    		}
 	    		?>
+                </div>
             </big>
         </div>
     </div>
 </div>
 <?php endforeach; ?>
-
 

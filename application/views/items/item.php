@@ -20,6 +20,8 @@
                                 </button>
                             </form>
                         </div>
+                        <br>
+                        <h5><a href="/accountdummy"> Account Username: <?php echo $item->account_id;?></a></h5>
                     </div>
                     <div class="card-footer">
                         <big>

@@ -1,5 +1,5 @@
-<?php $user = new User($this->db);
-$info = $user->readUser($_SESSION['id']);
+<?php
+$info = $_SESSION['accInfo'];
 require 'application/views/layouts/header.php'; ?>
 <div class="container">
     <div class="h1">Edit Information<hr></div>
@@ -81,7 +81,7 @@ require 'application/views/layouts/header.php'; ?>
         <div class="form-group">
                     <button type="submit" class="btn-ss btn-bw" name="submit">Save</button>
                     <button type="reset" class="btn-ss btn-bw" name="reset">Reset</button>
-                    <a href="/account/index">Cancel</a>
+                    <a href="/account/index" class="btn-ss btn-bw" name="cancel">Cancel</a>
         </div>
     </form>
 </div>
