@@ -3,7 +3,9 @@
 require 'application/views/layouts/header.php'; ?>
 
 <?php
+
 var_dump($_SESSION['invoice']);
+
 ?>
 <?php require 'application/views/layouts/footer.php'; ?>
 
