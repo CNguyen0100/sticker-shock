@@ -8,7 +8,7 @@ $orders = $order->getOrdersByAccountId($user->user_id);*/
 
 ?>
 
-    <div class="container">
+<div class="container">
         <div class="row">
             <!-- This contain wellcome on the left and infomation on right-->
             <!-- 1st col .. welcome-->
@@ -35,6 +35,9 @@ $orders = $order->getOrdersByAccountId($user->user_id);*/
                         </button>
                     </div>
                 </form>
+                </div>
+                <div class="text-right">
+                <a href="/items/review">Submit Review</a>
                 </div>
             </div>
             <br>
