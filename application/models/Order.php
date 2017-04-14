@@ -33,6 +33,7 @@ class Order extends Model {
         return $id;
     }
 
+    
     public function getOrderById($id) {
         $sql = "SELECT * FROM Orders WHERE order_id='$id'";
         $query = $this->db->prepare($sql);
@@ -49,4 +50,11 @@ class Order extends Model {
         return $query->fetchAll();
     }
 
+    public function getItemIdFromOrderId($order_id) {
+        $sql = "SELECT * FROM ItemOrders WHERE order_id='$order_id'";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        return $query->fetch();
+    }
 }

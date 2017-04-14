@@ -3,17 +3,36 @@
 class Account extends Controller {
     public function index() {
         $this->title = 'Account';
-    
+
         $user = null;
         # Graham L.:
         # If user is logged in, fetch their page.
         # If they aren't redirect to login page.
         if (isset($_SESSION['username'])) {
+
+            //get account infomation
+            $info = $this->model->readUser($_SESSION['id']);
+            $_SESSION['accInfo'] = $info;
+
+            //get list of order
+            $orders = $this->model->getOrderFromUser($_SESSION['id']);
+            $_SESSION['orderHis'] = $orders;
+//            var_dump($orders);
+
+            //get list of item that user is selling and sold
+            $listings = $this->model->getSaleList($_SESSION['id']);
+            $_SESSION['listing'] = $listings;
+          
             $user = $this->model->readUser($_SESSION['id']);
-            $listings = $this->model->getItemsByUser($_SESSION['id']);
-            # Not implemented yet.
             $orders = null;
+            require 'application/models/Item.php';
+            require 'application/models/Review.php';
             require 'application/views/account/index.php';
+
+//            unset($_SESSION['orderHis']);
+//            unset($_SESSION['accInfo']);
+//            unset($_SESSION['listing']);
+
         } else {
             header('location: /account/login');
         }
@@ -55,6 +74,7 @@ class Account extends Controller {
 
     public function edit(){
         $this->title = 'Edit Account Information';
+
         require 'application/views/account/edit.php';
 
     }
@@ -102,8 +122,8 @@ class Account extends Controller {
     }
 
     public function sell(){
-        echo constant('Category::Shirts');
         $arr = Category::getConstants();
+        $arr2 = Subcategory::getConstants();
         if(isset($_SESSION['username']) && $_SESSION['username'] != '') {
             $this->title = "Sell";
             require 'application/views/account/sell.php';
@@ -113,10 +133,55 @@ class Account extends Controller {
         }
     }
 
+    public function otherAccount() {
+        $user_id = filter_input(INPUT_POST, 'user', FILTER_SANITIZE_STRING);
+        //require 'application/models/User.php';
+        $user_model = new User($this->db);
+        $user = $user_model->readUser($user_id);
+        $listings = $user_model->getItemsByUser($user_id);
+        require 'application/models/Review.php';
+        require 'application/models/Order.php';
+        require 'application/views/account/otherAccount.php';
+    }
+
     public function loadModel() {
         require 'application/models/User.php';
         $this->model = new User($this->db);
         return;
     }
 
+    public function viewOrder($account_id){
+        $this->title = 'View Previous Orders';
+//        diplay all order in one page
+        $orders = $this->model->getOrderFromUser($account_id);
+        $_SESSION['orderHis'] = $orders;
+
+        require 'application/views/account/vieworder.php';
+        unset($_SESSION['orderHis']);
+    }
+    public function viewListing($user_id){
+        $this->title = 'View All Sale';
+//        display in one page
+        $listing = $this->model->getSaleList($user_id);
+        $_SESSION['listing'] = $listing;
+
+        require 'application/views/account/viewListing.php';
+    }
+
+    public function writeReview($orderId){
+
+
+    }
+    public function deleteReview($orderId){
+
+    }
+    public function printInvoice($orderId){
+        if(!$orderId)
+            require 'application/views/pages/error.php';
+        else {
+            $_SESSION['invoice'] = $this->model->getPurchase($orderId);
+            require 'application/views/account/printInvoice.php';
+            unset($_SESSION['invoice']);
+        }
+    }
 }

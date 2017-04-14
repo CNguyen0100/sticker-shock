@@ -1,3 +1,4 @@
 # extension used for backup files
 *.bak*
 *.idea/*
+application/views/account/index.php

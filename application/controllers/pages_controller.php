@@ -1,9 +1,12 @@
+
 <?php
 
 class Pages extends Controller {
 
     public function index() {
         $this->title="Home";
+        require 'application/models/User.php';
+        $user = new User($this->db);
         $items = $this->model->readAllItems();
         require 'application/views/pages/index.php';
     }
@@ -24,12 +27,6 @@ class Pages extends Controller {
         require 'application/views/pages/error.php';
     }
 
-
-    public function checkout() {
-        $this->title = "checkout";
-
-        require 'application/views/pages/checkout.php';
-    }
 
     public function loadModel()
     {

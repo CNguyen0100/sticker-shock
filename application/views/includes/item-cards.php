@@ -1,4 +1,5 @@
 <?php
+
 foreach($items as $item): ?> 
 
 <div class="col-lg-4 col-md-6 mb-4">
@@ -22,6 +23,15 @@ foreach($items as $item): ?>
             <h4 class="card-title"><a href="/items/item/<?php echo $item->item_id?>"><?php echo $item->item_name?></a></h4>
             <h5>$<?php echo number_format((float)$item->price, 2, '.', '');?></h5>
             <p class="card-text"><?php echo $item->description?></p>
+            <p class="card-text">
+                <form action="/account/otherAccount" method="POST">
+                    <input type="hidden" name="user" type="Number" value="<?php echo $user->readUser($item->account_id)->user_id;?>" >
+                    <p>Seller:
+                    <button type="submit" class="btn btn-link" name="submit"><?php echo $user->readUser($item->account_id)->username;?>
+                    </button>
+                    </p>
+                </form>
+            </p>
         </div>
         <div class="card-footer">
             <!-- 
@@ -53,5 +63,4 @@ foreach($items as $item): ?>
     </div>
 </div>
 <?php endforeach; ?>
-
 
