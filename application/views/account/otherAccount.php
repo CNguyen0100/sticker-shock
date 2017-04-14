@@ -45,7 +45,7 @@ $reviews = $review->getReviewsByUser($user->user_id);
 		        		echo '&emsp;';
 		        		$user = new User($this->db);
 		    			$thisUser = $user->readUser($i->reviewer_id);
-		    			echo $thisUser->username;
+		    			echo $thisUser->first_name;
 		    			?>
 		    		</h4>
                     <p><?php echo $i->comment;?></p>
