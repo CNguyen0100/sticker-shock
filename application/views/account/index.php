@@ -14,8 +14,8 @@ $items=new Item($this->db);
                 <p>
                 <div class="h2"  >
                     <?php
-                    if(isset($_SESSION['accInfo']->fname) && strpos($_SERVER['HTTP_REFERER'], 'account')){
-                        echo 'Welcome back, '. $_SESSION['fname'] .'!';
+                    if(isset($_SESSION['accInfo']->first_name) && strpos($_SERVER['HTTP_REFERER'], "/login")){
+                        echo 'Welcome back, '. $_SESSION['accInfo']->first_name .'!';
                         echo '<br>';
                     }
                     else{
@@ -98,7 +98,7 @@ $items=new Item($this->db);
                     <div class="col-lg-10"><div class="h2">Your Listing</div></div>
                     <div class="col-lg-2">
                         <div class="text-right">
-                            <h6><a href="/account/viewListing/<?=$_SESSION['id']?>">All List</a></h6>
+                            <!--h6><a href="/account/viewListing/<?=$_SESSION['id']?>">All List</a></h6-->
                         </div>
                     </div>
                 </div>
@@ -139,7 +139,7 @@ $items=new Item($this->db);
                 <div class="col-lg-10"><div class="h2">Your Orders</div></div>
                 <div class="col-lg-2">
                     <div class="text-right">
-                        <h6><a href="/account/vieworder/<?=$_SESSION['id']?>">All Order</a></h6>
+                        <!--h6><a href="/account/vieworder/<?=$_SESSION['id']?>">All Order</a></h6-->
                     </div>
                 </div>
               
