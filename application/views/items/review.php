@@ -4,10 +4,7 @@
     <div class="container">
         <div class="h1">Submit a Review<hr></div>
         <form action="/reviews/submit_review" method="POST">
-            <input type="hidden" name="orderID" value='<?php
-            $oID = $_SESSION['orderID'];
-            echo $oID;
-            unset($_SESSION['orderID']); ?>' />
+            <input type="hidden" name="orderID" value='<?php echo $order_id;?>' />
             <div class="form-group row">
                 <div class="col-md-6">
                     <select class="form-control" name="rating">
@@ -32,7 +29,6 @@
             </div>
 
             <input type="hidden" name="sellerID" value='<?php echo $sellerID; ?>' />
-            <input type="hidden" name="orderID" value='<?php echo $oID; ?>' />
 
 
             <div class="form-group">

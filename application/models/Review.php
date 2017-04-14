@@ -45,8 +45,8 @@ class Review extends Model {
     }
 
     public function deleteReview($reviewId){
-        $string1 = "DELETE FROM AccountOrderReview WHERE review_id=:'$reviewId'";
-        $string2 = "DELETE FROM Reviews WHERE review_id=:'$reviewId'";
+        $string1 = "DELETE FROM AccountOrderReview WHERE review_id = '$reviewId'";
+        $string2 = "DELETE FROM Reviews WHERE review_id = '$reviewId'";
         $stmt = $this->db->prepare($string1);
         $stmt->execute();
         $stmt = $this->db->prepare($string2);

@@ -209,8 +209,8 @@ $listings =$_SESSION['listing'];
 <!--Review button only show if there is no review-->
                                         <?php
                                         $rv=new Review($this->db);
-                                            $reviewForThis = $rv->getReviewForAnOrder($_SESSION['id'], $orders[$i]->order_id);
-                                        if(!$reviewForThis){
+                                            $reviewID = $rv->getReviewForAnOrder($_SESSION['id'], $orders[$i]->order_id);
+                                        if(!$reviewID){
                                             ?>
                                         <form action="/reviews/review/" method="POST">
                                             <div class="form-group">
@@ -221,11 +221,17 @@ $listings =$_SESSION['listing'];
                                         </form>
                                         <?php }else{?>
 <!--//Only show delete the review button if user wrote a review-->
-                                        <form action="/account/deleteReview/<?php echo $orders[$i]->order_id ?>" method="POST">
+                                        <form action="/reviews/viewReview/<?=$reviewID->review_id?>" method="POST">
+                                            <div class="form-group">
+                                                <button type="submit"  class="btn btn-secondary btn-block"  name="deleteReview" style="width: 150px" >View Review</button>
+                                            </div>
+                                        </form>
+                                        <form action="/reviews/deleteReview/<?=$reviewID->review_id?>" method="POST">
                                             <div class="form-group">
                                                 <button type="submit"  class="btn btn-secondary btn-block"  name="deleteReview" style="width: 150px" >Delete Review</button>
                                             </div>
                                         </form>
+
                                                 <?php }?>
                                     </div>
                                 </div>
