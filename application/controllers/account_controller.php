@@ -136,12 +136,12 @@ class Account extends Controller {
 
     }
 
-    public function printInvoice($orderId){
+    public function invoice($orderId){
         if(!$orderId)
             require 'application/views/pages/error.php';
         else {
             $_SESSION['invoice'] = $this->model->getPurchase($orderId);
-            require 'application/views/account/printInvoice.php';
+            require 'application/views/account/invoice.php';
             unset($_SESSION['invoice']);
         }
     }

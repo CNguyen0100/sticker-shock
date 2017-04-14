@@ -193,7 +193,7 @@
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="btn-group-vertical" >
-                                        <form action="/account/printInvoice/<?php echo $orders[$i]->order_id?>" method="POST">
+                                        <form action="/account/invoice/<?php echo $orders[$i]->order_id?>" method="POST">
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-secondary btn-block"  name="printInvoice" style="width: 150px" >View Invoice</button>
                                             </div>
