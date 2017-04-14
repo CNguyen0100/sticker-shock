@@ -25,6 +25,7 @@ class Account extends Controller {
           
             $user = $this->model->readUser($_SESSION['id']);
             $orders = null;
+            require 'application/models/Item.php';
             require 'application/views/account/index.php';
 //            unset($_SESSION['orderHis']);
 //            unset($_SESSION['accInfo']);
@@ -136,7 +137,7 @@ class Account extends Controller {
         $user_model = new User($this->db);
         $user = $user_model->readUser($user_id);
         $listings = $user_model->getItemsByUser($user_id);
-
+        require 'application/models/Order.php';
         require 'application/views/account/otherAccount.php';
     }
 
