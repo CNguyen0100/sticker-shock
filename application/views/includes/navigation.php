@@ -26,7 +26,7 @@ page (which is currently a clone of the home page).
         </form>        
             <ul class="navbar-nav ml-auto">
                 <li class= "<?php if ($page==0) echo 'nav-item active'; else echo 'nav-item'?>" >
-                    <a class="nav-link" href="/items">Browse<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">Browse<span class="sr-only">(current)</span></a>
                 </li>
                 <li class= "<?php if ($page==1) echo 'nav-item active'; else echo 'nav-item'?>">
                     <a class="nav-link" href="/account/sell">Sell</a>
