@@ -6,9 +6,9 @@
     	<a href="/items" class="list-group-item category-item">
     		<?php if ($_SERVER['REQUEST_URI'] == "/items" || $_SERVER['REQUEST_URI'] == "/")
     		{
-    			echo '<font color="blue">';
+    			echo '<u>';
     			echo 'ALL';
-    			echo '</font>';
+    			echo '</u>';
     		}
     		else
     			echo 'ALL';?>
@@ -21,9 +21,9 @@
             		echo '<a href="/items/';
 	                echo strtolower($key);
 	                echo '" class="list-group-item category-item">';
-	                echo '<font color="blue">';
+	                echo '<u>';
 	                echo ucwords($value);
-	                echo '</font>';
+	                echo '</u>';
 	                echo '</a>';
                 }
                 else
