@@ -1,10 +1,6 @@
 <!--This page show all listing of a seller and their review-->
 
-<?php require 'application/views/layouts/header.php';
-
-$review = new Review($this->db);
-$reviews = $review->getReviewsByUser($user->user_id);
-?>
+<?php require 'application/views/layouts/header.php'; ?>
     <div class="container">
         <div class="h1"> <?php echo ucfirst($user->username); ?>'s Profile </div> <br><br>
         <div class="h1">Listings</div>
@@ -54,7 +50,7 @@ $reviews = $review->getReviewsByUser($user->user_id);
                 </div>
             </div>
             <hr>
-        <?php }} else {echo '<hr><p>They have no reviews yet!';}?>
+        <?php }} else {echo '<p>They have no reviews yet!';}?>
         </div>
         </div>
     </div>

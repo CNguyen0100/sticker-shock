@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <div class="col-md-6">
+            <div class="col-md-6">ss
                 <input required value="<?php echo $item->price;?>" class="form-control" type="Number" step="any" name="price">
             </div>
         </div>

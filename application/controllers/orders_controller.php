@@ -7,7 +7,6 @@ class Orders extends Controller {
     public function createorder(){
         $post = $_SESSION['POST'];
         unset($_SESSION['POST']);
-        var_dump($post);
         $account_id = $_SESSION['id'];
         $item_id = $post['item_id'];
         $name = $post['recipient_name'];

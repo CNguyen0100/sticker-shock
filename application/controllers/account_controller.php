@@ -9,23 +9,13 @@ class Account extends Controller {
         # If user is logged in, fetch their page.
         # If they aren't redirect to login page.
         if (isset($_SESSION['username'])) {
-            $info = $this->model->readUser($_SESSION['id']);
-            $_SESSION['accInfo'] = $info;
-            $orders = $this->model->getOrderFromUser($_SESSION['id']);
-            $_SESSION['orderHis'] = $orders;
-            $listings = $this->model->getSaleList($_SESSION['id']);
-            $_SESSION['listing'] = $listings;
-          
             $user = $this->model->readUser($_SESSION['id']);
-            $orders = null;
+            $orders = $this->model->getOrderFromUser($_SESSION['id']);
+            $listings = $this->model->getSaleList($_SESSION['id']);
+
             require 'application/models/Item.php';
             require 'application/models/Review.php';
             require 'application/views/account/index.php';
-
-//            unset($_SESSION['orderHis']);
-//            unset($_SESSION['accInfo']);
-//            unset($_SESSION['listing']);
-
         } else {
             header('location: /account/login');
         }
@@ -67,7 +57,7 @@ class Account extends Controller {
 
     public function edit(){
         $this->title = 'Edit Account Information';
-
+        $user = $this->model->readUser($_SESSION['id']);
         require 'application/views/account/edit.php';
 
     }
@@ -127,12 +117,14 @@ class Account extends Controller {
     }
 
     public function profile($user_id) {
-        //require 'application/models/User.php';
-        $user = $this->model->readUser($user_id);
-        $listings = $this->model->getItemsByUser($user_id);
         require 'application/models/Review.php';
         require 'application/models/Order.php';
+        $user = $this->model->readUser($user_id);
+        $listings = $this->model->getItemsByUser($user_id);
+        $review = new Review($this->db);
+        $reviews = $review->getReviewsByUser($user->user_id);
         require 'application/views/account/profile.php';
+
     }
 
 
