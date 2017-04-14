@@ -1,23 +1,21 @@
 <?php
 
 class Order extends Model {
-
-    public function createOrder($account_id, $tax, $subtotal, $shipping, $address_1, $city, $state, $zip, $item_id){
-        $stmt = $this->db->prepare("INSERT INTO Orders (account_id, status, tax, subtotal, shipping, address_1, city, state, zip) 
-          VALUES (:accountid, :status, :tax, :subtotal, :shipping, :address1, :city, :state, :zip)");
+    public function createOrder($account_id, $total, $shipping, $name, $address_1, $address_2, $city, $state, $zip, $country, $item_id){
+        $stmt = $this->db->prepare("INSERT INTO Orders (account_id, status, total, shipping, recipient_name, address_1, address_2, city, state, zip, country,  completion_date)
+          VALUES (:accountid, :status, :total, :shipping, :recipient_name, :address1, :address2, :city, :state, :zip, :country, :completion_date)");
         $stmt->bindParam(':accountid', $account_id);
         $stmt->bindvalue(':status', 'purchased');
-        $stmt->bindParam(':tax', $tax);
         $stmt->bindParam(':shipping', $shipping);
-        $stmt->bindparam(':subtotal', $subtotal);
+        $stmt->bindparam(':total', $total);
         $stmt->bindparam(':address1', $address_1);
+        $stmt->bindparam(':address2', $address_2);
+        $stmt->bindparam(':country', $country);
         $stmt->bindparam(':city', $city);
         $stmt->bindparam(':state', $state);
         $stmt->bindparam(':zip', $zip);
-        $id = $this->db->lastInsertId();
-        #get today's date
-        //$stmt->bindvalue(':completiondate', );
-
+        $stmt->bindparam(':recipient_name', $name);
+        $stmt->bindvalue(':completion_date',  date("Y-m-d H:i:s"));
 
         $stmt->execute();
         $id = $this->db->lastInsertId();
@@ -50,4 +48,5 @@ class Order extends Model {
 
         return $query->fetchAll();
     }
+
 }
