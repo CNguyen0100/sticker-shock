@@ -1,7 +1,7 @@
 <?php require 'application/views/layouts/header.php'; ?>
 <div class="container">
     <div class="h1">Edit Item<hr></div>
-    <form enctype="multipart/form-data" action="/items/updateitem/<?php echo $item->item_id;?>/<?php echo $item->status;?>" method="POST">
+    <form enctype="multipart/form-data" action="/items/updateitem/<?php echo $item->item_id;?>/<?php echo $item->available;?>" method="POST">
         <div class="form-group row">
             <div class="col-md-6">
                 <input required value="<?php echo $item->item_name;?>" class="form-control" type="text" name="title">

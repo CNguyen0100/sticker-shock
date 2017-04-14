@@ -2,8 +2,8 @@
 class Item extends Model {
 
     public function createItem($account_id, $name, $size, $price, $shipping, $description, $category, $subcategory){
-        $stmt = $this->db->prepare("INSERT INTO Items (account_id, item_name, size, price, shipping, description, category, subcategory, status) 
-          VALUES (:accountid, :name, :size, :price, :shipping, :description, :category, :subcategory, :available)");
+        $stmt = $this->db->prepare("INSERT INTO Items (account_id, item_name, size, price, shipping, description, category, subcategory) 
+          VALUES (:accountid, :name, :size, :price, :shipping, :description, :category, :subcategory)");
         $stmt->bindParam(':accountid', $account_id);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':size', $size);
@@ -12,7 +12,6 @@ class Item extends Model {
         $stmt->bindparam(':description', $description);
         $stmt->bindparam(':category', $category);
         $stmt->bindparam(':subcategory', $subcategory);
-        $stmt->bindvalue(':available', true);
         $stmt->execute();
         $id = $this->db->lastInsertId();
         $stmt = $this->db->prepare("INSERT INTO UserItems (account_id, item_id) VALUES (:account_id, :item_id)");
@@ -20,6 +19,14 @@ class Item extends Model {
         $stmt->bindParam(':item_id', $id);
         $stmt->execute();
         return $id;
+    }
+
+    public function readBoughtItem($id){
+        $sql = "SELECT Items.*, Accounts.rating FROM Items LEFT JOIN Accounts ON Items.account_id = Accounts.user_id WHERE Items.item_id='$id'";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        return $query->fetch();
     }
 
     public function readItem($id){
