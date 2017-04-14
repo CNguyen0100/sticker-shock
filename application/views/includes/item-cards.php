@@ -36,7 +36,7 @@ foreach($items as $item): ?>
             //-->
             <big>
                 <small>
-                <a href="/account/otherAccount/<?php echo $user->readUser($item->account_id)->user_id;?>">
+                <a href="/account/profile/<?php echo $user->readUser($item->account_id)->user_id;?>">
                     <?php echo $user->readUser($item->account_id)->username;?>
                 </a>
                 </small>

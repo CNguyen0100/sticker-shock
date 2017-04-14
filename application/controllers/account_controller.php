@@ -126,31 +126,15 @@ class Account extends Controller {
         }
     }
 
-    public function otherAccount($user_id) {
+    public function profile($user_id) {
         //require 'application/models/User.php';
         $user = $this->model->readUser($user_id);
         $listings = $this->model->getItemsByUser($user_id);
         require 'application/models/Review.php';
         require 'application/models/Order.php';
-        require 'application/views/account/otherAccount.php';
+        require 'application/views/account/profile.php';
     }
 
-
-    public function viewOrder($account_id){
-        $this->title = 'View Previous Orders';
-        $orders = $this->model->getOrderFromUser($account_id);
-        $_SESSION['orderHis'] = $orders;
-
-        require 'application/views/account/vieworder.php';
-        unset($_SESSION['orderHis']);
-    }
-    public function viewListing($user_id){
-        $this->title = 'View All Sale';
-        $listing = $this->model->getSaleList($user_id);
-        $_SESSION['listing'] = $listing;
-
-        require 'application/views/account/viewListing.php';
-    }
 
     public function writeReview($orderId){
 
