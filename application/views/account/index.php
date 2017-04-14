@@ -101,22 +101,26 @@ $orders = $order->getOrdersByAccountId($user->user_id);*/
                     <div class="col-lg-10"><div class="h2">Your Listing</div></div>
                     <div class="col-lg-2">
                         <div class="text-right">
-                            <h6><a href="/account/viewListing">All List</a></h6>
+                            <h6><a href="/account/viewListing/<?=$_SESSION['id']?>">All List</a></h6>
                         </div>
                     </div>
                 </div>
                 <hr>
                 <?php if(count($listings) > 0) {
                     $count = 0;
-                    foreach($listings as $item) {/*if($count >=3) break;*/$count++;?>
+                    foreach($listings as $item) {if($count >=3) break;$count++;?>
 
                 <div class="well">
 
-                    <div class="media">
-                        <div class="media-left">
+                    <div class="media row">
+                        <div class="media-left col-lg-5">
                             <img src="<?php if(file_exists('uploads/item_'.$item->item_id)) {echo '/uploads/item_'.$item->item_id;} else echo 'https://placehold.it/700x400';?>" class="media-object" style="width:300px">
                         </div>
-                        <div class="media-right">
+                        <div class="media-body col-lg-5">
+                            <h4 class="media-heading"><?php echo $item->item_name?></h4>
+                            <p><?php echo $item->description?></p>
+                        </div>
+                        <div class="media-right col-lg-2">
                             <form action="/items/edititem/<?php echo $item->item_id?>" method="POST">
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-secondary btn-block" name="edititem">Edit</button>
@@ -131,7 +135,8 @@ $orders = $order->getOrdersByAccountId($user->user_id);*/
                     </div>
 
                 </div>
-            <?php }} else {echo '<hr><p>You have no listings! <a href="/account/sell">Create a listing here.</a>';}?>
+            <?php }} else {echo '<hr><p>You have no listings! <a href="/pages/sell">Create a listing here.</a>';}?>
+
             <br>
             <div class="row">
                 <div class="col-lg-10"><div class="h2">Your Orders</div></div>
@@ -145,8 +150,8 @@ $orders = $order->getOrdersByAccountId($user->user_id);*/
             </div>
                 <hr>
             <?php if(count($orders) > 0) {
-                    //$max = 3;
-                    //if(count($orders)<3)
+                    $max = 3;
+                    if(count($orders)<3)
                         $max = count($orders);
 
                     for($i =0; $i<$max;$i++){?>

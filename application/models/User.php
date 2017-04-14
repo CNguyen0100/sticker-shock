@@ -90,7 +90,7 @@ class User extends Model {
     }
 
     //get all order and item infomation from userid
-    public function getOrderFromOrder($id){
+    public function getOrderFromUser($id){
         $statement = $this->db->prepare("SELECT * FROM ItemOrders INNER JOIN Items ON ItemOrders.item_id=Items.item_id INNER JOIN Orders ON Orders.order_id = ItemOrders.order_id where Orders.account_id = :id");
         $statement->bindParam(':id',$id);
         $statement->execute();
@@ -98,6 +98,7 @@ class User extends Model {
         return $result;
     }
 
+    //get sale list
     public function getSaleList($userid){
         $statement = $this->db->prepare("SELECT * FROM Items WHERE account_id = :id");
         $statement->bindParam(':id',$userid);
@@ -105,6 +106,8 @@ class User extends Model {
         $result = $statement->fetchAll();
         return $result;
     }
+
+    //get all item that user is selling and sold
     public function getItemsByUser($user_id) {
         $sql = "SELECT * FROM Items WHERE account_id='$user_id'";
         $query = $this->db->prepare($sql);
