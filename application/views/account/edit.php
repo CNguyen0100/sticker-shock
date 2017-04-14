@@ -1,24 +1,22 @@
-<?php
-$info = $_SESSION['accInfo'];
-require 'application/views/layouts/header.php'; ?>
+<?php require 'application/views/layouts/header.php'; ?>
 <div class="container">
     <div class="h1">Edit Information<hr></div>
     <form action="/account/submit_edit" method="POST">
         <div class="form-group row">
             <div class="col-md-6">
-                <input required type="text" name="firstname" placeholder="First Name" value="<?= $info->first_name;?>"
+                <input required type="text" name="firstname" placeholder="First Name" value="<?= $user->first_name;?>"
                        style="width:400px">
             </div>
         </div>
         <div class="form-group row">
             <div class="col-md-6">
-                <input required type="text" name="lastname" placeholder="Last Name" value="<?= $info->last_name;?>"
+                <input required type="text" name="lastname" placeholder="Last Name" value="<?= $user->last_name;?>"
                        style="width:400px">
             </div>
         </div>
         <div class="form-group row">
             <div class="col-md-6">
-                <input required type="email" name="email" placeholder="Email" value="<?= $info->email;?>"
+                <input required type="email" name="email" placeholder="Email" value="<?= $user->email;?>"
                        style="width:400px">
             </div>
         </div>
@@ -26,7 +24,7 @@ require 'application/views/layouts/header.php'; ?>
             <div class="col-md-6">
                 <select class="form-control" name="gender" style="width:400px">
                     <?php
-                    if($info->gender === 'M'){
+                    if($user->gender === 'M'){
                     ?>
                     <option value="F">Female</option>
                     <option selected value="M">Male</option>
@@ -42,32 +40,32 @@ require 'application/views/layouts/header.php'; ?>
         </div>
         <div class="form-group row">
             <div class="col-md-6">
-                <input type="text" name="address1" placeholder="Address 1" value="<?= $info->address_1;?>"
+                <input type="text" name="address1" placeholder="Address 1" value="<?= $user->address_1;?>"
                        style="width:400px">
             </div>
         </div>
         <div class="form-group row">
             <div class="col-md-6">
-                <input type="text" name="address2" placeholder="Address 2" value="<?= $info->address_2;?>"
+                <input type="text" name="address2" placeholder="Address 2" value="<?= $user->address_2;?>"
                        style="width:400px">
             </div>
         </div>
 
         <div class="form-group row">
             <div class="col-md-6">
-                <input type="text" name="city" placeholder="City" value="<?= $info->city;?>"
+                <input type="text" name="city" placeholder="City" value="<?= $user->city;?>"
                        style="width:400px">
             </div>
         </div>
         <div class="form-group row">
             <div class="col-md-6">
-                <input type="text" name="state" placeholder="State" value="<?= $info->state;?>"
+                <input type="text" name="state" placeholder="State" value="<?= $user->state;?>"
                        style="width:400px">
             </div>
         </div>
         <div class="form-group row">
             <div class="col-md-6">
-                <input type="text" name="zip" placeholder="Zip" value="<?= $info->zip;?>"
+                <input type="text" name="zip" placeholder="Zip" value="<?= $user->zip;?>"
                        style="width:400px">
             </div>
         </div>

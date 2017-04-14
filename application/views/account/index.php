@@ -1,20 +1,13 @@
-<?php require 'application/views/layouts/header.php';
-$orders = $_SESSION['orderHis'];
-$listings =$_SESSION['listing'];
-        $items=new Item($this->db);
-?>
-
+<?php require 'application/views/layouts/header.php'; ?>
     <div class="container">
         <div class="row">
-            <!-- This contain wellcome on the left and infomation on right-->
-            <!-- 1st col .. welcome-->
             <div class="col-md-3">
                 <div class = "text-left">
                     <p>
                     <div class="h2"  >
                         <?php
-                        if(isset($_SESSION['accInfo']->first_name) && strpos($_SERVER['HTTP_REFERER'], "/login")){
-                            echo 'Welcome back, '. $_SESSION['accInfo']->first_name .'!';
+                        if(isset($user->first_name) && strpos($_SERVER['HTTP_REFERER'], "/login")){
+                            echo 'Welcome back, '. $user->first_name .'!';
                             echo '<br>';
                         }
                         else{
@@ -43,17 +36,17 @@ $listings =$_SESSION['listing'];
                     <!--each row has 2 cols-->
                     <div class="row">
                         <div class="col-4"> <h7> Name: </h7><br> </div>
-                        <div class="col-8"> <h7><?= $_SESSION['accInfo']->first_name;?> <?= $_SESSION['accInfo']->last_name;?></h7><br></div>
+                        <div class="col-8"> <h7><?= $user->first_name;?> <?= $user->last_name;?></h7><br></div>
                     </div>
                     <div class="row">
                         <div class="col-4"> <h7> Email:</h7><br> </div>
-                        <div class="col-8"> <h7><?= $_SESSION['accInfo']->email;?></h7><br></div>
+                        <div class="col-8"> <h7><?= $user->email;?></h7><br></div>
                     </div>
                     <div class="row">
                         <div class="col-4"> <h7> Gender:</h7><br></div>
                         <div class="col-8">
                             <h7><?php
-                                if($_SESSION['accInfo']->gender == 'M')
+                                if($user->gender == 'M')
                                     echo "Male";
                                 else
                                     echo "Female";
@@ -62,23 +55,23 @@ $listings =$_SESSION['listing'];
                     </div>
                     <div class="row">
                         <div class="col-4"> <h7> Address 1:</h7><br> </div>
-                        <div class="col-8">  <h7><?= $_SESSION['accInfo']->address_1;?></h7><br> </div>
+                        <div class="col-8">  <h7><?= $user->address_1;?></h7><br> </div>
                     </div>
                     <div class="row">
                         <div class="col-4"> <h7> Address 2:</h7><br> </div>
-                        <div class="col-8">  <h7> <?= $_SESSION['accInfo']->address_2; ?></h7><br> </div>
+                        <div class="col-8">  <h7> <?= $user->address_2; ?></h7><br> </div>
                     </div>
                     <div class="row">
                         <div class="col-4"> <h7> City:</h7><br> </div>
-                        <div class="col-8">  <h7><?= $_SESSION['accInfo']->city;?></h7><br> </div>
+                        <div class="col-8">  <h7><?= $user->city;?></h7><br> </div>
                     </div>
                     <div class="row">
                         <div class="col-4"> <h7> State:</h7><br> </div>
-                        <div class="col-8"> <h7><?= $_SESSION['accInfo']->state;?></h7><br>  </div>
+                        <div class="col-8"> <h7><?= $user->state;?></h7><br>  </div>
                     </div>
                     <div class="row">
                         <div class="col-4"> <h7> Zip:</h7><br> </div>
-                        <div class="col-8">  <h7><?= $_SESSION['accInfo']->zip;?></h7><br> </div>
+                        <div class="col-8">  <h7><?= $user->zip;?></h7><br> </div>
                     </div>
 
 
@@ -198,7 +191,6 @@ $listings =$_SESSION['listing'];
                                         </div>
                                     </div>
                                 </div>
-                                <!--                    collumn of button-->
                                 <div class="col-lg-3">
                                     <div class="btn-group-vertical" >
                                         <form action="/account/printInvoice/<?php echo $orders[$i]->order_id?>" method="POST">
@@ -206,7 +198,7 @@ $listings =$_SESSION['listing'];
                                                 <button type="submit" class="btn btn-secondary btn-block"  name="printInvoice" style="width: 150px" >View Invoice</button>
                                             </div>
                                         </form>
-<!--Review button only show if there is no review-->
+                                        <!--Review button only show if there is no review-->
                                         <?php
                                         $rv=new Review($this->db);
                                             $reviewForThis = $rv->getReviewForAnOrder($_SESSION['id'], $orders[$i]->order_id);
@@ -220,7 +212,7 @@ $listings =$_SESSION['listing'];
                                             </div>
                                         </form>
                                         <?php }else{?>
-<!--//Only show delete the review button if user wrote a review-->
+                                        <form action="/account/deleteReview/<?php echo $orders[$i]->order_id ?>" method="POST">
                                         <form action="/account/deleteReview/<?php echo $orders[$i]->order_id ?>" method="POST">
                                             <div class="form-group">
                                                 <button type="submit"  class="btn btn-secondary btn-block"  name="deleteReview" style="width: 150px" >Delete Review</button>
