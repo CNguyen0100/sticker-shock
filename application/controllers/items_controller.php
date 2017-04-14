@@ -1,4 +1,3 @@
-
 <?php
 
 class Items extends Controller {
@@ -55,11 +54,28 @@ class Items extends Controller {
 
         $this->title = $item->item_name;
 
-        require 'application/models/User.php';
-        require 'application/models/Review.php';
-        $review_model = new Review($this->db);
-        $reviews = $review_model->getReviewsByUser($item->account_id);
-        $users = new User($this->db);
+        $reviewers = explode(',', $item->reviewers);
+        $ratings = explode(',', $item->ratings);
+        $comments = explode('----', $item->comments);
+        $review_dates = explode(',', $item->review_dates);
+
+        if (sizeof($reviewers) != sizeof($ratings) || sizeof($reviewers) != sizeof($comments) || sizeof($reviewers) != sizeof($review_dates)) {
+            header('location: /pages/error');
+        }
+
+        require 'application/class/Review.php';
+
+        $reviews = array();
+
+        $iterator = new MultipleIterator;
+        $iterator->attachIterator(new ArrayIterator($reviewers));
+        $iterator->attachIterator(new ArrayIterator($ratings));
+        $iterator->attachIterator(new ArrayIterator($comments));
+        $iterator->attachIterator(new ArrayIterator($review_dates));
+
+        foreach ($iterator as $values) {
+            $reviews[] = new Review($values[0], $values[1], $values[2], $values[3]);
+        } 
 
         require 'application/views/items/item.php';
     }
