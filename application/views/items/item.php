@@ -21,7 +21,7 @@
                             </form>
                         </div>
                         <br>
-                        <h5><a href="/accountdummy"> Account Username: <?php echo $item->account_id;?></a></h5>
+                        <h5><a href="/accountdummy"> Account Username: <?php echo $item->seller;?></a></h5>
                     </div>
                     <div class="card-footer">
                         <big>
@@ -40,6 +40,9 @@
                             }?>
                         </big>
                     </div>
+                </div>
+                <div class="well">
+                    <?php include "application/views/items/reviews.php" ?>
                 </div>
             </div>
         </div>

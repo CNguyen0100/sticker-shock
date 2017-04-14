@@ -11,8 +11,7 @@ foreach($reviews as $review): ?>
         			else
         				echo '&#9734; ';
         		}
-        		$user = $users->readUser($review->reviewer_id);
-    			echo $user->first_name;
+    			echo $review->reviewer;
     		?>
 		    <span class="float-right"><?php echo $review->review_date?></span>
 		    <p><?php echo $review->comment; ?></p>
