@@ -123,6 +123,7 @@ class Account extends Controller {
         $listings = $this->model->getItemsByUser($user_id);
         $review = new Review($this->db);
         $reviews = $review->getReviewsByUser($user->user_id);
+        $this->title = $user->username . '\'s Profile';
         require 'application/views/account/profile.php';
 
     }
@@ -140,9 +141,8 @@ class Account extends Controller {
         if(!$orderId)
             require 'application/views/pages/error.php';
         else {
-            $_SESSION['invoice'] = $this->model->getPurchase($orderId);
+            $invoice = $this->model->getPurchase($orderId);
             require 'application/views/account/invoice.php';
-            unset($_SESSION['invoice']);
         }
     }
 
