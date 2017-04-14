@@ -4,7 +4,7 @@
     </div>
     <div class="list-group category">
     	<a href="/items" class="list-group-item category-item">
-    		<?php if ($_SERVER['REQUEST_URI'] == "/items")
+    		<?php if ($_SERVER['REQUEST_URI'] == "/items" || $_SERVER['REQUEST_URI'] == "/")
     		{
     			echo '<font color="blue">';
     			echo 'ALL';
