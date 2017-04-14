@@ -9,13 +9,13 @@
             foreach ($categories as $key => $value) {
             	if (strpos ($_SERVER['REQUEST_URI'], $value))
             	{
-            		echo "<p style='padding:0px; color: grey; background-color: grey; border: black 3px solid'>";
             		echo '<a href="/items/';
 	                echo strtolower($key);
 	                echo '" class="list-group-item category-item">';
+	                echo '<font color="blue">';
 	                echo ucwords($value);
+	                echo '</font>';
 	                echo '</a>';
-	                echo '</p>';
                 }
                 else
                 {
