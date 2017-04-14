@@ -108,7 +108,7 @@ $orders = $order->getOrdersByAccountId($user->user_id);*/
                 <hr>
                 <?php if(count($listings) > 0) {
                     $count = 0;
-                    foreach($listings as $item) {if($count >=3) break;$count++;?>
+                    foreach($listings as $item) {if($count >=3) break; if($item->available != true) continue; $count++; ?>
 
                 <div class="well">
 
