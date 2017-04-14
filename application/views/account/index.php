@@ -134,20 +134,22 @@ $listings =$_SESSION['listing'];
                     <?php }} else {echo '<hr><p>You have no listings! <a href="/pages/sell">Create a listing here.</a>';}?>
 
                 <br>
+                <?php if(count($orders) > 0) {
+                    $max = (count($orders)<4)?(count($orders)):4;?>
                 <div class="row">
                     <div class="col-lg-10"><div class="h2">Your Orders</div></div>
+                    <?php if($max>= 4) {?>
                     <div class="col-lg-2">
                         <div class="text-right">
-                            <!--h6><a href="/account/vieworder/<?=$_SESSION['id']?>">All Order</a></h6-->
+                            <h6><a href="/account/vieworder/<?=$_SESSION['id']?>">All Order</a></h6>
                         </div>
-                    </div>
+                    </div> <?php }?>
 
 
                 </div>
                 <hr>
-                <?php if(count($orders) > 0) {
-                    $max = (count($orders)<4)?(count($orders)):4;
-                    for($i =0; $i<$max;$i++){?>
+
+                    <?php for($i =0; $i<$max;$i++){?>
                         <div class="well">
                             <div class="row">
                                 <div class="col-md-3">
@@ -162,7 +164,6 @@ $listings =$_SESSION['listing'];
                                     <div class="text-center">
                                         <h7>
                                             <b>Total<br></b>
-                                            <!--                             I don't tax is percentage or actual tax, so fix it if it is percentage-->
                                             $<?php $total = $orders[$i]->total + $orders[$i]->shipping;
                                             echo $total;?>
                                         </h7>
@@ -208,12 +209,13 @@ $listings =$_SESSION['listing'];
 <!--Review button only show if there is no review-->
                                         <?php
                                         $rv=new Review($this->db);
-                                        $reviewForThis = $rv->getReviewForAnOrder($_SESSION['id'], $orders[$i]->order_id);
+                                            $reviewForThis = $rv->getReviewForAnOrder($_SESSION['id'], $orders[$i]->order_id);
                                         if(!$reviewForThis){
                                             ?>
-                                        <form action="/reviews/review" method="POST">
+                                        <form action="/reviews/review/" method="POST">
                                             <div class="form-group">
                                                 <input type="hidden" name="sellerID" value='<?php echo $items->readBoughtItem($orders[$i]->item_id)->account_id; ?>' />
+                                                <input type="hidden" name="orderID" value='<?php echo $orders[$i]->order_id?>' />
                                                 <button type="submit" class="btn btn-secondary btn-block"  name="writeReview" style="width: 150px" >Review</button>
                                             </div>
                                         </form>

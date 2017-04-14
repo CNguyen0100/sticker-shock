@@ -1,7 +1,7 @@
 <?php
 class Review extends Model {
 
-    public function createReview($buyID, $sellID, $reviewDate, $comment, $ratingNum ,$title){
+    public function createReview($order_id,$buyID, $sellID, $reviewDate, $comment, $ratingNum ,$title){
         $stmt = $this->db->prepare("INSERT INTO Reviews (reviewer_id, seller_id, review_date, comment, rating, title) 
         VALUES (:buyID, :sellID, :reviewDate, :commentText, :ratingNum, :titleText)");
         $stmt->bindParam(':buyID', $buyID);
@@ -10,6 +10,18 @@ class Review extends Model {
         $stmt->bindParam(':commentText', $comment);
         $stmt->bindParam(':ratingNum', $ratingNum);
         $stmt->bindParam(':titleText', $title);
+        $stmt->execute();
+//    update AccountOrderReview
+        $getReviewID = "SELECT review_id FROM Reviews WHERE reviewer_id = '$buyID' AND seller_id ='$sellID' AND title = '$title'";
+        $stmt=$this->db->prepare($getReviewID);
+        $stmt->execute();
+
+        //Assume that alway has 1 result
+        $result = $stmt->fetch();
+        $reviewID = $result->review_id;
+        //assume account_id is userid;
+        $stmt2 ="INSERT INTO AccountOrderReview(review_id, order_id, account_id) VALUES ('$reviewID', '$order_id', '$buyID')";
+        $stmt=$this->db->prepare($stmt2);
         $stmt->execute();
 
     }
@@ -32,8 +44,12 @@ class Review extends Model {
 
     }
 
-    public function deleteReview($item_id){
-        $stmt = $this->db->prepare("DELETE FROM Items WHERE item_id='$item_id'");
+    public function deleteReview($reviewId){
+        $string1 = "DELETE FROM AccountOrderReview WHERE review_id=:'$reviewId'";
+        $string2 = "DELETE FROM Reviews WHERE review_id=:'$reviewId'";
+        $stmt = $this->db->prepare($string1);
+        $stmt->execute();
+        $stmt = $this->db->prepare($string2);
         $stmt->execute();
     }
 
@@ -47,7 +63,7 @@ class Review extends Model {
 
     //connect 2 tables ,accountorderreview table and review table , get all information of that specific order review
     public function getReviewForAnOrder($user_id,$order_id){
-        $stmt = $this->db->prepare("SELECT Reviews.review_id FROM Reviews INNER JOIN AccountOrderReview ON AccountOrderReview.review_id  = Reviews.review_id WHERE order_id = :orderId AND reviewer_id =:userId");
+        $stmt = $this->db->prepare("SELECT review_id FROM  AccountOrderReview WHERE order_id = :orderId AND account_id =:userId");
         $stmt->bindParam(':userId',$user_id);
         $stmt->bindParam(':orderId',$order_id);
         $stmt->execute();

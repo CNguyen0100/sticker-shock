@@ -1,3 +1,5 @@
+<!--This page show all listing of a seller and their review-->
+
 <?php require 'application/views/layouts/header.php';
 
 $review = new Review($this->db);
