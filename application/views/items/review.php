@@ -2,9 +2,8 @@
 
 
     <div class="container">
-        <?php include 'application/views/includes/category-menu.php';?>
         <div class="h1">Submit a Review<hr></div>
-        <form action="/review/submit_review" method="POST">
+        <form action="/reviews/submit_review" method="POST">
             <div class="form-group row">
                 <div class="col-md-6">
                     <select class="form-control" name="rating">
@@ -28,9 +27,14 @@
                 </div>
             </div>
 
+            <input type="hidden" name="sellerID" value='<?php echo $sellerID; ?>' />
+
+
             <div class="form-group">
                 <button type="submit" class="btn-ss btn-bw"" name="submit">Submit</button>
             </div>
+
+
         </form>
     </div>
     </div>

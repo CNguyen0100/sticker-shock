@@ -1,6 +1,7 @@
 <?php require 'application/views/layouts/header.php';
 $orders = $_SESSION['orderHis'];
 $listings =$_SESSION['listing'];
+$items=new Item($this->db); 
 
 ?>
 
@@ -31,9 +32,6 @@ $listings =$_SESSION['listing'];
                         </button>
                     </div>
                 </form>
-                </div>
-                <div class="text-right">
-                <a href="/items/review">Submit Review</a>
                 </div>
             </div>
             <br>
@@ -169,7 +167,7 @@ $listings =$_SESSION['listing'];
                                 <h7>
                                     <b>Total<br></b>
     <!--                             I don't tax is percentage or actual tax, so fix it if it is percentage-->
-                                <?php $total = $orders[$i]->subtotal+$orders[$i]->tax+ $orders[$i]->shipping;
+                                $<?php $total = $orders[$i]->total + $orders[$i]->shipping;
                                     echo $total;?>
                                 </h7>
                             </div>
@@ -211,8 +209,9 @@ $listings =$_SESSION['listing'];
                                         <button type="submit" class="btn btn-secondary btn-block"  name="printInvoice" style="width: 150px" >View Invoice</button>
                                     </div>
                                 </form>
-                                <form action="/account/writeReview/<?php echo $orders[$i]->order_id ?>" method="POST">
+                                <form action="/reviews/review" method="POST">
                                     <div class="form-group">
+                                        <input type="hidden" name="sellerID" value='<?php echo $items->readBoughtItem($orders[$i]->item_id)->account_id; ?>' />
                                         <button type="submit" class="btn btn-secondary btn-block"  name="writeReview" style="width: 150px" >Review</button>
                                     </div>
                                 </form>
