@@ -6,10 +6,10 @@ $review = new Review($this->db);
 $reviews = $review->getReviewsByUser($user->user_id);
 ?>
     <div class="container">
-        <div class="h1"> <?php echo ucfirst($user->username); ?>'s Account </div> <br><br>
-        <div class="h1">Their Listings</div>
+        <div class="h1"> <?php echo ucfirst($user->username); ?>'s Profile </div> <br><br>
+        <div class="h1">Listings</div>
+        <hr>
         <?php if(count($listings) > 0) {foreach($listings as $item) {?>
-            <hr>
             <div class="media">
                 <div class="media-left">
                     <img src="
@@ -22,15 +22,15 @@ $reviews = $review->getReviewsByUser($user->user_id);
 	            	class="media-object" style="width:60px">
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading">&emsp;<?php echo $item->item_name?></h4>
+                    <h4 class="media-heading"><?php echo $item->item_name?></h4>
                     <p>&emsp;<?php echo $item->description?></p>
                 </div>
             </div>
+            <hr>
         <?php }} else {echo '<hr><p>They have no listings!';}?>
         <br>
-        <div class="h1">Their Reviews</div>
+        <div class="h1">Reviews</div><hr>
         <?php if(count($reviews) > 0) {foreach($reviews as $i) {?>
-            <hr>
             <div class="media">
                 <div class="media-left">
                     <!--img src="<?php if(file_exists('uploads/item_'.$item->item_id)) {echo '/uploads/item_'.$item->item_id;} else echo 'https://placehold.it/700x400';?>" class="media-object" style="width:60px"-->
