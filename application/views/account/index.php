@@ -1,9 +1,9 @@
 <?php require 'application/views/layouts/header.php';
 require 'application/models/Item.php';
-//$orders = $_SESSION['orderHis'];
+$orders = $_SESSION['orderHis'];
 $listings =$_SESSION['listing'];
 require 'application/models/Order.php';
-$order =  $_SESSION['orderHis'];
+//$order =  $_SESSION['orderHis'];
 //$order = new Order($this->db);
 //$orders = $order->getOrdersByAccountId($user->user_id);
 
@@ -150,6 +150,7 @@ $order =  $_SESSION['orderHis'];
             </div>
                 <hr>
             <?php if(count($orders) > 0) {
+
                     $max = 3;
                     if(count($orders)<3)
                         $max = count($orders);
