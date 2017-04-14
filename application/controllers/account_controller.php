@@ -26,7 +26,9 @@ class Account extends Controller {
             $user = $this->model->readUser($_SESSION['id']);
             $orders = null;
             require 'application/models/Item.php';
+            require 'application/models/Review.php';
             require 'application/views/account/index.php';
+
 //            unset($_SESSION['orderHis']);
 //            unset($_SESSION['accInfo']);
 //            unset($_SESSION['listing']);

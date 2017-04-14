@@ -37,7 +37,7 @@ class Review extends Model {
         $stmt->execute();
     }
 
-
+    //get all review for one seller,
     public function getReviewsByUser($user_id) {
         $sql = "SELECT * FROM Reviews WHERE seller_id='$user_id'";
         $query = $this->db->prepare($sql);
@@ -45,4 +45,12 @@ class Review extends Model {
         return $query->fetchAll();
     }
 
+    //connect 2 tables ,accountorderreview table and review table , get all information of that specific order review
+    public function getReviewForAnOrder($user_id,$order_id){
+        $stmt = $this->db->prepare("SELECT Reviews.review_id FROM Reviews INNER JOIN AccountOrderReview ON AccountOrderReview.review_id  = Reviews.review_id WHERE order_id = :orderId AND reviewer_id =:userId");
+        $stmt->bindParam(':userId',$user_id);
+        $stmt->bindParam(':orderId',$order_id);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
 }
