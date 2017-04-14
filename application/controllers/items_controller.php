@@ -54,28 +54,31 @@ class Items extends Controller {
 
         $this->title = $item->item_name;
 
-        $reviewers = explode(',', $item->reviewers);
-        $ratings = explode(',', $item->ratings);
-        $comments = explode('----', $item->comments);
-        $review_dates = explode(',', $item->review_dates);
-
-        if (sizeof($reviewers) != sizeof($ratings) || sizeof($reviewers) != sizeof($comments) || sizeof($reviewers) != sizeof($review_dates)) {
-            header('location: /pages/error');
-        }
 
         require 'application/class/Review.php';
 
         $reviews = array();
 
-        $iterator = new MultipleIterator;
-        $iterator->attachIterator(new ArrayIterator($reviewers));
-        $iterator->attachIterator(new ArrayIterator($ratings));
-        $iterator->attachIterator(new ArrayIterator($comments));
-        $iterator->attachIterator(new ArrayIterator($review_dates));
+        if ($item->reviewers != null) {
+            $reviewers = explode(',', $item->reviewers);
+            $ratings = explode(',', $item->ratings);
+            $comments = explode('----', $item->comments);
+            $review_dates = explode(',', $item->review_dates);
 
-        foreach ($iterator as $values) {
-            $reviews[] = new Review($values[0], $values[1], $values[2], $values[3]);
-        } 
+            if (sizeof($reviewers) != sizeof($ratings) || sizeof($reviewers) != sizeof($comments) || sizeof($reviewers) != sizeof($review_dates)) {
+                header('location: /pages/error');
+            }
+
+            $iterator = new MultipleIterator;
+            $iterator->attachIterator(new ArrayIterator($reviewers));
+            $iterator->attachIterator(new ArrayIterator($ratings));
+            $iterator->attachIterator(new ArrayIterator($comments));
+            $iterator->attachIterator(new ArrayIterator($review_dates));
+
+            foreach ($iterator as $values) {
+                $reviews[] = new Review($values[0], $values[1], $values[2], $values[3]);
+            } 
+        }
 
         require 'application/views/items/item.php';
     }
