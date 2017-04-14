@@ -17,8 +17,8 @@ $orders = $order->getOrdersByAccountId($user->user_id);*/
                 <p>
                 <div class="h2"  >
                     <?php
-                    if(isset($_SESSION['accInfo']->fname) && strpos($_SERVER['HTTP_REFERER'], 'account')){
-                        echo 'Welcome back, '. $_SESSION['fname'] .'!';
+                    if(isset($_SESSION['accInfo']->first_name) && strpos($_SERVER['HTTP_REFERER'], "/login")){
+                        echo 'Welcome back, '. $_SESSION['accInfo']->first_name .'!';
                         echo '<br>';
                     }
                     else{
