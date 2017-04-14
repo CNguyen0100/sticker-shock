@@ -1,55 +1,25 @@
-<?php
-require_once('models/Connection.php');
-?>
+<?php session_start();
+# Graham L.:
+# I researched various implementations of MVC patterns in PHP and eventually
+# came across this GitHub repo: https://github.com/panique/mini
+# It was, as it purported to be, a barebones application that implemented the
+# design pattern fairly well.
 
-<!DOCTYPE html>
-<html lang="en">
+# Graham L.:
+# This currently only has the database connection string.
+require './application/conf/config.php';
 
-<head>
+# Graham L.:
+# All super classes should be required here. Trying to declare a class twice
+# will throw an error so it's better to marginally increase overhead by just
+# requiring them all up front and not have to worry about potential conflicts
+# down the road.
+require './application/class/Application.php';
+require './application/class/Controller.php';
+require './application/class/Model.php';
+require './application/class/Enum.php';
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Sticker Shock</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/shop-homepage.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="images/logo.png">
-    <style>
-        .navbar-toggler {
-            z-index: 1;
-        }
+require './application/controllers/helpers/categories.php';
+require './application/controllers/helpers/subcategories.php';
 
-        @media (max-width: 576px) {
-            nav > .container {
-                width: 100%;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-    <?php include "views/navigation.php"?>
-
-    <div class="container" style="margin-top:25px;">
-        <div class="row">
-            <?php include 'views/category-menu.php';?>
-            <div class="col-md-9">
-                <div class="row">
-                    <?php include 'views/item-cards.php';?>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <?php include 'views/footer.php';?>
-
-    <script src="js/jquery.js"></script>
-    <script src="js/tether.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-
-</body>
-
-</html>
+$app = new Application();
