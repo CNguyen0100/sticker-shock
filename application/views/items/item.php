@@ -41,9 +41,13 @@
                         </big>
                     </div>
                 </div>
-                <div class="well">
-                    <?php include "application/views/items/reviews.php" ?>
-                </div>
+<?php 
+    if (sizeof($reviews) > 0) {
+        echo '<div class="well">';
+        include "application/views/items/reviews.php";
+        echo '</div>';
+    }
+?>
             </div>
         </div>
     </div>
