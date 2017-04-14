@@ -4,7 +4,7 @@ $listings =$_SESSION['listing'];
 
 ?>
 
-    <div class="container">
+<div class="container">
         <div class="row">
             <!-- This contain wellcome on the left and infomation on right-->
             <!-- 1st col .. welcome-->
@@ -31,6 +31,9 @@ $listings =$_SESSION['listing'];
                         </button>
                     </div>
                 </form>
+                </div>
+                <div class="text-right">
+                <a href="/items/review">Submit Review</a>
                 </div>
             </div>
             <br>
