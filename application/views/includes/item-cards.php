@@ -21,7 +21,9 @@ foreach($items as $item): ?>
                     ?>
             </small>
             <h4 class="card-title"><a href="/items/item/<?php echo $item->item_id?>"><?php echo $item->item_name?></a></h4>
-            <h5>$<?php echo number_format((float)$item->price, 2, '.', '');?></h5>
+            <h5>$<?php
+                $total = (float)$item->price + (float)$item->shipping;
+                echo number_format((float)$total, 2, '.', '');?></h5>
             <p class="card-text"><?php echo $item->description?></p>
         </div>
         <div class="card-footer">
@@ -42,8 +44,8 @@ foreach($items as $item): ?>
                 </small>
                 <div class="float-right">
             	<?php
-                if(isset($item->rating)){
-            	    $avgReview=$item->rating;
+                if(isset($user->readUser($item->account_id)->rating)){
+            	    $avgReview= $user->readUser($item->account_id)->rating;
                 }
                 else{
                     $avgReview = 0;
