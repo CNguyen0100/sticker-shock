@@ -91,7 +91,7 @@ class Item extends Model {
 
     public function purchaseItem($item_id){
         $stmt = $this->db->prepare("UPDATE Items SET available=:status WHERE item_id=:item_id");
-        $stmt->bindvalue(':status', false);
+        $stmt->bindvalue(':status', 0);
         $stmt->bindParam(':item_id', $item_id);
         $stmt->execute();
     }

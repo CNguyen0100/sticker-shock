@@ -117,7 +117,7 @@
                                     </form>
                                     <form action="/items/deleteitem/<?php echo $item->item_id?>" method="POST">
                                         <div class="form-group">
-                                            <button <?php if($item->available != true){echo 'style="visibility:hidden;"';};?> type="submit" class="btn btn-danger btn-block" name="deleteitem">Delete</button>
+                                            <button <?php if($item->available != 1){echo 'style="visibility:hidden;"';};?> type="submit" class="btn btn-danger btn-block" name="deleteitem">Delete</button>
                                         </div>
                                     </form>
                                 </div>
@@ -138,19 +138,16 @@
                             <h6><a href="/account/vieworder/<?=$_SESSION['id']?>">All Order</a></h6>
                         </div>
                     </div> <?php }?>
-
-
                 </div>
                 <hr>
-
-                    <?php for($i =0; $i<$max;$i++){?>
+                    <?php foreach($orders as $order){?>
                         <div class="well">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="text-center">
                                         <h7>
                                             <b>Order Id<br></b>
-                                            <?=$orders[$i]->order_id ?>
+                                            <?php echo $order->order_id ?>
                                         </h7>
                                     </div>
                                 </div>
@@ -158,7 +155,7 @@
                                     <div class="text-center">
                                         <h7>
                                             <b>Total<br></b>
-                                            $<?php echo number_format((float)$orders[$i]->total, 2, '.', '');?>
+                                            $<?php echo number_format((float)$order->total, 2, '.', '');?>
                                         </h7>
                                     </div>
                                 </div>
@@ -166,7 +163,7 @@
                                     <div class="text-center">
                                         <h7>
                                             <b>Ship to<br></b>
-                                            <?=$orders[$i]->address_1 ?>
+                                            <?php echo$order->address_1 ?>
                                         </h7>
                                     </div>
                                 </div>
@@ -174,7 +171,7 @@
                                     <div class="text-center">
                                         <h7>
                                             <b>Date<br></b>
-                                            <?=$orders[$i]->completion_date ?>
+                                            <?php echo $order->completion_date ?>
                                         </h7>
                                     </div>
                                 </div>
@@ -186,14 +183,14 @@
                                         <img class="d-flex mr-5"
                                              src="https://placehold.it/700x400" alt="Generic placeholder image" style="width:300px">
                                         <div class="media-body">
-                                            <h4 class="media-heading"><?php echo $orders[$i]->item_name?></h4>
-                                            <p><?php echo $orders[$i]->description;?></p>
+                                            <h4 class="media-heading"><?php echo $order->item_name?></h4>
+                                            <p><?php echo $order->description;?></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="btn-group-vertical" >
-                                        <form action="/account/invoice/<?php echo $orders[$i]->order_id?>" method="POST">
+                                        <form action="/account/invoice/<?php echo $order->order_id?>" method="POST">
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-secondary btn-block"  name="printInvoice" style="width: 150px" >View Invoice</button>
                                             </div>
@@ -201,28 +198,29 @@
                                         <!--Review button only show if there is no review-->
                                         <?php
                                         $rv=new Review($this->db);
-                                            $reviewForThis = $rv->getReviewForAnOrder($_SESSION['id'], $orders[$i]->order_id);
+                                            $reviewForThis = $rv->getReviewForAnOrder($_SESSION['id'], $order->order_id);
                                         if(!$reviewForThis){
                                             ?>
                                         <form action="/reviews/review/" method="POST">
                                             <div class="form-group">
-                                                <input type="hidden" name="sellerID" value='<?php echo $items->readBoughtItem($orders[$i]->item_id)->account_id; ?>' />
-                                                <input type="hidden" name="orderID" value='<?php echo $orders[$i]->order_id?>' />
+                                                <input type="hidden" name="sellerID" value='<?php echo $items->readBoughtItem($order->item_id)->account_id; ?>' />
+                                                <input type="hidden" name="orderID" value='<?php echo $order->order_id?>' />
                                                 <button type="submit" class="btn btn-secondary btn-block"  name="writeReview" style="width: 150px" >Review</button>
                                             </div>
                                         </form>
                                         <?php }else{?>
-                                        <form action="/account/deleteReview/<?php echo $orders[$i]->order_id ?>" method="POST">
-                                        <form action="/account/deleteReview/<?php echo $orders[$i]->order_id ?>" method="POST">
+                                        <form action="/account/deleteReview/<?php echo $order->order_id ?>" method="POST">
+                                        <form action="/account/deleteReview/<?php echo $order->order_id ?>" method="POST">
                                             <div class="form-group">
                                                 <button type="submit"  class="btn btn-secondary btn-block"  name="deleteReview" style="width: 150px" >Delete Review</button>
                                             </div>
                                         </form>
-                                                <?php }?>
+                                            <?php }?>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     <?php }} else {echo '<hr><p>You have no orders! <a href="/pages/index">Browse items here.</a>';}?>
 
             </div>
