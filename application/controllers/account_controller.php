@@ -119,6 +119,7 @@ class Account extends Controller {
     public function profile($user_id) {
         require 'application/models/Review.php';
         require 'application/models/Order.php';
+        $users = $this->model;
         $user = $this->model->readUser($user_id);
         $listings = $this->model->getItemsByUser($user_id);
         $review = new Review($this->db);
