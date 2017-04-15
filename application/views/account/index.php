@@ -6,7 +6,7 @@
                     <p>
                     <div class="h2"  >
                         <?php
-                        if(isset($user->first_name) && strpos($_SERVER['HTTP_REFERER'], "/login")){
+                        if(isset($user->first_name) && isset($_SERVER['HTTP_REFERER']) &&strpos($_SERVER['HTTP_REFERER'], "/login")){
                             echo 'Welcome back, '. $user->first_name .'!';
                             echo '<br>';
                         }
@@ -87,7 +87,7 @@
                 </div>
                 <!-- 2nd order history -->
                 <div class="row">
-                    <div class="col-lg-10"><div class="h2">Your Listing</div></div>
+                    <div class="col-lg-10"><div class="h2">Your Listings</div></div>
                     <div class="col-lg-2">
                         <div class="text-right">
                             <!--h6><a href="/account/viewListing/<?=$_SESSION['id']?>">All List</a></h6-->
@@ -127,10 +127,11 @@
                     <?php }} else {echo '<hr><p>You have no listings! <a href="/pages/sell">Create a listing here.</a>';}?>
 
                 <br>
+                <div class="h2">Your Orders</div>
+
                 <?php if(count($orders) > 0) {
                     $max = (count($orders)<4)?(count($orders)):4;?>
                 <div class="row">
-                    <div class="col-lg-10"><div class="h2">Your Orders</div></div>
                     <?php if($max>= 4) {?>
                     <div class="col-lg-2">
                         <div class="text-right">
