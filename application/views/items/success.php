@@ -17,6 +17,7 @@ use PayPal\Api\Currency;
         $response = $payment->toJSON();
         $response = json_decode($response);
         $_POST['item_id'] = $response->transactions[0]->item_list->items[0]->sku;
+
         $_POST['total'] = $response->transactions[0]->amount->total;
         $_POST['shipping'] = $response->transactions[0]->amount->details->shipping;
         $shipping_address = $response->payer->payer_info->shipping_address;

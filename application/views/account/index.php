@@ -157,8 +157,7 @@
                                     <div class="text-center">
                                         <h7>
                                             <b>Total<br></b>
-                                            $<?php $total = $orders[$i]->total + $orders[$i]->shipping;
-                                            echo $total;?>
+                                            $<?php echo number_format((float)$orders[$i]->total, 2, '.', '');?>
                                         </h7>
                                     </div>
                                 </div>
