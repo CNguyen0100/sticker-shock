@@ -209,8 +209,7 @@
                                             </div>
                                         </form>
                                         <?php }else{?>
-                                        <form action="/account/deleteReview/<?php echo $order->order_id ?>" method="POST">
-                                        <form action="/account/deleteReview/<?php echo $order->order_id ?>" method="POST">
+                                        <form action="/account/deleteReview/<?php echo $reviewForThis->review_id ?>" method="POST">
                                             <div class="form-group">
                                                 <button type="submit"  class="btn btn-secondary btn-block"  name="deleteReview" style="width: 150px" >Delete Review</button>
                                             </div>
