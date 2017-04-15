@@ -59,6 +59,13 @@
         include "application/views/items/reviews.php";
         echo '</div>';
     }
+
+    else{
+        echo'<br>';
+        echo '<div class="well">';
+        echo '<p>This user has no reviews.</p>';
+        echo '</div>';
+    }
 ?>
             </div>
         </div>
