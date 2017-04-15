@@ -135,7 +135,11 @@ class Account extends Controller {
 
 
     }
-    public function deleteReview($orderId){
+    public function deleteReview($reviewId){
+        require 'application/models/Review.php';
+        $review = new Review($this->db);
+        $review->deleteReview($reviewId);
+        header('location: /account/');
 
     }
 

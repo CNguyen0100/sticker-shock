@@ -42,16 +42,18 @@ class Reviews extends Controller
         $this->model->createReview($order_id,$reviewerID,$sellerID,$date,$comment,$stars,$title);
         header('location: /account');
     }
-    public function loadModel()
-    {
-        require 'application/models/Review.php';
-        $this->model = new Review($this->db);
-        return;
-    }
+
     public function deleteReview($review_id)
     {
         $this->model->deleteReview($review_id);
         header('location: /account');
+        return;
+    }
+
+    public function loadModel()
+    {
+        require 'application/models/Review.php';
+        $this->model = new Review($this->db);
         return;
     }
 }

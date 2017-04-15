@@ -45,12 +45,10 @@ class Review extends Model {
     }
 
     public function deleteReview($reviewId){
-        $string1 = "DELETE FROM AccountOrderReview WHERE review_id=:'$reviewId'";
-        $string2 = "DELETE FROM Reviews WHERE review_id=:'$reviewId'";
-        $stmt = $this->db->prepare($string1);
+        $stmt = $this->db->prepare("DELETE FROM Reviews WHERE review_id='$reviewId'");
+        $stmt->bindParam(':reviewid', $reviewId);
         $stmt->execute();
-        $stmt = $this->db->prepare($string2);
-        $stmt->execute();
+        echo '<p>'.$this->db->errorInfo() .'</p>';
     }
 
     //get all review for one seller,
