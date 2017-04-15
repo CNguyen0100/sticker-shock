@@ -55,6 +55,8 @@ class Reviews extends Controller
         return;
     }
     public function viewReview($review_id){
+        $return = $this->model->readReview($review_id);
 
+//        require 'application/models/Review.php';
     }
 }

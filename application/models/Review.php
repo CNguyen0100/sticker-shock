@@ -26,8 +26,10 @@ class Review extends Model {
 
     }
 
-    public function readReview(){
-
+    public function readReview($review_id){
+        $stmt =$this->db->prepare("SELECT * FROM Reviews WHERE review_id= '$review_id'");
+        $stmt->execute();
+        return $stmt->fetch();
     }
 
     public function updateReview($reviewID, $buyID, $sellID, $reviewDate, $comment, $ratingNum ,$title){
@@ -69,4 +71,5 @@ class Review extends Model {
         $stmt->execute();
         return $stmt->fetch();
     }
+
 }
