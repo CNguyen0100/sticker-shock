@@ -150,6 +150,9 @@ class Items extends Controller {
     }
 
     public function purchasesuccess(){
+        require 'application/models/User.php';
+        $user = new User($this->db);
+        $item = $this->model;
         require 'application/views/items/success.php';
     }
 
