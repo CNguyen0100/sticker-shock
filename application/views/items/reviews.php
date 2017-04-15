@@ -1,5 +1,4 @@
 <?php
-if (count($reviews) == 0) echo '<p>This user has no reviews.</p>';
 foreach($reviews as $review): ?>
 		<div class="row">
 		    <div class="col-md-12">
