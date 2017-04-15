@@ -97,7 +97,7 @@
                 <hr>
                 <?php if(count($listings) > 0) {
                     $count = 0;
-                    foreach($listings as $item) {if($count >=3) break; if($item->available != true) continue; $count++; ?>
+                    foreach($listings as $item) {if($count >=3) break; $count++; ?>
 
                         <div class="well">
 
