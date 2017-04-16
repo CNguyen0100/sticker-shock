@@ -26,10 +26,8 @@ class Review extends Model {
 
     }
 
-    public function readReview($review_id){
-        $stmt =$this->db->prepare("SELECT * FROM Reviews WHERE review_id= '$review_id'");
-        $stmt->execute();
-        return $stmt->fetch();
+    public function readReview(){
+
     }
 
     public function updateReview($reviewID, $buyID, $sellID, $reviewDate, $comment, $ratingNum ,$title){
@@ -47,12 +45,10 @@ class Review extends Model {
     }
 
     public function deleteReview($reviewId){
-        $string1 = "DELETE FROM AccountOrderReview WHERE review_id = '$reviewId'";
-        $string2 = "DELETE FROM Reviews WHERE review_id = '$reviewId'";
-        $stmt = $this->db->prepare($string1);
+        $stmt = $this->db->prepare("DELETE FROM Reviews WHERE review_id='$reviewId'");
+        $stmt->bindParam(':reviewid', $reviewId);
         $stmt->execute();
-        $stmt = $this->db->prepare($string2);
-        $stmt->execute();
+        echo '<p>'.$this->db->errorInfo() .'</p>';
     }
 
     //get all review for one seller,
@@ -71,5 +67,4 @@ class Review extends Model {
         $stmt->execute();
         return $stmt->fetch();
     }
-
 }

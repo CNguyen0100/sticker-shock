@@ -30,7 +30,15 @@ class Item extends Model {
     }
 
     public function readItem($id){
-        $sql = "SELECT Items.*, Accounts.rating FROM Items LEFT JOIN Accounts ON Items.account_id = Accounts.user_id WHERE available=true AND Items.item_id='$id'";
+        $sql = "SELECT Items.*, Sellers.username as seller, GROUP_CONCAT(IFNULL(Reviewers.username,NULL)) as reviewers, GROUP_CONCAT(IFNULL(Reviews.rating,NULL)) as ratings, GROUP_CONCAT(IFNULL(Reviews.comment,NULL) SEPARATOR '----') as comments, GROUP_CONCAT(Reviews.review_date) as review_dates, GROUP_CONCAT(Reviews.title) as review_titles FROM Items JOIN Reviews ON Reviews.seller_id = Items.account_id JOIN Accounts as Reviewers ON Reviewers.user_id = Reviews.reviewer_id JOIN Accounts as Sellers ON Sellers.user_id = Items.account_id WHERE Items.item_id = ".$id." AND Items.available=true;";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        return $query->fetch();
+    }
+
+    public function getItemById($id){
+        $sql = "SELECT * FROM Items WHERE item_id=" .$id.";";
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -42,7 +50,6 @@ class Item extends Model {
         if (isset($category)) {
             $sql .= " AND category='" . $category . "'";
             $category = strtolower($category);
-
             if (isset($subcategory)) {
                 $sql .= " AND subcategory='" . $subcategory . "'";
                 $subcategory = strtolower($subcategory);
@@ -84,7 +91,7 @@ class Item extends Model {
 
     public function purchaseItem($item_id){
         $stmt = $this->db->prepare("UPDATE Items SET available=:status WHERE item_id=:item_id");
-        $stmt->bindvalue(':status', false);
+        $stmt->bindvalue(':status', 0);
         $stmt->bindParam(':item_id', $item_id);
         $stmt->execute();
     }

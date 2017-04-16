@@ -24,7 +24,7 @@ class Reviews extends Controller
         $this->title = 'Submit a Review';
         $sellerID = filter_input(INPUT_POST, 'sellerID', FILTER_SANITIZE_STRING);
         $order_id = filter_input(INPUT_POST, 'orderID', FILTER_SANITIZE_STRING);
-//        $_SESSION['orderID'] = $order_id;
+        $_SESSION['orderID'] = $order_id;
         require 'application/views/items/review.php';
 
     }
@@ -42,21 +42,18 @@ class Reviews extends Controller
         $this->model->createReview($order_id,$reviewerID,$sellerID,$date,$comment,$stars,$title);
         header('location: /account');
     }
-    public function loadModel()
-    {
-        require 'application/models/Review.php';
-        $this->model = new Review($this->db);
-        return;
-    }
+
     public function deleteReview($review_id)
     {
         $this->model->deleteReview($review_id);
         header('location: /account');
         return;
     }
-    public function viewReview($review_id){
-        $return = $this->model->readReview($review_id);
 
-//        require 'application/models/Review.php';
+    public function loadModel()
+    {
+        require 'application/models/Review.php';
+        $this->model = new Review($this->db);
+        return;
     }
 }

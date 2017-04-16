@@ -1,3 +1,4 @@
+
 <?php
 
 class Pages extends Controller {
@@ -26,18 +27,6 @@ class Pages extends Controller {
         require 'application/views/pages/error.php';
     }
 
-
-    public function checkout() {
-        $this->title = "checkout";
-
-        require 'application/views/pages/checkout.php';
-    }
-
-    public function success() {
-        $this->title = "success";
-
-        require 'application/views/pages/success.php';
-    }
 
     public function loadModel()
     {

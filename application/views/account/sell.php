@@ -14,12 +14,12 @@
         </div>
         <div class="form-group row">
             <div class="col-md-6">
-                <input required placeholder="Price" class="form-control" type="Number" step="any" name="price">
+                <input required placeholder="Price" class="form-control" type="Number" min=0.01 step="any" name="price">
             </div>
         </div>
         <div class="form-group row">
             <div class="col-md-6">
-                <input required placeholder="Shipping" class="form-control" type="Number" step="any" name="shipping">
+                <input required placeholder="Shipping" class="form-control" type="Number" min=0.01 step="any" name="shipping">
             </div>
         </div>
         <div class="form-group row">
@@ -27,16 +27,6 @@
                 <select required class="form-control" name="category">
                     <option selected disabled>Category</option>
                     <?php foreach($arr as $str): ?>
-                    <option value=<?php echo ucwords($str); ?>><?php echo ucwords($str);?></option>
-                    <?php endforeach;?>
-                </select>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-6">
-                <select required class="form-control" name="subcategory">
-                    <option selected disabled>Subcategory</option>
-                    <?php foreach($arr2 as $str): ?>
                     <option value=<?php echo ucwords($str); ?>><?php echo ucwords($str);?></option>
                     <?php endforeach;?>
                 </select>

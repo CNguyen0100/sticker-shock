@@ -5,7 +5,7 @@ foreach($items as $item): ?>
 <div class="col-lg-4 col-md-6 mb-4">
     <div class="card h-100">
         <a href="/items/item/<?php echo $item->item_id?>" class="img-container-card"><img class="card-img-top img-fluid" src="<?php if(file_exists('uploads/item_'.$item->item_id)) {echo '/uploads/item_'.$item->item_id;} else echo 'https://placehold.it/700x400';?>" alt=""></a>
-        <div class="card-block">
+        <div class="card-block" style="word-wrap: break-word;">
             <small>
                     <?php
                         # Graham L.:
@@ -21,7 +21,9 @@ foreach($items as $item): ?>
                     ?>
             </small>
             <h4 class="card-title"><a href="/items/item/<?php echo $item->item_id?>"><?php echo $item->item_name?></a></h4>
-            <h5>$<?php echo number_format((float)$item->price, 2, '.', '');?></h5>
+            <h5 class="card-text">$<?php
+                $total = (float)$item->price + (float)$item->shipping;
+                echo number_format((float)$total, 2, '.', '');?></h5>
             <p class="card-text"><?php echo $item->description?></p>
             <p class="card-text">
                 <form action="/account/otherAccount" method="POST">
@@ -44,9 +46,15 @@ foreach($items as $item): ?>
             &#9734 is a white star (with black outline).
             //-->
             <big>
+                <small>
+                <a href="/account/profile/<?php echo $user->readUser($item->account_id)->user_id;?>">
+                    <?php echo $user->readUser($item->account_id)->username;?>
+                </a>
+                </small>
+                <div class="float-right">
             	<?php
-                if(isset($item->rating)){
-            	    $avgReview=$item->rating;
+                if(isset($user->readUser($item->account_id)->rating)){
+            	    $avgReview= $user->readUser($item->account_id)->rating;
                 }
                 else{
                     $avgReview = 0;
@@ -58,10 +66,10 @@ foreach($items as $item): ?>
 	    				echo '&#9734; ';
 	    		}
 	    		?>
+                </div>
             </big>
         </div>
     </div>
 </div>
 <?php endforeach; ?>
-
 

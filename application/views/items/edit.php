@@ -34,16 +34,6 @@
         </div>
         <div class="form-group row">
             <div class="col-md-6">
-                <select required class="form-control" name="subcategory">
-                    <option selected disabled>Subcategory</option>
-                    <?php foreach($arr2 as $str): ?>
-                    <option value=<?php echo ucwords($str); ?>><?php echo ucwords($str);?></option>
-                    <?php endforeach;?>
-                </select>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-6">
                 <input placeholder="Tracking Number" value="<?php echo $item->tracking_number;?>" class="form-control" type="text" name="tracking">
             </div>
         </div>
